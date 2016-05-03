@@ -1,0 +1,14 @@
+<div class="home">
+
+    <!-- The {{ }} syntax is used to access the scope object -->
+    <h2>{{ heading }}</h2>
+
+    <!-- Angular has directives with most often start with ng-
+        Here, ng-model ties the value of the input field to the $scope.text
+        property - this is 2 way binding in action -->
+    <input type="text" ng-model="text">
+
+    <!-- You can see that when you change the value in the input field,
+        since it is bound to text, it changes the text in this h5 -->
+    <h5>{{ text }}</h5>
+</div>
