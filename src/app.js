@@ -7,7 +7,8 @@
 // Also, ui.router is a dependency to make the routing system work
 angular.module('swen303', [
     'ui.router',
-    'swen303.home'
+    'swen303.home',
+    'swen303.cart'
 ])
 
     // Config just specifies configuration parameters for the app
