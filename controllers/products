@@ -1,0 +1,43 @@
+var express = require('express')
+  , router = express.Router()
+
+router.get('/', function(req,res){
+	var id = req.params.id;
+	console.log("GET /product" + id);
+	res.json([exampleProduct,exampleProduct,exampleProduct,exampleProduct]);
+})
+
+router.get('/:id', function(req,res){
+	var id = req.params.id;
+	console.log("GET /product/" + id);
+	res.json(exampleProduct);
+})
+
+
+module.exports = router
+
+//example initial testing / front end
+var exampleProduct = {
+		productId: 7000,
+		name: "Test Product",
+		Description: "An amazing thing, the likes of which you have never seen",
+		specification:{
+			color:"pink",
+			rpm: "5700",
+			Mbps: "800"
+		},
+		tags:['tag1','tag2'],
+		category: "Hard Drives",
+		ratingReview: 0.8,
+		price: {
+			value:200,
+			currency:"NZD"
+		},
+		borrowable: true,
+		dimensions: {
+			width:200,
+			height:400,
+			weight:400
+		},
+		quantity: 30,
+	};
