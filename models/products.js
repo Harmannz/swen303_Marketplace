@@ -1,14 +1,13 @@
-var pg = require('pg')
-//	dbClient = require('./db');
+//var dbClient = require('./db')
 
-exports.get = function(id,cb){
+exports.get = function(id, cb){
 	//TODO db query goes here
-	cb("",exampleProduct);
+	cb(null,exampleProduct);
 }
 
 exports.getAll = function(cb){
 	//TODO db query goes here
-	cb("",[exampleProduct,exampleProduct,exampleProduct,exampleProduct]);
+	cb(null,[exampleProduct,exampleProduct,exampleProduct,exampleProduct]);
 }
 
 //example initial testing / front end

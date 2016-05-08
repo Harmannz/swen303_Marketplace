@@ -5,7 +5,11 @@ var express = require('express')
 router.get('/', function(req,res){
 	console.log("GET /products");
 	Product.getAll(function(err, products){
-		res.json(products);
+		if(!err){
+			res.json(products);
+		} else {
+			processError(err,res);
+		}
 	})
 })
 
@@ -14,9 +18,19 @@ router.get('/:id', function(req,res){
 	console.log("GET /products/" + id);
 
 	Product.get(id,function(err, product){
-		res.json(product);
+		if(!err){
+			res.json(product);
+		} else {
+			processError(err,res);
+		}
 	})
 })
 
+function processError(error,res){
+	console.log(error);
+	//TODO analyse error send relevant code
+	//alternatively can pass an error callback funtion to model
+	res.sendStatus(500); 
+}
 
 module.exports = router
