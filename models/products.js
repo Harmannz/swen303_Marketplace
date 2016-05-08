@@ -1,20 +1,15 @@
-var express = require('express')
-  , router = express.Router()
+var pg = require('pg')
+//	dbClient = require('./db');
 
-router.get('/', function(req,res){
-	var id = req.params.id;
-	console.log("GET /product" + id);
-	res.json([exampleProduct,exampleProduct,exampleProduct,exampleProduct]);
-})
+exports.get = function(id,cb){
+	//TODO db query goes here
+	cb("",exampleProduct);
+}
 
-router.get('/:id', function(req,res){
-	var id = req.params.id;
-	console.log("GET /product/" + id);
-	res.json(exampleProduct);
-})
-
-
-module.exports = router
+exports.getAll = function(cb){
+	//TODO db query goes here
+	cb("",[exampleProduct,exampleProduct,exampleProduct,exampleProduct]);
+}
 
 //example initial testing / front end
 var exampleProduct = {

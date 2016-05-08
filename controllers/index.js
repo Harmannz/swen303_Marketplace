@@ -3,7 +3,8 @@ var express = require('express')
   , path = require('path')
 
 //products route
-router.use('/products', require('./products'))
+router.use('/api/products', require('./products'))
+//router.use('api/products', require('./products'))
 
 router.get('*', function(req, res) {
 	res.sendFile(path.resolve('src/index.html'));
