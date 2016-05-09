@@ -7,6 +7,7 @@
 // Also, ui.router is a dependency to make the routing system work
 angular.module('swen303', [
     'ui.router',
+    'templates-app',
     'swen303.home',
     'swen303.cart'
 ])
@@ -15,6 +16,49 @@ angular.module('swen303', [
     .config(function($locationProvider) {
          // This is just a formality to make it so you don't need #'s in urls
         $locationProvider.html5Mode(true);
+    })
+
+    .controller('MainController', function($scope) {
+
+        // TODO load from database
+        $scope.categories = {
+            computers: [
+                { name: 'One' },
+                { name: 'Two' },
+                { name: 'Three' },
+                { name: 'Four' }
+            ],
+            phones: [
+                { name: 'One' },
+                { name: 'Two' },
+                { name: 'Three' },
+                { name: 'Four' }
+            ],
+            tablets: [
+                { name: 'One' },
+                { name: 'Two' },
+                { name: 'Three' },
+                { name: 'Four' }
+            ],
+            tvs: [
+                { name: 'One' },
+                { name: 'Two' },
+                { name: 'Three' },
+                { name: 'Four' }
+            ],
+            cameras: [
+                { name: 'One' },
+                { name: 'Two' },
+                { name: 'Three' },
+                { name: 'Four' }
+            ],
+            audio: [
+                { name: 'One' },
+                { name: 'Two' },
+                { name: 'Three' },
+                { name: 'Four' }
+            ]
+        };
     })
 
 ;

@@ -15,7 +15,7 @@ angular.module('swen303.home', [])
             url: '/',
             views: {
                 "main": {
-                    templateUrl: 'src/home/home.html',
+                    templateUrl: 'home/home.html',
                     controller: 'HomeController'
                 }
             }
@@ -28,20 +28,26 @@ angular.module('swen303.home', [])
     // 2 way bindings, so when you change it in the javascript code, it changes
     // on the html page, and vice versa.
     .controller('HomeController', function($scope) {
-        // I just declared 2 random properties on the scope, so now I can access
-        // these in the html file. This is done with {{ }} or directives such as
-        // ng-model or ng-bind (take a look at the home.html file to see that).
-        $scope.heading = 'home';
-        $scope.text = 'something';
-
-        // $scope.$watch is a special angular function that says when the given
-        // property changes, execute the given function.
-        // Here, it says when $scope.text changes, just output $scope.text to the log.
-        // This means when you change the input on the html file, because of 2 way
-        // bindings, that means $scope.text changes, so the new $scope.text is output to the log.
-        $scope.$watch('text', function() {
-            console.log($scope.text);
-        });
+       $scope.products = [
+           {
+               name: 'iPad',
+               image: 'ipad.png',
+               price: 699.99,
+               rent: 40
+           },
+           {
+               name: 'Kindle',
+               image: 'kindle.png',
+               price: 299.99,
+               rent: 20
+           },
+           {
+               name: 'Canon 70d',
+               image: 'canon.png',
+               price: 1328.47,
+               rent: 70
+           }
+       ];
     })
 
 ;

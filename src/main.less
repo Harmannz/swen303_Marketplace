@@ -1,0 +1,127 @@
+// Font imports
+@font-face {
+    font-family: 'Keep Calm';
+    src: url('fonts/Keepcalm.ttf');
+}
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,100,300,500');
+
+// Bootstrap imports
+@import '../node_modules/bootstrap/less/variables.less';
+@import '../node_modules/bootstrap/less/mixins.less';
+@import '../node_modules/bootstrap/less/grid.less';
+@import '../node_modules/bootstrap/less/utilities.less';
+@import '../node_modules/bootstrap/less/forms.less';
+@import '../node_modules/bootstrap/less/navs.less';
+@import '../node_modules/bootstrap/less/navbar.less';
+@import '../node_modules/bootstrap/less/dropdowns.less';
+
+// App imports
+@import 'home/home.less';
+
+html, body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(68, 68, 68, 0.4);
+    border: 0;
+    margin-bottom: 0;
+
+    .navbar__top {
+        background-color: #444444;
+        padding: 0 48px;
+        display: table;
+        width: 100%;
+
+        .logo, .cart {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .logo {
+            img {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            h1 {
+                display: inline-block;
+                vertical-align: middle;
+                font-family: 'Keep Calm', sans-serif;
+                color: #ffffff;
+                padding-left: 24px;
+
+                @media(max-width: @screen-sm-max) {
+                    font-size: 14pt;
+                }
+            }
+        }
+
+        .cart {
+            display: table-cell;
+            background-color: #333333;
+            height: 80px;
+            width: 200px;
+            padding: 0 24px;
+
+            .material-icons {
+                color: #ffffff;
+                font-size: 36px;
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .cart__right {
+                display: inline-block;
+                vertical-align: middle;
+                float: right;
+
+                .cart__right--items {
+                    color: #bbbbbb;
+                }
+
+                .cart__right--price {
+                    color: #ffffff;
+                }
+            }
+
+            @media(max-width: @screen-sm-max) {
+                width: 50px;
+
+                .cart__right {
+                    display: none;
+                }
+            }
+        }
+
+        @media(max-width: @screen-sm-max) {
+            padding: 0 24px;
+        }
+    }
+
+    .navbar-nav {
+        background-color: #f5f5f5;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+
+        .dropdown {
+            padding: 0;
+            text-align: center;
+
+            .dropdown-toggle {
+                color: #444444;
+                text-decoration: none;
+            }
+
+            .dropdown-menu {
+                background-color: #ffffff;
+            }
+        }
+    }
+}

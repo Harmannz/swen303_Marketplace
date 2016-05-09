@@ -1,16 +1,77 @@
 <html ng-app="swen303">
 
 <head>
-    <script src="/node_modules/angular/angular.js"></script>
-    <script src="/node_modules/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="/src/app.js"></script>
-    <script src="/src/home/home.js"></script>
-    <script src="/src/checkout/checkout.js"></script>
+    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="/<%= file %>" /><% }); %>
+
+    <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="/<%= file %>"></script><% }); %>
 
     <base href="/">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body>
+<body ng-controller="MainController">
+
+<div class="navbar">
+    <div class="navbar__top">
+        <div class="logo">
+            <img src="assets/img/logo.png">
+            <h1>Electronics</h1>
+        </div><!--
+        --><div class="cart">
+            <i class="material-icons">shopping_cart</i>
+            <div class="cart__right">
+                <div class="cart__right--items">3 items</div>
+                <div class="cart__right--price">$435.32</div>
+            </div>
+        </div>
+    </div>
+    <ul class="nav navbar-nav container">
+        <li class="dropdown col-sm-2">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Computers<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li ng-repeat="category in categories.computers"><a href="#">{{ category.name }}</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown col-sm-2">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Phones<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li ng-repeat="category in categories.phones"><a href="#">{{ category.name }}</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown col-sm-2">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Tablets<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li ng-repeat="category in categories.tablets"><a href="#">{{ category.name }}</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown col-sm-2">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">TVs<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li ng-repeat="category in categories.tvs"><a href="#">{{ category.name }}</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown col-sm-2">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Cameras<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li ng-repeat="category in categories.cameras"><a href="#">{{ category.name }}</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown col-sm-2">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Audio<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li ng-repeat="category in categories.audio"><a href="#">{{ category.name }}</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
 
 <div ui-view="main"></div>
 
