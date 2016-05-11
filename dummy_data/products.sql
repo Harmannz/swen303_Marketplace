@@ -1,5 +1,5 @@
 CREATE TABLE products (
-	pid SERIAL,
+	pid SERIAL primary key,
 	categoryId int,
 	name varchar not null,
 	image varchar not null,
