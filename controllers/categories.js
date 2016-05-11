@@ -5,7 +5,7 @@ var express = require('express')
 router.get('/', function(req,res){
 	console.log("GET /categories");
 	Utils.getCategories(function(categories){
-			res.json(categories);
+		res.json(categories);
 	},function(err){
 		console.log(err);
 		res.sendStatus(500);

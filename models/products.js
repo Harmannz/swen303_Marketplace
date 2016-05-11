@@ -1,4 +1,6 @@
 var dbClient = require('./db')
+   ,Utils = require('./utils')
+   ,fs = require('fs')
 
 exports.get = function(id, cb, errorCb){
 	var query = dbClient.query("select * from products where pid = $1",[id]);
@@ -32,3 +34,18 @@ exports.getAll = function(cb,errorCb){
 		cb(data);
 	})
 }
+
+exports.addNew = function(product, cb, errorCb){
+	var queryParams = Utils.shallowObjToQuery(product);
+	var query = dbClient.query("insert into products " + queryParams.string +" returning *" , queryParams.args);
+	
+	query.on('error',function(e){
+		errorCb(e);
+	})
+
+	query.on('end',function(e){
+		insertedRow = (e.rows.length > 0)? e.rows[0] : null;
+		cb(insertedRow);
+	})
+}
+
