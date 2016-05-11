@@ -9,7 +9,8 @@ angular.module('swen303', [
     'ui.router',
     'templates-app',
     'swen303.home',
-    'swen303.cart'
+    'swen303.cart',
+    'swen303.services.category'
 ])
 
     // Config just specifies configuration parameters for the app
@@ -18,47 +19,11 @@ angular.module('swen303', [
         $locationProvider.html5Mode(true);
     })
 
-    .controller('MainController', function($scope) {
-
-        // TODO load from database
-        $scope.categories = {
-            computers: [
-                { name: 'One' },
-                { name: 'Two' },
-                { name: 'Three' },
-                { name: 'Four' }
-            ],
-            phones: [
-                { name: 'One' },
-                { name: 'Two' },
-                { name: 'Three' },
-                { name: 'Four' }
-            ],
-            tablets: [
-                { name: 'One' },
-                { name: 'Two' },
-                { name: 'Three' },
-                { name: 'Four' }
-            ],
-            tvs: [
-                { name: 'One' },
-                { name: 'Two' },
-                { name: 'Three' },
-                { name: 'Four' }
-            ],
-            cameras: [
-                { name: 'One' },
-                { name: 'Two' },
-                { name: 'Three' },
-                { name: 'Four' }
-            ],
-            audio: [
-                { name: 'One' },
-                { name: 'Two' },
-                { name: 'Three' },
-                { name: 'Four' }
-            ]
-        };
+    .controller('MainController', function($scope, CategoryService) {
+        $scope.categories = [];
+        CategoryService.getCategories().then(function(payload) {
+            $scope.categories = payload;
+        });
     })
 
 ;
