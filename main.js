@@ -8,4 +8,8 @@ app.use('/assets', express.static('build/assets'));
 //routes defined here
 app.use(require('./controllers'));
 
-app.listen(3000);
+// Start the server listening
+var server = app.listen(3000, function() {
+	var port = server.address().port;
+	console.log('Server listening on port %s.', port);
+});
