@@ -13,21 +13,32 @@ section{padding:100px 0}
     border-bottom: 3px solid @theme-primary;
 }
 
-.billing-form .form-row > label span{
+.billing-form label > span{
     display: block;
     box-sizing: border-box;
     color:  @theme-dark;
-    width: 200px;
-    padding: 0 0 12px;
+    width: 100%;
 }
 
+.billing-form .text-muted {
+    
+    color:@theme-primary;
+}
+
+.billing-form .right {
+    
+    float:rigth;
+}
 .billing-form input{
     color:  @theme-dark;
     box-sizing: border-box;
-    width: 300px;
     box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
-    padding: 12px 18px;
     border: 1px solid #dbdbdb;
+}
+
+.billing-form .small{
+    width:350px;
+
 }
 
 .billing-form input[type=radio],
