@@ -49,3 +49,14 @@ exports.addNew = function(product, cb, errorCb){
 	})
 }
 
+exports.getFeaturedProducts = function(cb, errorCb) {
+	var query = "SELECT * FROM products ORDER BY viewed LIMIT 10";
+	dbClient.query(query, function(err, results) {
+		if (err) {
+			errorCb(err);
+		}
+
+		cb(results.rows);
+	});
+}
+

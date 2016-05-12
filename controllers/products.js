@@ -12,6 +12,16 @@ router.get('/', function(req,res){
 	})
 })
 
+router.get('/featured', function(req, res) {
+	console.log("GET /products/featured");
+	Products.getFeaturedProducts(function(products) {
+		res.json(products);
+	}, function(err) {
+		console.log(err);
+		res.sendStatus(500);
+	});
+});
+
 router.get('/:id', function(req,res){
 	var id = req.params.id;
 	console.log("GET /products/" + id);
@@ -37,4 +47,4 @@ router.post('/', function(req,res){
 	
 })
 
-module.exports = router
+module.exports = router;
