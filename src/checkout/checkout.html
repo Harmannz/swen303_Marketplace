@@ -3,14 +3,14 @@
         <div class="row">
 
             <div class="col-md-12">
-                <p class="text-muted lead">You currently have 3 item(s) in your cart.</p>
+                <p class="text-muted lead">You currently have {{purchasingProducts.length}} item(s) in your cart.</p>
             </div>
 
             <div class="col-md-9 clearfix" id="basket">
 
                 <div class="box">
 
-                    <form method="post" action="#">
+                    <form ng-submit="submitForm()">
 
                         <div class="table-responsive">
                             <table class="table">
@@ -19,50 +19,32 @@
                                     <th colspan="2">Product</th>
                                     <th>Quantity</th>
                                     <th>Unit price</th>
-                                    <th>Discount</th>
                                     <th colspan="2">Total</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
+                                <tr ng-repeat="product in purchasingProducts">
                                     <td>
                                         <a href="#">
-                                            <img src="assets/img/products/iphone.png" alt="White Blouse Armani">
+                                            <img ng-src="assets/img/products/{{product.image}}" alt="{{product.name}}">
                                         </a>
                                     </td>
-                                    <td><a href="#">iphone</a>
+                                    <td><a href="#">{{product.name}}</a>
                                     </td>
                                     <td>
-                                        <input type="number" value="2" class="form-control">
+                                        <input type="number" value="{{product.quantity}}" class="form-control">
                                     </td>
-                                    <td>$123.00</td>
-                                    <td>$0.00</td>
-                                    <td>$246.00</td>
-                                    <td><a href="#"><i class="fa fa-trash-o"></i></a>
+                                    <td>{{product.purchaseprice | currency}}</td>
+                                    <td>{{product.purchaseprice * product.quantity | currency}}</td>
+                                    <td><a href="#here" ng-click="removeProduct(product.pid)"><i class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#">
-                                            <img src="assets/img/products/iphone.png" alt="Black Blouse Armani">
-                                        </a>
-                                    </td>
-                                    <td><a href="#">iphone</a>
-                                    </td>
-                                    <td>
-                                        <input type="number" value="1" class="form-control">
-                                    </td>
-                                    <td>$200.00</td>
-                                    <td>$0.00</td>
-                                    <td>$200.00</td>
-                                    <td><a href="#"><i class="fa fa-trash-o"></i></a>
-                                    </td>
-                                </tr>
+
                                 </tbody>
                                 <tfoot>
                                 <tr>
                                     <th colspan="5">Total</th>
-                                    <th colspan="2">$446.00</th>
+                                    <th colspan="2">{{purchaseTotal() | currency}}</th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -103,19 +85,19 @@
                             <tbody>
                             <tr>
                                 <td>Order subtotal</td>
-                                <th>$446.00</th>
+                                <th>{{purchaseTotal() | currency}}</th>
                             </tr>
                             <tr>
                                 <td>Shipping and handling</td>
-                                <th>$10.00</th>
+                                <th>{{getShipping() | currency}}</th>
                             </tr>
                             <tr>
                                 <td>Tax</td>
-                                <th>$0.00</th>
+                                <th>{{getTax() | currency}}</th>
                             </tr>
                             <tr class="total">
                                 <td>Total</td>
-                                <th>$456.00</th>
+                                <th>{{total() | currency}}</th>
                             </tr>
                             </tbody>
                         </table>
