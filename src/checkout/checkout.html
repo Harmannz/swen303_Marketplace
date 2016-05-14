@@ -1,3 +1,162 @@
+<div class="cart">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <p class="text-muted lead">You currently have 3 item(s) in your cart.</p>
+            </div>
+
+            <div class="col-md-9 clearfix" id="basket">
+
+                <div class="box">
+
+                    <form method="post" action="#">
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th colspan="2">Product</th>
+                                    <th>Quantity</th>
+                                    <th>Unit price</th>
+                                    <th>Discount</th>
+                                    <th colspan="2">Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <a href="#">
+                                            <img src="assets/img/products/iphone.png" alt="White Blouse Armani">
+                                        </a>
+                                    </td>
+                                    <td><a href="#">iphone</a>
+                                    </td>
+                                    <td>
+                                        <input type="number" value="2" class="form-control">
+                                    </td>
+                                    <td>$123.00</td>
+                                    <td>$0.00</td>
+                                    <td>$246.00</td>
+                                    <td><a href="#"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#">
+                                            <img src="assets/img/products/iphone.png" alt="Black Blouse Armani">
+                                        </a>
+                                    </td>
+                                    <td><a href="#">iphone</a>
+                                    </td>
+                                    <td>
+                                        <input type="number" value="1" class="form-control">
+                                    </td>
+                                    <td>$200.00</td>
+                                    <td>$0.00</td>
+                                    <td>$200.00</td>
+                                    <td><a href="#"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th colspan="5">Total</th>
+                                    <th colspan="2">$446.00</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+
+                        </div>
+                        <!-- /.table-responsive -->
+
+                        <div class="box-footer">
+                            <div class="pull-left">
+                                <a href="shop-category.html" class="btn btn-default"><i class="fa fa-chevron-left"></i>
+                                    Continue shopping</a>
+                            </div>
+                            <div class="pull-right">
+                                <button class="btn btn-default"><i class="fa fa-refresh"></i> Update cart</button>
+                                <button type="submit" class="btn btn-template-main">Proceed to checkout <i
+                                        class="fa fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+                <!-- /.box -->
+
+
+            </div>
+
+            <div class="col-md-3">
+                <div class="box" id="order-summary">
+                    <div class="box-header">
+                        <h3>Order summary</h3>
+                    </div>
+                    <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>Order subtotal</td>
+                                <th>$446.00</th>
+                            </tr>
+                            <tr>
+                                <td>Shipping and handling</td>
+                                <th>$10.00</th>
+                            </tr>
+                            <tr>
+                                <td>Tax</td>
+                                <th>$0.00</th>
+                            </tr>
+                            <tr class="total">
+                                <td>Total</td>
+                                <th>$456.00</th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+                <div class="box">
+                    <div class="box-header">
+                        <h4>Coupon code</h4>
+                    </div>
+                    <p class="text-muted">If you have a coupon code, please enter it in the box below.</p>
+                    <form>
+                        <div class="input-group">
+
+                            <input type="text" class="form-control">
+
+                                    <span class="input-group-btn">
+
+					    <button class="btn btn-template-main" type="button"><i class="fa fa-gift"></i></button>
+
+					</span>
+                        </div>
+                        <!-- /input-group -->
+                    </form>
+                </div>
+
+            </div>
+            <!-- /.col-md-3 -->
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!--
+
 <div class="container">
   <div class="cart">
   <div class="row">
@@ -12,9 +171,9 @@
                   <label for="firstname" class="col-sm-2 form-control-label"><span>Firstname<span></label>
                   <div class="col-sm-10 form-inline">
                   <input type="text" class="form-control" id="firstName" placeholder="Firstname">
-                  <input type="text" class="form-control" id="lastName" placeholder="Lastname"> 
+                  <input type="text" class="form-control" id="lastName" placeholder="Lastname">
                 </div>
-              
+
               </div>
 
               <div class="form-group row">
@@ -28,106 +187,86 @@
               <div class="form-group row">
                   <label for="address" class="col-sm-2 form-control-label"><span>Address<span></label>
                   <div class="col-sm-10">
-                      <input type="text" class="form-control" id="address" placeholder="Address">  
-                  </div>       
-              </div>
-
-              <!-- turn below div into inline 
-                   Similar to : http://dev.sencha.com/deploy/ext-4.0.1/examples/form/checkout.html
-              -->
-              <div class="form-group row">
-                  <label for="city" class="col-sm-2 form-control-label"><span>City<span></label>
-                  <div class="col-sm-10 form-inline">
-                      <input type="text" class="form-control" id="city" placeholder="City">
-                      <!--
-                      <div class="right"> 
-                       <label for="postalcode" class="form-control-label"><span>Postal Code<span></label>
-                        <input type="text" class="form-control" id="postalcode" placeholder="Postal Code">  
-                      </div> -->
-                  </div>       
-              </div>
-
-
-              <fieldset class="form-group">
-                  <label for="example"><span>Example form<span> </label>
-                  <input type="email" class="form-control" id="exampleInputEmail" placeholder="Enter email">
-                  <small class="text-muted">You email will never be shared with anyone</small>
-              </fieldset>
-              <div class="form-row">
-                  <label>
-                      <span>Full name</span>
-                      <input type="text" name="name">
-                  </label>
-              </div>
-
-              <div class="form-row">
-                  <label>
-                      <span>Email</span>
-                      <input type="email" name="email">
-                  </label>
-              </div>
-
-              <div class="form-row">
-                  <label>
-                      <span>Dropdown</span>
-                      <select name="dropdown">
-                          <option>Option One</option>
-                          <option>Option Two</option>
-                          <option>Option Three</option>
-                          <option>Option Four</option>
-                      </select>
-                  </label>
-              </div>
-
-              <div class="form-row">
-                  <label>
-                      <span>Checkbox</span>
-                      <input type="checkbox" name="checkbox" checked>
-                  </label>
-              </div>
-
-              <div class="form-row">
-                  <label><span>Radio</span></label>
-                  <div class="form-radio-buttons">
-
-                      <div>
-                          <label>
-                              <input type="radio" name="radio">
-                              <span>Radio option 1</span>
-                          </label>
-                      </div>
-
-                      <div>
-                          <label>
-                              <input type="radio" name="radio">
-                              <span>Radio option 2</span>
-                          </label>
-                      </div>
-
-                      <div>
-                          <label>
-                              <input type="radio" name="radio">
-                              <span>Radio option 3</span>
-                          </label>
-                      </div>
-
+                      <input type="text" class="form-control" id="address" placeholder="Address">
                   </div>
               </div>
 
-              <div class="form-row">
-                  <button type="submit">Submit Form</button>
-              </div>
-
-          </form>
 
 
-
-
-  	</div>
-
-  </div>
-  </div>
+<div class="form-group row">
+    <label for="city" class="col-sm-2 form-control-label"><span>City<span></label>
+    <div class="col-sm-10 form-inline">
+        <input type="text" class="form-control" id="city" placeholder="City">
+    </div>
 </div>
+<div class="form-group row">
+    <label for="postalcode" class="col-sm-2 form-control-label"><span>Postal Code<span></label>
+    <div class="col-sm-10 form-inline">
+        <input type="text" class="form-control" id="postalcode" placeholder="Postal Code">
+    </div>
+</div>
+
+<div class="form-row">
+    <label>
+        <span>Dropdown</span>
+        <select name="dropdown">
+            <option>Option One</option>
+            <option>Option Two</option>
+            <option>Option Three</option>
+            <option>Option Four</option>
+        </select>
+    </label>
+</div>
+
+<div class="form-row">
+    <label>
+        <span>Checkbox</span>
+        <input type="checkbox" name="checkbox" checked>
+    </label>
+</div>
+
+<div class="form-row">
+    <label><span>Radio</span></label>
+    <div class="form-radio-buttons">
+
+        <div>
+            <label>
+                <input type="radio" name="radio">
+                <span>Radio option 1</span>
+            </label>
+        </div>
+
+        <div>
+            <label>
+                <input type="radio" name="radio">
+                <span>Radio option 2</span>
+            </label>
+        </div>
+
+        <div>
+            <label>
+                <input type="radio" name="radio">
+                <span>Radio option 3</span>
+            </label>
+        </div>
+
+    </div>
+</div>
+
+<div class="form-row">
+    <button type="submit">Submit Form</button>
+</div>
+
+</form>
+
+
+</div>
+
+</div>
+</div>
+</div>
+
+-->
 <!-- Following is code for choosing phonecode and country code. Should we have this in checkout form??
 
                           <div class="control-group">
