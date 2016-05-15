@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/grunt build && node main.js"
+    "start": "export DATABASE_URL='postgres://wfcobdeydhoqxp:xmp8iwSwjIoGFhCzJxWwz-3ujj@ec2-54-225-243-220.compute-1.amazonaws.com:5432/d8b1isb80kb086' && ./node_modules/.bin/grunt build && node main.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
     "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
+    "font-awesome": "^4.6.1",
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-clean": "^1.0.0",
