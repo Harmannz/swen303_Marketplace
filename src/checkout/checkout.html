@@ -3,7 +3,7 @@
         <div class="row">
 
             <div class="col-md-12">
-                <p class="text-muted lead">You currently have {{purchasingProducts.length}} item(s) in your cart.</p>
+                <p class="text-muted lead">You currently have {{productsToPurchase.length + productsToRent.length}} item(s) in your cart.</p>
             </div>
 
             <div class="col-md-9 clearfix" id="basket">
@@ -11,7 +11,9 @@
                 <div class="box">
 
                     <form ng-submit="submitForm()">
-
+                        
+                        <h3>Purchasing</h3>
+                        
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -51,14 +53,58 @@
 
                         </div>
                         <!-- /.table-responsive -->
+                        
+                        <h3>Renting</h3>
+                        
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th colspan="2">Product</th>
+                                    <th>Quantity</th>
+                                    <th>Rent Price</th>
+                                    <th>Rent Days</th>
+                                    <th colspan="2">Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="product in productsToRent">
+                                    <td>
+                                        <a href="#">
+                                            <img ng-src="assets/img/products/{{product.image}}" alt="{{product.name}}">
+                                        </a>
+                                    </td>
+                                    <td><a href="#">{{product.name}}</a>
+                                    </td>
+                                    <td>
+                                        <input type="number" ng-model="product.quantity" ng-change="updatePrices()" class="form-control" min="0" max={{product.instock}}>
+                                    </td>
+                                    <td>{{product.rentalpricepd | currency}}</td>
+                                    <td>
+                                        <input type="number" ng-model="product.rentdays" ng-change="updatePrices()" class="form-control" min={{product.minrentdays}} max={{product.maxrentdays}}>
+                                    </td>
+                                    <td>{{product.rentalpricepd * product.quantity * product.rentdays | currency}}</td>
+                                    <td><a href="#here" ng-click="removeProductFromRent(product.pid)"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
 
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th colspan="5">Total</th>
+                                    <th colspan="2">{{rentTotal | currency}}</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+
+                        </div>
+                        <!-- /.table-responsive -->
                         <div class="box-footer">
                             <div class="pull-left">
                                 <a href="shop-category.html" class="btn btn-default"><i class="fa fa-chevron-left"></i>
                                     Continue shopping</a>
                             </div>
                             <div class="pull-right">
-                                <button class="btn btn-default"><i class="fa fa-refresh"></i> Update cart</button>
                                 <button type="submit" class="btn btn-template-main">Proceed to checkout <i
                                         class="fa fa-chevron-right"></i>
                                 </button>
@@ -85,7 +131,7 @@
                             <tbody>
                             <tr>
                                 <td>Order subtotal</td>
-                                <th>{{purchaseTotal | currency}}</th>
+                                <th>{{purchaseTotal + rentTotal | currency}}</th>
                             </tr>
                             <tr>
                                 <td>Shipping and handling</td>

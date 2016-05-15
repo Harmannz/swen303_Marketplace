@@ -20,11 +20,18 @@ angular.module('swen303.cart', ['swen303.services.product', 'swen303.factory.car
 	})
 
 	.controller('CartController',function($scope, usercartFactory, Products) {
-        //TODO: ASK BROCK how to delete item!!!
-
-        //add temp data to user cart
+        
+        //add temp data to user cart for purchasing
         for(var i = 0; i < Products.length;i++){
              usercartFactory.addToPurchase(Products[i]);
+        }
+
+        //add temp data to user cart for renting
+        for(var i = 0; i < Products.length;i++){
+            var product = Products[i];
+            //renting product must have rentdays as a property to determine how many days the product can be rented for?
+            product.rentdays = Products[i].minrentdays; //does this create a new Product object ???
+            usercartFactory.addToRent(Products[i]);
         }
 
         $scope.productsToPurchase = usercartFactory.getToPurchase();
@@ -35,12 +42,21 @@ angular.module('swen303.cart', ['swen303.services.product', 'swen303.factory.car
 
         $scope.purchaseTotal = usercartFactory.purchaseTotal();
         $scope.rentTotal = usercartFactory.rentTotal();
+        console.log($scope.rentTotal);
         $scope.total = usercartFactory.getTotal();
         $scope.tax = usercartFactory.getTax()
         $scope.shipping = usercartFactory.getShipping();
 
         $scope.removeProduct = function(pid){
             console.log("Remove product with id: " + pid);
+            usercartFactory.removeFromPurchase(pid);
+            this.updatePrices();
+        };
+
+        $scope.removeProductFromRent = function(pid){
+            console.log("Remove product with id: " + pid);
+            usercartFactory.removeFromRent(pid);
+            this.updatePrices();
         };
 
         $scope.updatePrices = function(){
@@ -54,7 +70,7 @@ angular.module('swen303.cart', ['swen303.services.product', 'swen303.factory.car
         // calling our submit function.
         $scope.submitForm = function() {
             console.log("submit selected");
-            console.log("validate user input if required here.");
+            console.log("check if user's cart is not empty?");
         }
 	})
 

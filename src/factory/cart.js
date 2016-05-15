@@ -59,16 +59,16 @@ angular.module('swen303.factory.cart', [])
             //removes product matching pid from purchase list
             removeFromPurchase: function(pid){
                 for(var i =0; i < cart.toPurchase.length; i++){
-                    if (cart.toPurchase[i].productid == pid){
-                        cart.toPurchase.splice(index,1); //remove product from cart
+                    if (cart.toPurchase[i].pid == pid){
+                        cart.toPurchase.splice(i,1); //remove product from cart
                     }
                 }
             },
             //removes product matching pid from rent list
             removeFromRent: function(pid){
                 for(var i =0; i < cart.toRent.length; i++){
-                    if (cart.toRent[i].productid == pid){
-                        cart.toRent.splice(index,1); //remove product from cart
+                    if (cart.toRent[i].pid == pid){
+                        cart.toRent.splice(i,1); //remove product from cart
                     }
                 }
             },
@@ -103,7 +103,7 @@ angular.module('swen303.factory.cart', [])
             rentTotal: function(){
                 var total=0;
                 for(var i = 0; i < cart.toRent.length; i++){
-                    total += cart.toRent[i].rentalPricePD * cart.toRent[i].rentDays * cart.toRent[i].quantity;
+                    total += cart.toRent[i].rentalpricepd * cart.toRent[i].rentdays * cart.toRent[i].quantity;
                 }
                 return total;
             },
