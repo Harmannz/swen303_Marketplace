@@ -8,6 +8,12 @@ angular.module('swen303.services.product', [])
             });
         };
 
+        this.getProduct = function(product_id) {
+            return $http.get('/api/products/' + product_id).then(function(payload) {
+                return payload.data;
+            });
+        };
+
     })
 
 ;

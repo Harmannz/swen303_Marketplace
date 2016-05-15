@@ -1,0 +1,15 @@
+<div class="product">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6">
+				<img ng-src="assets/img/products/{{ product.image }}" class="img-responsive">
+			</div>
+			<div class="col-sm-6">
+				<h1 ng-bind="product.name"></h1>
+				<h2 ng-if="product.purchaseprice">{{ product.purchaseprice | currency }}</h2>
+				<h3 ng-if="product.rentalpricepd">or rent from {{ product.rentalpricepd | currency }} per day</h3>
+				<button class="btn btn-template-main">Add to cart</button>
+			</div>
+		</div>
+	</div>
+</div>

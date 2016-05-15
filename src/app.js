@@ -10,6 +10,7 @@ angular.module('swen303', [
     'templates-app',
     'swen303.home',
     'swen303.cart',
+    'swen303.product',
     'swen303.services.category',
     'swen303.factory.cart'
 ])
