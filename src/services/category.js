@@ -4,10 +4,10 @@ angular.module('swen303.services.category', [])
 
         this.getCategories = function() {
             return $http.get('/api/categories').then(function (payload) {
-                return payload;
+                return payload.data;
             });
         };
-        
+
     })
 
 ;
