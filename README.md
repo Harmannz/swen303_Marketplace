@@ -7,4 +7,4 @@ An online shopping and market place system
 # Getting Started
 
 1. run `npm install` to download the project dependencies
-2. run `node main.js`
+2. run `node start` to deploy web application to port 3000
