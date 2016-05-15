@@ -23,7 +23,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr ng-repeat="product in purchasingProducts">
+                                <tr ng-repeat="product in productsToPurchase">
                                     <td>
                                         <a href="#">
                                             <img ng-src="assets/img/products/{{product.image}}" alt="{{product.name}}">
@@ -32,7 +32,7 @@
                                     <td><a href="#">{{product.name}}</a>
                                     </td>
                                     <td>
-                                        <input type="number" value="{{product.quantity}}" class="form-control">
+                                        <input type="number" ng-model="product.quantity" ng-change="updatePrices()" class="form-control" min="0" max={{product.instock}}>
                                     </td>
                                     <td>{{product.purchaseprice | currency}}</td>
                                     <td>{{product.purchaseprice * product.quantity | currency}}</td>
@@ -44,7 +44,7 @@
                                 <tfoot>
                                 <tr>
                                     <th colspan="5">Total</th>
-                                    <th colspan="2">{{purchaseTotal() | currency}}</th>
+                                    <th colspan="2">{{purchaseTotal | currency}}</th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -85,19 +85,19 @@
                             <tbody>
                             <tr>
                                 <td>Order subtotal</td>
-                                <th>{{purchaseTotal() | currency}}</th>
+                                <th>{{purchaseTotal | currency}}</th>
                             </tr>
                             <tr>
                                 <td>Shipping and handling</td>
-                                <th>{{getShipping() | currency}}</th>
+                                <th>{{shipping | currency}}</th>
                             </tr>
                             <tr>
                                 <td>Tax</td>
-                                <th>{{getTax() | currency}}</th>
+                                <th>{{tax | currency}}</th>
                             </tr>
                             <tr class="total">
                                 <td>Total</td>
-                                <th>{{total() | currency}}</th>
+                                <th>{{total | currency}}</th>
                             </tr>
                             </tbody>
                         </table>

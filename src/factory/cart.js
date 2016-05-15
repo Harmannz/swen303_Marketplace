@@ -3,7 +3,7 @@
  */
 angular.module('swen303.factory.cart', [])
     .factory('usercartFactory', ['$http', function($http){
-        var urlBase = 'api/' //TODO: Which url are we using for purchasing ??
+        var urlBase = 'api/' //TODO: Which url are we using for purchasing/renting ??
         var cart = {
             toPurchase: [],
             toRent: [],
@@ -11,12 +11,12 @@ angular.module('swen303.factory.cart', [])
         };
 
         return {
-
+            //adds product to purchase.
             addToPurchase: function(product) {
                 var productExists = false;
                 for(var i = 0; i < cart.toPurchase.length; i++){
                     if(cart.toPurchase[i].pid == product.pid){
-                        cart.toPurchase[i].quantity+=1;
+                        cart.toPurchase[i].quantity += 1;
                         productExists = true;
                     }
                 }
@@ -25,15 +25,8 @@ angular.module('swen303.factory.cart', [])
                     cart.toPurchase.push(product);
                 }
             },
-            getToPurchase: function(){
-                return cart.toPurchase;
-            },
-            getToRent: function(){
-                return cart.toRent;
-            },
-            getUserDetails: function(){
-                return cart.userDetails;
-            },
+            //adds product to purchase.
+            // Product must have the rentdays (number of days for renting) as a property
             addToRent: function(product){
                 var productExists = false;
                 for(var i = 0; i < cart.toRent.length; i++){
@@ -47,29 +40,91 @@ angular.module('swen303.factory.cart', [])
                     cart.toRent.push(product);
                 }
             },
-            removeFromPurchase: function(product){
+            //adds user details to cart
+            addUserDetails: function(userDetails){
+                cart.userDetails = userDetails;
+            },
+            //getter method for accessing the products to purchase
+            getToPurchase: function(){
+                return cart.toPurchase;
+            },
+            //getter method for accessing the products to rent
+            getToRent: function(){
+                return cart.toRent;
+            },
+            //getter for user details
+            getUserDetails: function(){
+                return cart.userDetails;
+            },
+            //removes product matching pid from purchase list
+            removeFromPurchase: function(pid){
                 for(var i =0; i < cart.toPurchase.length; i++){
-                    if (cart.toPurchase[i].productid == product.productid){
+                    if (cart.toPurchase[i].productid == pid){
                         cart.toPurchase.splice(index,1); //remove product from cart
                     }
                 }
             },
+            //removes product matching pid from rent list
+            removeFromRent: function(pid){
+                for(var i =0; i < cart.toRent.length; i++){
+                    if (cart.toRent[i].productid == pid){
+                        cart.toRent.splice(index,1); //remove product from cart
+                    }
+                }
+            },
+            //empties purchase list
             clearPurchase: function(){
-                cart.toPurchase = {};
+                cart.toPurchase = [];
             },
+            //empties rent list
             clearRent: function(){
-                cart.toRent={};
+                cart.toRent= [];
             },
-            addUserDetails: function(userDetails){
-                cart.userDetails = userDetails;
-            },
+            //empties user details
             clearUserDetails: function(){
                 cart.userDetails = {};
             },
+            //empties everything in cart
             clearCart: function(){
                 this.clearPurchase();
                 this.clearRent();
                 this.clearUserDetails();
+            },
+            //Calculation Functions
+            //returns the total of purchase list
+            purchaseTotal: function(){
+                var total=0;
+                    for(var i = 0; i < cart.toPurchase.length; i++){
+                        total += cart.toPurchase[i].purchaseprice * cart.toPurchase[i].quantity;
+                    }
+                return total;
+            },
+            //returns the total rent cost
+            rentTotal: function(){
+                var total=0;
+                for(var i = 0; i < cart.toRent.length; i++){
+                    total += cart.toRent[i].rentalPricePD * cart.toRent[i].rentDays * cart.toRent[i].quantity;
+                }
+                return total;
+            },
+            //returns the total tax cost == 15% of total cost
+            getTax:  function(){
+                return (this.rentTotal() + this.purchaseTotal()) * 0.15;
+            },
+            //returns the total shipping cost = 9.73% of weightg
+            getShipping: function(){
+                var shippingCost = 0;
+                for(var i = 0; i < cart.toPurchase.length; i++){
+                    shippingCost += cart.toPurchase[i].weightg * cart.toPurchase[i].quantity *  .00973 ;
+                }
+                for(var i = 0; i < cart.toRent.length; i++){
+                    shippingCost += cart.toRent[i].weightg * cart.toRent[i].quantity * .00973 ;
+                }
+                return shippingCost;
+            },
+            //returns the total cost
+            getTotal: function(){
+                return this.purchaseTotal() + this.rentTotal() + this.getTax() + this.getShipping();
             }
 
         }
