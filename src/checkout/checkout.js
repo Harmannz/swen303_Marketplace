@@ -44,7 +44,6 @@ angular.module('swen303.cart', ['swen303.services.product', 'swen303.factory.car
 
         $scope.purchaseTotal = usercartFactory.purchaseTotal();
         $scope.rentTotal = usercartFactory.rentTotal();
-        console.log($scope.rentTotal);
         $scope.total = usercartFactory.getTotal();
         $scope.tax = usercartFactory.getTax()
         $scope.shipping = usercartFactory.getShipping();

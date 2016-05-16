@@ -56,16 +56,23 @@ angular.module('swen303.factory.cart', [])
             getUser: function(){
                 return cart.user;
             },
-            getNumOfItems: function(){
-                var numOfItems = 0;
-                //sum the counts of Purchases and rentals 
+            getNumOfPurchases: function(){
+                var numOfPurchases = 0;
+                //sum the counts of Purchases and rentals
                 for(var i = 0; i < cart.toPurchase.length; i++){
-                    numOfItems += cart.toPurchase[i].quantity;
+                    numOfPurchases += cart.toPurchase[i].quantity;
                 }
+                return numOfPurchases;
+            },
+            getNumOfRentals: function(){
+                var numOfRentals = 0;
                 for(var i = 0; i < cart.toRent.length; i++){
-                    numOfItems += cart.toRent[i].quantity;
+                    numOfRentals += cart.toRent[i].quantity;
                 }
-                return numOfItems;
+                return numOfRentals;
+            },
+            getNumOfItems: function(){
+                return this.getNumOfPurchases() + this.getNumOfRentals();
             },
             //removes product matching pid from purchase list
             removeFromPurchase: function(pid){

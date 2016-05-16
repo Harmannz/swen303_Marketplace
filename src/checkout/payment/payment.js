@@ -14,8 +14,12 @@ angular.module('swen303.cart.payment', ['swen303.factory.cart'])
 
 	.controller('PaymentController',function($scope, usercartFactory) {
         //get data from paymentdetails
-        $scope.billingAddress = usercartFactory.getUser().address;
-        
+        $scope.user = usercartFactory.getUser();
+		$scope.purchaseTotal = usercartFactory.purchaseTotal();
+		$scope.rentTotal = usercartFactory.rentTotal();
+		$scope.total = usercartFactory.getTotal();
+		$scope.tax = usercartFactory.getTax()
+		$scope.shipping = usercartFactory.getShipping();
 	})
 
 ;
