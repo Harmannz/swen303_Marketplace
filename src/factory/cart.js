@@ -7,7 +7,7 @@ angular.module('swen303.factory.cart', [])
         var cart = {
             toPurchase: [],
             toRent: [],
-            userDetails: {}
+            user: {}
         };
 
         return {
@@ -41,8 +41,8 @@ angular.module('swen303.factory.cart', [])
                 }
             },
             //adds user details to cart
-            addUserDetails: function(userDetails){
-                cart.userDetails = userDetails;
+            addUser: function(user){
+                cart.user = user;
             },
             //getter method for accessing the products to purchase
             getToPurchase: function(){
@@ -53,8 +53,19 @@ angular.module('swen303.factory.cart', [])
                 return cart.toRent;
             },
             //getter for user details
-            getUserDetails: function(){
-                return cart.userDetails;
+            getUser: function(){
+                return cart.user;
+            },
+            getNumOfItems: function(){
+                var numOfItems = 0;
+                //sum the counts of Purchases and rentals 
+                for(var i = 0; i < cart.toPurchase.length; i++){
+                    numOfItems += cart.toPurchase[i].quantity;
+                }
+                for(var i = 0; i < cart.toRent.length; i++){
+                    numOfItems += cart.toRent[i].quantity;
+                }
+                return numOfItems;
             },
             //removes product matching pid from purchase list
             removeFromPurchase: function(pid){
@@ -81,15 +92,16 @@ angular.module('swen303.factory.cart', [])
                 cart.toRent= [];
             },
             //empties user details
-            clearUserDetails: function(){
-                cart.userDetails = {};
+            clearUser: function(){
+                cart.user = {};
             },
             //empties everything in cart
             clearCart: function(){
                 this.clearPurchase();
                 this.clearRent();
-                this.clearUserDetails();
+                this.clearUser();
             },
+            
             //Calculation Functions
             //returns the total of purchase list
             purchaseTotal: function(){
