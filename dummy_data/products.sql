@@ -1,6 +1,7 @@
 CREATE TABLE products (
 	pid SERIAL primary key,
 	categoryId int,
+	sellerId int references users(uid) not null,
 	name varchar not null,
 	image varchar not null,
 	descriprion varchar,
