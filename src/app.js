@@ -31,6 +31,18 @@ angular.module('swen303', [
         CategoryService.getCategories().then(function(payload) {
             $scope.categories = payload;
         });
+
+        $scope.$watch(function() {
+            return usercartFactory.getTotal();
+        }, function(newValue) {
+            $scope.carttotal = newValue;
+        });
+
+        $scope.$watch(function() {
+            return usercartFactory.getNumOfItems();
+        }, function(newValue) {
+            $scope.cartsize = newValue;
+        });
     })
 
 ;
