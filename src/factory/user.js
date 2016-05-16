@@ -8,16 +8,18 @@ angular.module('swen303.factory.user', [])
 		try {
 			user = JSON.parse(localStorage.getItem('user'));
 			// If there is a partial user object for some reason, get rid of it
-			if (!user.user_id) {
+			if (!user.uid) {
 				user = {};
 			}
 		} catch(error) {}
 
-		return {
+		var Auth = {
+
+			user: user,
 
 			register: function(user) {
 				return $http.post('/api/users', user).then(function(payload) {
-					user = payload;
+					Auth.user = payload.data;
 
 					try {
 						localStorage.setItem('user', JSON.stringify(user));
@@ -29,7 +31,7 @@ angular.module('swen303.factory.user', [])
 
 			signin: function(details) {
 				return $http.post('/api/users/' + details.username, details).then(function(payload) {
-					user = payload;
+					Auth.user = payload.data;
 
 					try {
 						localStorage.setItem('user', JSON.stringify(user));
@@ -40,11 +42,13 @@ angular.module('swen303.factory.user', [])
 			},
 
 			signout: function() {
-				user = {};
+				Auth.user = {};
 				localStorage.clear();
 			}
 
 		};
+
+		return Auth;
 	})
 
 ;
