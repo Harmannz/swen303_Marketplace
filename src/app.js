@@ -10,6 +10,7 @@ angular.module('swen303', [
     'templates-app',
     'swen303.home',
     'swen303.cart',
+    'swen303.cart.payment',
     'swen303.product',
     'swen303.register',
     'swen303.services.category',
@@ -23,8 +24,10 @@ angular.module('swen303', [
         $locationProvider.html5Mode(true);
     })
 
-    .controller('MainController', function($scope, CategoryService, UserFactory) {
+    .controller('MainController', function($scope, CategoryService, UserFactory, usercartFactory) {
         $scope.categories = [];
+        $scope.carttotal = usercartFactory.getTotal();
+        $scope.cartsize = usercartFactory.getNumOfItems();
         CategoryService.getCategories().then(function(payload) {
             $scope.categories = payload;
         });
