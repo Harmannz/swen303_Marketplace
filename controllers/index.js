@@ -21,6 +21,8 @@ router.use('/api/specifications', require('./specifications'))
 
 router.use('/api/users', require('./users'))
 
+router.use('/api/orders', require('./orders'))
+
 
 router.get('*', function(req, res) {
 	res.sendFile(path.resolve('build/index.html'));
