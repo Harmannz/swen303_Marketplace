@@ -28,7 +28,7 @@ angular.module('swen303.factory.user', [])
 			},
 
 			signin: function(details) {
-				return $http.post('something', details).then(function(payload) {
+				return $http.post('/api/users/' + details.username, details).then(function(payload) {
 					user = payload;
 
 					try {

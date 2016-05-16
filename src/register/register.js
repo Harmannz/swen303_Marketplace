@@ -34,8 +34,18 @@ angular.module('swen303.register', [])
 		};
 
 		$scope.signin = function() {
-			UserFactory.signin($scope.signin).then(function(result) {
-
+			UserFactory.signin($scope.signinDetails).then(function(result) {
+				if (result.success) {
+					if ($stateParams.redirectstate) {
+						try {
+							$state.go(redirectstate);
+						} catch (Error) {
+							$state.go('home');
+						}
+					} else {
+						$state.go('home');
+					}
+				}
 			});
 		};
 	})
