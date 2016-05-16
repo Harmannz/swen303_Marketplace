@@ -1,0 +1,85 @@
+<div class="register">
+	<div id="content">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-md-6">
+					<div class="box">
+						<h2 class="text-uppercase">New account</h2>
+
+						<p class="lead">Not registered yet? Sign up!</p>
+
+						<hr>
+
+						<form>
+							<div class="form-group">
+								<label for="name-login">First Name</label>
+								<input type="text" class="form-control" ng-model="user.firstname">
+							</div>
+							<div class="form-group">
+								<label for="name-login">Last Name</label>
+								<input type="text" class="form-control" ng-model="user.lastname">
+							</div>
+							<div class="form-group">
+								<label for="email-login">Email</label>
+								<input type="text" class="form-control" ng-model="user.email">
+							</div>
+							<div class="form-group">
+								<label for="password-login">Address</label>
+								<input type="text" class="form-control" ng-model="user.address">
+							</div>
+
+							<hr />
+
+							<div class="form-group">
+								<label for="name-login">Username</label>
+								<input type="text" class="form-control" ng-model="user.username">
+							</div>
+							<div class="form-group">
+								<label for="password-login">Password</label>
+								<input type="password" class="form-control" ng-model="user.password">
+							</div>
+							<div class="form-group">
+								<label for="password-login">Confirm Password</label>
+								<input type="password" class="form-control" ng-model="confirm_password">
+							</div>
+							<div class="text-center">
+								<button class="btn btn-template-main" ng-click="register()"><i class="fa fa-user-md"></i>Register</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="box">
+						<h2 class="text-uppercase">Login</h2>
+
+						<p class="lead">Already our customer?</p>
+						<p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
+							ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+
+						<hr>
+
+						<form>
+							<div class="form-group">
+								<label for="email">Email/Username</label>
+								<input type="text" class="form-control" ng-model="signin.username">
+							</div>
+							<div class="form-group">
+								<label for="password">Password</label>
+								<input type="password" class="form-control" ng-model="signin.password">
+							</div>
+							<div class="text-center">
+								<button class="btn btn-template-main" ng-click="signin()"><i class="fa fa-sign-in"></i> Log in</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+			</div>
+			<!-- /.row -->
+
+		</div>
+		<!-- /.container -->
+	</div>
+</div>

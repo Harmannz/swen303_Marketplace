@@ -11,8 +11,10 @@ angular.module('swen303', [
     'swen303.home',
     'swen303.cart',
     'swen303.product',
+    'swen303.register',
     'swen303.services.category',
-    'swen303.factory.cart'
+    'swen303.factory.cart',
+    'swen303.factory.user'
 ])
 
     // Config just specifies configuration parameters for the app
@@ -21,7 +23,7 @@ angular.module('swen303', [
         $locationProvider.html5Mode(true);
     })
 
-    .controller('MainController', function($scope, CategoryService) {
+    .controller('MainController', function($scope, CategoryService, UserFactory) {
         $scope.categories = [];
         CategoryService.getCategories().then(function(payload) {
             $scope.categories = payload;
