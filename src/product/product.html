@@ -12,12 +12,23 @@
 			</div>
 		</div>
 	</div>
+
+	
+
 	<div class="container">
 		<h3>Description</h3>
-		<p ng-bind="product.descriprion"></p>
-	</div>
-	<div class="container">
-		<h3>Comparison</h3>
-		<p ng-bind="specifications.name"></p>
+		<p ng-bind="product.description"></p>
+	
+		<div class="panel panel-default">
+			<div class="panel-heading">Specifications</div>
+				<table class="table">
+					<tr ng-repeat="(key, spec) in fullCompareTable">
+						<td> {{ spec.name }} </td>
+						<td> {{ spec.value_1 }} </td>
+						<td> {{ spec.value_2 }} </td>
+					</tr>
+				</table>
+			<div>
+		</div>
 	</div>
 </div>

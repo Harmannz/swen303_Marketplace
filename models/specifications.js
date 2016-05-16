@@ -3,7 +3,7 @@ var dbClient = require('./db')
    ,fs = require('fs')
 
    exports.getSpecs = function(pid, cb, errorCb){
-	var query = dbClient.query("select * from specificaiotns where pid = $1",[pid]);
+	var query = dbClient.query("select * from specifications where product_id = $1",[pid]);
 	var data = [];
 	
 	query.on('row',function(d){

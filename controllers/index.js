@@ -17,8 +17,7 @@ router.use('/api/wishlist', require('./wishlist'))
 
 router.use('/api/categories', require('./categories'))
 
-
-router.use('api/specifications', require('./specifications'))
+router.use('/api/specifications', require('./specifications'))
 
 router.use('/api/users', require('./users'))
 
