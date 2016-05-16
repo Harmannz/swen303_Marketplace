@@ -20,18 +20,20 @@ angular.module('swen303.cart', ['swen303.services.product', 'swen303.factory.car
 	})
 
 	.controller('CartController',function($scope, usercartFactory, Products) {
-        
+
+		var rentProducts = JSON.parse(JSON.stringify(Products));
+
         //add temp data to user cart for purchasing
         for(var i = 0; i < Products.length;i++){
              usercartFactory.addToPurchase(Products[i]);
         }
 
         //add temp data to user cart for renting
-        for(var i = 0; i < Products.length;i++){
-            var product = Products[i];
+        for(var i = 0; i < rentProducts.length;i++){
+            var product = rentProducts[i];
             //renting product must have rentdays as a property to determine how many days the product can be rented for?
-            product.rentdays = Products[i].minrentdays; //does this create a new Product object ???
-            usercartFactory.addToRent(Products[i]);
+            product.rentdays = rentProducts[i].minrentdays; //does this create a new Product object ???
+            usercartFactory.addToRent(rentProducts[i]);
         }
 
         $scope.productsToPurchase = usercartFactory.getToPurchase();
