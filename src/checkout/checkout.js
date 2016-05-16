@@ -48,6 +48,7 @@ angular.module('swen303.cart', ['swen303.services.product', 'swen303.factory.car
         $scope.total = usercartFactory.getTotal();
         $scope.tax = usercartFactory.getTax()
         $scope.shipping = usercartFactory.getShipping();
+        $scope.cartsize = usercartFactory.getNumOfItems();
 
         $scope.removeProduct = function(pid){
             console.log("Remove product with id: " + pid);

@@ -3,7 +3,7 @@
         <div class="row">
 
             <div class="col-md-12">
-                <p class="text-muted lead">You currently have {{productsToPurchase.length + productsToRent.length}} item(s) in your cart.</p>
+                <p class="text-muted lead">You currently have {{ cartsize }} item(s) in your cart.</p>
             </div>
 
             <div class="col-md-9 clearfix" id="basket">
@@ -138,7 +138,7 @@
                                 <th>{{shipping | currency}}</th>
                             </tr>
                             <tr>
-                                <td>Tax</td>
+                                <td>Tax <i>(inclusive)</i></td>
                                 <th>{{tax | currency}}</th>
                             </tr>
                             <tr class="total">

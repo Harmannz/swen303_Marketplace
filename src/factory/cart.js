@@ -136,7 +136,7 @@ angular.module('swen303.factory.cart', [])
             },
             //returns the total cost
             getTotal: function(){
-                return this.purchaseTotal() + this.rentTotal() + this.getTax() + this.getShipping();
+                return this.purchaseTotal() + this.rentTotal() + this.getShipping();
             }
 
         }
