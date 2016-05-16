@@ -17,6 +17,8 @@ router.use('/api/wishlist', require('./wishlist'))
 
 router.use('/api/categories', require('./categories'))
 
+router.use('api/specifications', require('./specifications'))
+
 router.get('*', function(req, res) {
 	res.sendFile(path.resolve('build/index.html'));
 });

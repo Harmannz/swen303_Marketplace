@@ -1,4 +1,4 @@
-angular.module('swen303.product', ['swen303.services.product'])
+angular.module('swen303.product', ['swen303.services.product', 'swen303.services.specifications'])
 
 	.config(function($stateProvider) {
 		$stateProvider.state('product', {
@@ -14,13 +14,19 @@ angular.module('swen303.product', ['swen303.services.product'])
 					return ProductService.getProduct($stateParams.id).then(function(payload) {
 						return payload;
 					});
+				}],
+				Specifications: ['SpecsService', '$stateParams', function(SpecsService, $stateParams) {
+					return SpecsService.getSpecifications($stateParams.id).then(function(payload) {
+						return payload;
+					});
 				}]
 			}
 		});
 	})
 
-	.controller('ProductController', function($scope, Product) {
+	.controller('ProductController', function($scope, Product, Specifications) {
 		$scope.product = Product;
+		$scope.specifications = Specifications;
 	})
 
 ;
