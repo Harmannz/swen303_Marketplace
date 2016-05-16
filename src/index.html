@@ -23,8 +23,8 @@
         --><div class="cart" ui-sref="cart">
             <i class="material-icons">shopping_cart</i>
             <div class="cart__right">
-                <div class="cart__right--items">3 items</div>
-                <div class="cart__right--price">$435.32</div>
+                <div class="cart__right--items">{{ cartsize }} items</div>
+                <div class="cart__right--price">{{ carttotal | currency }}</div>
             </div>
         </div>
     </div>
