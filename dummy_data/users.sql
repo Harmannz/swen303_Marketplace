@@ -1,12 +1,12 @@
 CREATE TABLE users (
 	uid serial primary key,
-	username  character varying(50) NOT NULL,
-	firstname character varying(30),
-	lastname  character varying(30),
-	email  character varying(50),
+	username  varchar NOT NULL,
+	firstname varchar,
+	lastname  varchar,
+	email  varchar,
 	dob  DATE,
-	address character varying(100),
-	password character varying(100) NOT NULL
+	address varchar,
+	password varchar NOT NULL
 );
 
 SET datestyle = "ISO, DMY";
