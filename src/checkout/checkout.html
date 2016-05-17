@@ -27,11 +27,11 @@
                                 <tbody>
                                 <tr ng-repeat="product in productsToPurchase">
                                     <td>
-                                        <a href="#">
+                                        <a ui-sref="product({ id: product.pid })">
                                             <img ng-src="assets/img/products/{{product.image}}" alt="{{product.name}}">
                                         </a>
                                     </td>
-                                    <td><a href="#">{{product.name}}</a>
+                                    <td><a ui-sref="product({ id: product.pid })">{{product.name}}</a>
                                     </td>
                                     <td>
                                         <input type="number" ng-model="product.quantity" ng-change="updatePrices()" class="form-control" min="0" max={{product.instock}}>
@@ -70,11 +70,11 @@
                                 <tbody>
                                 <tr ng-repeat="product in productsToRent">
                                     <td>
-                                        <a href="#">
+                                        <a ui-sref="product({ id: product.pid })">
                                             <img ng-src="assets/img/products/{{product.image}}" alt="{{product.name}}">
                                         </a>
                                     </td>
-                                    <td><a href="#">{{product.name}}</a>
+                                    <td><a ui-sref="product({ id: product.pid })">{{product.name}}</a>
                                     </td>
                                     <td>
                                         <input type="number" ng-model="product.quantity" ng-change="updatePrices()" class="form-control" min="0" max={{product.instock}}>
@@ -105,7 +105,7 @@
                                     Continue shopping</a>
                             </div>
                             <div class="pull-right">
-                                <button type="submit" class="btn btn-template-main">Proceed to checkout <i
+                                <button type="submit" class="btn btn-template-main" ng-disabled="total <= 0">Proceed to checkout <i
                                         class="fa fa-chevron-right"></i>
                                 </button>
                             </div>
