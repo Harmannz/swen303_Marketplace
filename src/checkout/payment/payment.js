@@ -1,7 +1,7 @@
 angular.module('swen303.cart.payment', ['swen303.factory.cart'])
 
 	.config(function($stateProvider) {
-		$stateProvider.state('cart/payment', {
+		$stateProvider.state('payment', {
 			url: '/cart/payment',
 			views: {
 				"main": {

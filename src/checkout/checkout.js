@@ -19,7 +19,7 @@ angular.module('swen303.cart', ['swen303.services.product', 'swen303.factory.car
 		});
 	})
 
-	.controller('CartController',function($scope, usercartFactory, Products) {
+	.controller('CartController',function($state, $scope, usercartFactory, Products) {
 
 		var rentProducts = JSON.parse(JSON.stringify(Products));
 
@@ -73,6 +73,8 @@ angular.module('swen303.cart', ['swen303.services.product', 'swen303.factory.car
         $scope.submitForm = function() {
             console.log("submit selected");
             console.log("check if user's cart is not empty?");
+            $state.go("payment");
+
         }
 	})
 
