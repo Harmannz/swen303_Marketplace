@@ -14,6 +14,12 @@ angular.module('swen303.services.product', [])
             });
         };
 
+        this.getFromCategory = function(cid) {
+            return $http.get('/api/products/category/' + cid).then(function(payload) {
+                return payload.data;
+            });
+        }
+
     })
 
 ;

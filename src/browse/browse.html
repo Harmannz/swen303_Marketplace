@@ -1,0 +1,16 @@
+<div class="browse">
+    <h1>TEST</h1>
+    <div class="list container">
+        <div class="list__header">Products in {{ category.name }} </div>
+        <div class="list__products row">
+            <div ng-repeat="product in products" class="product col-sm-4">
+                <div class="product__inner" ui-sref="product({ id: product.pid })">
+                    <img ng-src="assets/img/products/{{ product.image }}">
+                    <h4>{{ product.name }}</h4>
+                    <h3>{{ product.purchaseprice | currency }}</h3>
+                    <h4><small>or rent from {{ product.rentalpricepd | currency }}<small></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

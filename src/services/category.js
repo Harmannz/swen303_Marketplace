@@ -8,6 +8,12 @@ angular.module('swen303.services.category', [])
             });
         };
 
+        this.get = function(cid) {
+            return $http.get('/api/categories/'+cid).then(function (payload) {
+                return payload.data;
+            });
+        };
+
     })
 
 ;

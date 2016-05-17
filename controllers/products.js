@@ -22,6 +22,19 @@ router.get('/featured', function(req, res) {
 	});
 });
 
+//Get items in category
+router.get('/category/:cid', function(req,res){
+	var cid = req.params.cid;
+	console.log("GET /products/category/" + cid);
+
+	Products.getFromCategory(cid,function(products){
+		res.json(products);
+	},function(err){
+		console.log(err);
+		res.sendStatus(500);
+	})
+})
+
 router.get('/:id', function(req,res){
 	var id = req.params.id;
 	console.log("GET /products/" + id);

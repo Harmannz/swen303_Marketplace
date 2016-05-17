@@ -35,6 +35,24 @@ exports.getAll = function(cb,errorCb){
 	})
 }
 
+//Get items in category
+exports.getFromCategory = function(cid, cb,errorCb){
+	var query = dbClient.query("select * from products where categoryId = $1",[cid]);
+	var data = [];
+	query.on('row',function(d){
+		data.push(d);
+	});
+
+	query.on('error',function(err){
+		errorCb(err);
+	});
+
+	query.on('end',function(e){
+		cb(data);
+	})
+}
+
+
 exports.addNew = function(product, cb, errorCb){
 	var queryParams = Utils.shallowObjToQuery(product);
 	var query = dbClient.query("insert into products " + queryParams.string +" returning *" , queryParams.args);
