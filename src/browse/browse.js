@@ -26,10 +26,17 @@ angular.module('swen303.browse', ['swen303.services.product', 'swen303.services.
         });
     })
 
-    .controller('BrowseController', function($scope, Products, Category) {
-        console.log("Browse.js");
+    .controller('BrowseController', function($scope, Products, Category, ProductService) {
         $scope.products = Products;
         $scope.category = Category;
+
+		$scope.search = '';
+
+		$scope.$watch('search', function() {
+			/*ProductService.search($scope.search).then(function(payload) {
+				$scope.products = payload;
+			});*/
+		});
     })
 
 ;

@@ -3,8 +3,8 @@ var dbClient = require('./db')
 
 /*Get the category tree*/
 exports.getCategories = function(cb, errorCb){
-	var query = dbClient.query("select c.name as child, p.name as parent from categories c inner join categories p on c.parentcid = p.cid",[]);
-	
+	var query = dbClient.query("select c.cid, c.name as child, p.name as parent from categories c inner join categories p on c.parentcid = p.cid",[]);
+
 	var data = [];
 	query.on('row',function(d){
 		data.push(d);
@@ -22,7 +22,10 @@ exports.getCategories = function(cb, errorCb){
 		grouped = _.groupBy(d,'parent');
 		var cleaned = _.mapValues(grouped,function(o){
 			return _.map(o,function(oc){
-				return oc.child;
+				return {
+                    id: oc.cid,
+                    name: oc.child
+                };
 			})
 		})
 		return cleaned;
@@ -34,7 +37,7 @@ exports.shallowObjToQuery = function(o){
 		string: "",
 		args: []
 	}
-	
+
 	var keysLen = _.keys(o).length;
 	var qString;
 	_.forEach(o,function(val,key){

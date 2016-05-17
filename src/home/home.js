@@ -21,8 +21,6 @@ angular.module('swen303.home', ['swen303.services.product'])
 
     .controller('HomeController', function($scope, $state, Products) {
         $scope.products = Products;
-        $state.go('browse');
-
     })
 
 ;

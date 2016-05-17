@@ -32,42 +32,42 @@
         <li class="dropdown col-sm-2">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Computers<span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li ng-repeat="category in categories['Computers & Tablets']"><a href="#">{{ category }}</a></li>
+                <li ng-repeat="category in categories['Computers & Tablets']" ui-sref="browse({cid: category.id})"><a href="#">{{ category.name }}</a></li>
             </ul>
         </li>
 
         <li class="dropdown col-sm-2">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Phones<span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li ng-repeat="category in categories['Cellphones & Accessories']"><a href="#">{{ category }}</a></li>
+                <li ng-repeat="category in categories['Cellphones & Accessories']" ui-sref="browse({cid: category.id})"><a href="#">{{ category.name }}</a></li>
             </ul>
         </li>
 
         <li class="dropdown col-sm-2">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Vehicle electronics<span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li ng-repeat="category in categories['Vehicle Electronics & GPS']"><a href="#">{{ category }}</a></li>
+                <li ng-repeat="category in categories['Vehicle Electronics & GPS']" ui-sref="browse({cid: category.id})"><a href="#">{{ category.name }}</a></li>
             </ul>
         </li>
 
         <li class="dropdown col-sm-2">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">TVs<span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li ng-repeat="category in categories['TV, Audio & Surveillance']"><a href="#">{{ category }}</a></li>
+                <li ng-repeat="category in categories['TV, Audio & Surveillance']" ui-sref="browse({cid: category.id})"><a href="#">{{ category.name }}</a></li>
             </ul>
         </li>
 
         <li class="dropdown col-sm-2">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Cameras<span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li ng-repeat="category in categories['Cameras & Photo']"><a href="#">{{ category }}</a></li>
+                <li ng-repeat="category in categories['Cameras & Photo']" ui-sref="browse({cid: category.id})"><a href="#">{{ category.name }}</a></li>
             </ul>
         </li>
 
         <li class="dropdown col-sm-2">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Gaming<span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li ng-repeat="category in categories['Video Games & Consoles']"><a href="#">{{ category }}</a></li>
+                <li ng-repeat="category in categories['Video Games & Consoles']" ui-sref="browse({cid: category.id})"><a href="#">{{ category.name }}</a></li>
             </ul>
         </li>
     </ul>

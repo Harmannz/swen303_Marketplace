@@ -1,7 +1,12 @@
-<div class="browse">
-    <h1>TEST</h1>
+<div class="browse container">
     <div class="list container">
-        <div class="list__header">Products in {{ category.name }} </div>
+		<div class="list__header">Products in {{ category.name }}</div>
+		<form>
+			<div class="form-group">
+				<label>Search this category</label>
+				<input type="text" class="form-control" ng-model="search">
+			</div>
+		</form>
         <div class="list__products row">
             <div ng-repeat="product in products" class="product col-sm-4">
                 <div class="product__inner" ui-sref="product({ id: product.pid })">
@@ -11,6 +16,9 @@
                     <h4><small>or rent from {{ product.rentalpricepd | currency }}<small></h4>
                 </div>
             </div>
+			<div ng-show="products.length === 0" class="list__products--empty">
+				No products found
+			</div>
         </div>
     </div>
 </div>
