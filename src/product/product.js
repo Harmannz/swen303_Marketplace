@@ -29,7 +29,7 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 		});
 	})
 
-	.controller('ProductController', function($scope, Product, Specifications, CompareSpecifications) {
+	.controller('ProductController', function($scope, Product, Specifications, CompareSpecifications, usercartFactory) {
 		$scope.product = Product;
 		$scope.specs = Specifications;
 		$scope.compareSpecs = CompareSpecifications;
@@ -60,6 +60,15 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 				fullCompTable.push({"name":Specifications[i].name, "value_1":"-", "value_2":CompareSpecifications[i].value});
 			}
 		}
+
+		$scope.addToCart = function() {
+			usercartFactory.addToPurchase($scope.product);
+		};
+
+		$scope.rent = function() {
+			$scope.product.rentdays = $scope.product.minrentdays;
+			usercartFactory.addToRent($scope.product);
+		};
 
 
 		$scope.fullCompareTable = fullCompTable;

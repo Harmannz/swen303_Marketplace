@@ -8,17 +8,18 @@
 				<h1 ng-bind="product.name"></h1>
 				<h2 ng-if="product.purchaseprice">{{ product.purchaseprice | currency }}</h2>
 				<h3 ng-if="product.rentalpricepd">or rent from {{ product.rentalpricepd | currency }} per day</h3>
-				<button class="btn btn-template-main">Add to cart</button>
+				<button class="btn btn-template-main" ng-click="addToCart()">Add to cart</button>
+				<button class="btn btn-default" ng-click="rent()">Rent this product</button>
 			</div>
 		</div>
 	</div>
 
-	
+
 
 	<div class="container">
 		<h3>Description</h3>
 		<p ng-bind="product.description"></p>
-	
+
 		<div class="panel panel-default">
 			<div class="panel-heading">Specifications</div>
 				<table class="table">

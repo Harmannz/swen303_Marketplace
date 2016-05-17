@@ -8,33 +8,11 @@ angular.module('swen303.cart', ['swen303.services.product', 'swen303.factory.car
 					templateUrl: 'checkout/checkout.html',
 					controller: 'CartController'
 				}
-			},
-            resolve: {
-                Products: ['ProductService', function(ProductService) {
-                    return ProductService.getFeaturedProducts().then(function(payload) {
-                        return payload;
-                    });
-                }]
-            }
+			}
 		});
 	})
 
-	.controller('CartController',function($state, $scope, usercartFactory, Products) {
-
-		var rentProducts = JSON.parse(JSON.stringify(Products));
-
-        //add temp data to user cart for purchasing
-        for(var i = 0; i < Products.length;i++){
-             usercartFactory.addToPurchase(Products[i]);
-        }
-
-        //add temp data to user cart for renting
-        for(var i = 0; i < rentProducts.length;i++){
-            var product = rentProducts[i];
-            //renting product must have rentdays as a property to determine how many days the product can be rented for?
-            product.rentdays = rentProducts[i].minrentdays; //does this create a new Product object ???
-            usercartFactory.addToRent(rentProducts[i]);
-        }
+	.controller('CartController',function($state, $scope, usercartFactory) {
 
         $scope.productsToPurchase = usercartFactory.getToPurchase();
         console.log($scope.productsToPurchase);
