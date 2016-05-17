@@ -19,8 +19,8 @@ exports.addUser = function(data,cb,errorCb){
 	})
 }
 /*Gets the last user (should only be one) who has the email or username specified */
-exports.fromIdentifier = function(id,cb,errorCb){
-	
+exports.fromUsername = function(id,cb,errorCb){
+
 	var query = dbClient.query("select * from users where username = $1",[id]);
 	var data;
 

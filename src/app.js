@@ -26,6 +26,13 @@ angular.module('swen303', [
     })
 
     .controller('MainController', function($scope, CategoryService, UserFactory, usercartFactory) {
+        $scope.user = UserFactory.user;
+        $scope.$watch(function() {
+            return UserFactory.user;
+        }, function(user) {
+            $scope.user = user;
+        });
+
         $scope.categories = [];
         $scope.carttotal = usercartFactory.getTotal();
         $scope.cartsize = usercartFactory.getNumOfItems();

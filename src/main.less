@@ -51,9 +51,32 @@ html, body {
         display: table;
         width: 100%;
 
-        .logo, .cart {
+        .user, .logo, .cart {
             display: table-cell;
             vertical-align: middle;
+        }
+
+        .user {
+            text-align: center;
+            color: #ffffff;
+            background-color: #333333;
+            height: 80px;
+            width: 200px;
+            padding: 0 24px;
+
+            .user__welcome {
+                color: #bbbbbb;
+                display: block;
+            }
+
+            .user__account {
+                color: #ffffff;
+                display: block;
+            }
+
+            span:hover {
+                cursor: pointer;
+            }
         }
 
         .logo {
@@ -84,7 +107,6 @@ html, body {
         }
 
         .cart {
-            display: table-cell;
             background-color: #333333;
             height: 80px;
             width: 200px;

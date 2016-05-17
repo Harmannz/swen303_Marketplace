@@ -16,6 +16,13 @@
 
 <div class="navbar">
     <div class="navbar__top">
+        <div class="user">
+            <span ui-sref="register" ng-hide="user">Signin/Register</span>
+            <div ng-show="user">
+                <span class="user__welcome">Hi {{ user.firstname }}!</span>
+                <span class="user__account">View your account</span>
+            </div>
+        </div>
         <div class="logo">
             <img src="assets/img/logo.png" ui-sref="home">
             <h1><span ui-sref="home">Electronics</span></h1>
