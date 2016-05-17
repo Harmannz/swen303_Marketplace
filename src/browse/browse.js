@@ -16,6 +16,7 @@ angular.module('swen303.browse', ['swen303.services.product', 'swen303.services.
                     });
                 }],
 
+
                 Category: ['CategoryService', '$stateParams', function(CategoryService, $stateParams) {
                     return CategoryService.get($stateParams.cid).then(function(payload) {
                         return payload;

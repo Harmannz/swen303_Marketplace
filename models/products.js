@@ -19,6 +19,49 @@ exports.get = function(id, cb, errorCb){
 	})
 }
 
+exports.search = function(str, cid, cb, errorCb){
+	var searchWords = str.toLowerCase().split(' ');
+	//Build query
+	var queryStr = "select * from products WHERE ";
+
+	
+	if(cid!=0){
+		queryStr += "categoryId = "+cid+" AND ";
+	}
+
+	//Search name
+	queryStr += "((LOWER(name) LIKE '%"+searchWords[0]+"%'";
+	for(i = 1; i < searchWords.length; i++){
+		queryStr += " AND LOWER(name) LIKE '%"+searchWords[i]+"%'";
+	}
+	queryStr+=')';
+
+	//Search description
+
+	queryStr += "OR (LOWER(description) LIKE '%"+searchWords[0]+"%'";
+	for(i = 1; i < searchWords.length; i++){
+		queryStr += " AND LOWER(description) LIKE '%"+searchWords[i]+"%'";
+	}
+	queryStr+="))";
+
+console.log(queryStr);
+
+	//Execute query
+	var query = dbClient.query(queryStr);
+	var data = [];
+	query.on('row',function(d){
+		data.push(d);
+	});
+
+	query.on('error',function(err){
+		errorCb(err);
+	});
+
+	query.on('end',function(e){
+		cb(data);
+	})
+}
+
 exports.getAll = function(cb,errorCb){
 	var query = dbClient.query("select * from products");
 	var data = [];

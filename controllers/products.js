@@ -23,11 +23,28 @@ router.get('/featured', function(req, res) {
 });
 
 //Get items in category
-router.get('/category/:cid', function(req,res){
+router.get('/products/:cid', function(req,res){
 	var cid = req.params.cid;
 	console.log("GET /products/category/" + cid);
 
 	Products.getFromCategory(cid,function(products){
+		res.json(products);
+	},function(err){
+		console.log(err);
+		res.sendStatus(500);
+	})
+})
+
+//Search Items in category (0 = All)
+router.get('/:cid/:search', function(req,res){
+	var cid = req.params.cid;
+	var search = req.params.search;
+
+	console.log("SEARCH " + cid + " : "+search)
+	
+	console.log("GET /products/category/" + cid + "/"+search);
+
+	Products.search(search, cid,function(products){
 		res.json(products);
 	},function(err){
 		console.log(err);
