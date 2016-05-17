@@ -19,8 +19,10 @@ angular.module('swen303.home', ['swen303.services.product'])
         });
     })
 
-    .controller('HomeController', function($scope, Products) {
+    .controller('HomeController', function($scope, $state, Products) {
         $scope.products = Products;
+        $state.go('browse');
+
     })
 
 ;
