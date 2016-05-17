@@ -1,10 +1,10 @@
 <div class="browse container">
     <div class="list container">
-		<div class="list__header">Products in {{ category.name }}</div>
-		<form>
+		<div class="list__header">{{ category.name }}</div>
+		<form ng-submit="search()">
 			<div class="form-group">
 				<label>Search this category</label>
-				<input type="text" class="form-control" ng-model="search">
+				<input type="text" class="form-control" ng-model="searchTerm">
 			</div>
 		</form>
         <div class="list__products row">

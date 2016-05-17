@@ -20,8 +20,8 @@ angular.module('swen303.services.product', [])
             });
         };
 
-        this.search = function(query) {
-            return $http.get('/api/products/search?' + query).then(function(payload) {
+        this.search = function(category_id, query) {
+            return $http.get('/api/products/' + category_id + '/' + query).then(function(payload) {
                 return payload.data;
             });
         };

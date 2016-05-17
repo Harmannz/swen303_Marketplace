@@ -5,7 +5,7 @@ var dbClient = require('./db')
 exports.get = function(id, cb, errorCb){
 	var query = dbClient.query("select * from products where pid = $1",[id]);
 	var data;
-	
+
 	query.on('row',function(d){
 		data = d;
 	});
@@ -24,7 +24,7 @@ exports.search = function(str, cid, cb, errorCb){
 	//Build query
 	var queryStr = "select * from products WHERE ";
 
-	
+
 	if(cid!=0){
 		queryStr += "categoryId = "+cid+" AND ";
 	}
@@ -43,8 +43,6 @@ exports.search = function(str, cid, cb, errorCb){
 		queryStr += " AND LOWER(description) LIKE '%"+searchWords[i]+"%'";
 	}
 	queryStr+="))";
-
-console.log(queryStr);
 
 	//Execute query
 	var query = dbClient.query(queryStr);
@@ -99,7 +97,7 @@ exports.getFromCategory = function(cid, cb,errorCb){
 exports.addNew = function(product, cb, errorCb){
 	var queryParams = Utils.shallowObjToQuery(product);
 	var query = dbClient.query("insert into products " + queryParams.string +" returning *" , queryParams.args);
-	
+
 	query.on('error',function(e){
 		errorCb(e);
 	})
@@ -120,4 +118,3 @@ exports.getFeaturedProducts = function(cb, errorCb) {
 		cb(results.rows);
 	});
 }
-

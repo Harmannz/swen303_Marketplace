@@ -23,7 +23,7 @@ router.get('/featured', function(req, res) {
 });
 
 //Get items in category
-router.get('/products/:cid', function(req,res){
+router.get('/category/:cid', function(req,res){
 	var cid = req.params.cid;
 	console.log("GET /products/category/" + cid);
 
@@ -41,7 +41,7 @@ router.get('/:cid/:search', function(req,res){
 	var search = req.params.search;
 
 	console.log("SEARCH " + cid + " : "+search)
-	
+
 	console.log("GET /products/category/" + cid + "/"+search);
 
 	Products.search(search, cid,function(products){
@@ -67,14 +67,14 @@ router.get('/:id', function(req,res){
 router.post('/', function(req,res){
 	Products.addNew(req.body,function(product){
 		if(product){
-			res.status(201).send(product);	
+			res.status(201).send(product);
 		}else{
 			res.sendStatus(400);
 		}
 	},function(err){
 		res.sendStatus(400);
 	});
-	
+
 })
 
 module.exports = router;

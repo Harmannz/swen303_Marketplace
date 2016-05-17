@@ -30,13 +30,19 @@ angular.module('swen303.browse', ['swen303.services.product', 'swen303.services.
         $scope.products = Products;
         $scope.category = Category;
 
-		$scope.search = '';
+		$scope.searchTerm = '';
 
-		$scope.$watch('search', function() {
-			/*ProductService.search($scope.search).then(function(payload) {
-				$scope.products = payload;
-			});*/
-		});
+		$scope.search = function() {
+			if (!$scope.searchTerm) {
+				ProductService.getFromCategory($scope.category.cid).then(function(payload) {
+					$scope.products = payload;
+				});
+			} else {
+				ProductService.search($scope.searchTerm, $scope.category.cid).then(function(payload) {
+					$scope.products = payload;
+				});
+			}
+		};
     })
 
 ;
