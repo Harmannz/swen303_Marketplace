@@ -1,24 +1,66 @@
 <div class="browse container">
-    <div class="list container">
-		<div class="list__header">{{ category.name }}</div>
+    <div class="container">
+        <div class="heading text-center"><h1>{{ category.name }}</h1></div>
+        <!-- search bar -->
 		<form ng-submit="search()">
-			<div class="form-group">
-				<label>Search this category</label>
-				<input type="text" class="form-control" ng-model="searchTerm">
-			</div>
-		</form>
-        <div class="list__products row">
-            <div ng-repeat="product in products" class="product col-sm-4">
-                <div class="product__inner" ui-sref="product({ id: product.pid })">
-                    <img ng-src="assets/img/products/{{ product.image }}">
-                    <h4>{{ product.name }}</h4>
-                    <h3>{{ product.purchaseprice | currency }}</h3>
-                    <h4><small>or rent from {{ product.rentalpricepd | currency }}<small></h4>
-                </div>
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="searchTerm" placeholder="Search here">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-md btn-template-primary" type="button" id="search-button">Markup Search</button>
+                </span>
             </div>
-			<div ng-show="products.length === 0" class="list__products--empty">
-				No products found
-			</div>
+		</form>
+        <!-- show items -->
+        <div id="content">
+            <div class="container">
+
+                <div class="row products" ng-repeat="product in products">
+
+                    <div class="col-md-3 col-sm-4">
+                        <div class="product">
+                            <div class="image">
+                                <a  ui-sref="product({ id: product.pid })">
+                                    <img ng-src="assets/img/products/{{ product.image }}" alt="{{product.image}}" class="img-responsive">
+                                </a>
+                            </div>
+                            <!-- /.image -->
+                            <div class="text">
+                                <h3><a  ui-sref="product({ id: product.pid })">{{ product.name }}</a></h3>
+                                <p class="price">{{ product.purchaseprice | currency }}</p>
+                                <h4><small>or rent from {{ product.rentalpricepd | currency }}<small></h4>
+
+                            </div>
+                            <!-- /.text -->
+                            <a href="#">
+                                <div class="ribbon sale"  ng-click="addToCart(product)">
+                                    <div class="theribbon">Buy Now</div>
+                                    <div class="ribbon-background"></div>
+                                </div>
+                            </a>
+                            <!-- /.ribbon -->
+                            <a href="#">
+                                <div class="ribbon new" ng-click="rent(product)">
+                                    <div class="theribbon">Quick Rent</div>
+                                    <div class="ribbon-background"></div>
+                                </div>
+                            </a>
+                            <!-- /.ribbon -->
+                        </div>
+                        <!-- /.product -->
+                    </div>
+<!-- /.col-md-4 -->
+                </div>
+                <!-- /.products -->
+
+                <div class="col-sm-12">
+                    <div class="pages">
+                    </div>
+                </div>
+                <!-- /.col-sm-12 -->
+
+            </div>
+            <!-- /.container -->
         </div>
+        <!-- /#content -->
     </div>
 </div>
