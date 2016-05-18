@@ -12,13 +12,15 @@ angular.module('swen303.cart.payment', ['swen303.factory.cart'])
 		});
 	})
 
-	.controller('PaymentController',function($scope, usercartFactory) {
+	.controller('PaymentController',function($scope, usercartFactory, UserFactory) {
+
         //get data from paymentdetails
-        $scope.user = usercartFactory.getUser();
+		console.log("user: " + UserFactory.user);
+        $scope.user = UserFactory.user;
 		$scope.purchaseTotal = usercartFactory.purchaseTotal();
 		$scope.rentTotal = usercartFactory.rentTotal();
 		$scope.total = usercartFactory.getTotal();
-		$scope.tax = usercartFactory.getTax()
+		$scope.tax = usercartFactory.getTax();
 		$scope.shipping = usercartFactory.getShipping();
 	})
 

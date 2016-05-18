@@ -21,7 +21,9 @@
 @import '../node_modules/bootstrap/less/tables.less';
 @import '../node_modules/bootstrap/less/labels.less';
 @import '../node_modules/bootstrap/less/buttons.less';
+@import '../node_modules/bootstrap/less/button-groups.less';
 @import '../node_modules/bootstrap/less/scaffolding.less';
+@import '../node_modules/bootstrap/less/input-groups.less';
 // Fontawesome imports
 @import '../node_modules/font-awesome/less/font-awesome.less';
 @fa-font-path: "/assets/fonts";
@@ -222,4 +224,47 @@ fieldset[disabled]
     background: @theme-primary;
     color: #ffffff;
     border-color: @theme-primary;
+}
+
+
+.btn-template-primary {
+    color: #ffffff;
+    background-color: @theme-primary;
+    border-color: @theme-primary;
+}
+.btn-template-primary:hover,
+.btn-template-primary:focus,
+.btn-template-primary:active,
+.btn-template-primary.active,
+.open > .dropdown-toggle.btn-template-primary {
+    color: #ffffff;
+    background-color: #E53935;
+    border-color: #E53935;
+}
+.btn-template-primary:active,
+.btn-template-primary.active,
+.open > .dropdown-toggle.btn-template-primary {
+    background-image: none;
+}
+.btn-template-primary.disabled,
+.btn-template-primary[disabled],
+fieldset[disabled] .btn-template-primary,
+.btn-template-primary.disabled:hover,
+.btn-template-primary[disabled]:hover,
+fieldset[disabled] .btn-template-primary:hover,
+.btn-template-primary.disabled:focus,
+.btn-template-primary[disabled]:focus,
+fieldset[disabled] .btn-template-primary:focus,
+.btn-template-primary.disabled:active,
+.btn-template-primary[disabled]:active,
+fieldset[disabled] .btn-template-primary:active,
+.btn-template-primary.disabled.active,
+.btn-template-primary[disabled].active,
+fieldset[disabled] .btn-template-primary.active {
+    background-color: @theme-primary;
+    border-color: @theme-primary;
+}
+.btn-template-primary .badge {
+    color: @theme-primary;
+    background-color: #ffffff;
 }

@@ -17,7 +17,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="firstname">First name</label>
-                                                    <input type="text" name="firstname" id="firstname" ng-model="user.firstname" class="form-control" id="firstname" required>
+                                                    <input type="text" name="firstname" id="firstname" value={{user.firstname}} class="form-control" id="firstname" required>
                                                     <span class="error" ng-show="paymentform.firstname.$touched && paymentform.firstname.$invalid">First name is required.</span>
                                                 </div>
                                             </div>
@@ -35,7 +35,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="email">Email</label>
-                                                    <input type="text"  id="email" ng-model="user.email" class="form-control" id="email" name="email" required>
+                                                    <input type="email"  id="email" ng-model="user.email" class="form-control" id="email" name="email" required>
                                                     <span class="error" ng-show="paymentform.email.$touched && paymentform.email.$invalid">Email is required.</span>
                                                 </div>
                                             </div>
@@ -120,7 +120,7 @@
 
                                     <div class="box-footer">
                                         <div class="pull-left">
-                                            <a href="shop-basket.html" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to basket</a>
+                                            <a ui-sref="cart" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to basket</a>
                                         </div>
                                         <div class="pull-right">
                                             <button type="submit" class="btn btn-template-main">Confirm<i class="fa fa-chevron-right"></i>
