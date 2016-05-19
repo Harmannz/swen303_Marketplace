@@ -6,14 +6,17 @@
 
                 <p class="lead">Enter your listing details here.</p>
                 <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                <div flow-init="{target:'/api/products/imageupload',testChunks:false}"
+                flow-name="obj.flow">
                 <form name="productForm">
                 
 
-                <div flow-init>
+
                     <!-- Image -->
                 <div class="col-sm-6">
-                    <div flow-drag-enter="style={border:'4px solid green'}" flow-drag-leave="style={}" ng-style="style">
-                        <img flow-img="$flow.files[0]" />
+                    <div class="" flow-drag-enter="style={border:'4px solid green'}" flow-drag-leave="style={}" ng-style="style">
+
+                        <img class="ratio1_1 prod-image-preview col-sm-12" flow-img="$flow.files[0]" />
                     </div>
                 </div>
                 <div class="box col-sm-6">
@@ -21,7 +24,7 @@
                     <div class="heading">
                         <h3 class="text-uppercase">General Information</h3>
                     </div>
-
+                    
                     
                     <div class="row">
                         <div class="col-sm-12">
@@ -43,28 +46,34 @@
                                 </md-input-container>
                             </div>
                         </div>
-                    </div>
-                    
-                        <!-- <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    
-                                    <div type="password" class="form-control" id="password_1" ng-model="$flow.files[0]" ></div>
-                                </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="state">Category</label>
+                                <select class="form-control" ng-model="mainCategory" >
+                                    <option ng-repeat="(key, value) in categories" value="{{key}}">{{key}}</option>
+                                </select>
+                                <!-- select ng-options="key as value for (key , value) in categories" ng-model="mainCategory"></select> -->
                             </div>
-                        </div> -->
-                        <!-- /.row -->
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="country">Sub Category</label>
+                                <select class="form-control" id="country">
+                                    <option ng-repeat="subCat in categories[mainCategory]" value="{{subCat.id}}">{{subCat.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
                         <div class="text-center">
-                            <!-- <button class="btn btn-template-main"><i class="fa fa-upload"></i> Upload Image  -->
                             <label for="password_1">Image</label>
-                            <input type="file" flow-btn class="btn btn-template-main" placeholder="&#xf093;" >
+                            <input type="file" name="pimage" flow-btn class="btn form-control" placeholder="&#xf093;" >
                             <!-- </button> -->
                             
                         </div>
                     
                 </div>
-                </div>
+                
                 <!-- /.box -->
 
 
@@ -86,17 +95,27 @@
 
                         <div class="row">
                             <div class="col-sm-6">
+                                <!-- <div class="form-group">
+                                    <label>Quantity</label>
+                                   <input type="number" ng-model="product.quantity" class="form-control" min="1">
+                                </div> -->
                                 <div class="form-group">
-                                    <label for="company">Company</label>
-                                    <input type="text" class="form-control" id="company">
-                                </div>
+                                    <label>Rental Price</label>
+                                    <input type="number" ng-model="product.quantity" class="form-control" min="1">
+                               </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="street">Street</label>
-                                    <input type="text" class="form-control" id="street">
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label for="street">Min Rent Days</label>
+                                        <input type="number" ng-model="product.minrentdays" class="form-control" min="7">
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label for="street">Max Rent Days</label>
+                                        <input type="number" ng-model="product.maxrentdays" class="form-control" min="7">
+                                    </div>
+                                </div>
                         </div>
                         <!-- /.row -->
 
@@ -139,7 +158,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-12 text-center">
-                                <button type="submit" class="btn btn-template-main"><i class="fa fa-save"></i> Save changes</button>
+                                <button class="btn btn-template-main" ng-click="submitForm($flow)"><i class="fa fa-save"></i> Confirm</button>
 
                             </div>
 
@@ -149,6 +168,7 @@
 
                 </div>
                 </form>
+                </div>
             </div>
 
         </div>
