@@ -79,9 +79,9 @@ router.post('/', function(req,res){
 	});
 
 })
+
 var upload = multer({ dest : 'upload/'});
-//new product
-router.post('/imageUpload', upload.single('pimage'), function(req,res){
+router.post('/imageupload', upload.single('file'), function(req,res){
 	console.log('POST /api/products/imageUpload');
 	
 	var tmp_path = req.file.path;
