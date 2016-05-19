@@ -1,0 +1,159 @@
+<div class="listproduct">
+    <div class="container">
+        <div class="row">
+
+           <div class="col-md-9 clearfix" id="customer-account">
+
+                <p class="lead">Enter your listing details here.</p>
+                <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                <form name="productForm">
+                
+
+                <div flow-init>
+                    <!-- Image -->
+                <div class="col-sm-6">
+                    <div flow-drag-enter="style={border:'4px solid green'}" flow-drag-leave="style={}" ng-style="style">
+                        <img flow-img="$flow.files[0]" />
+                    </div>
+                </div>
+                <div class="box col-sm-6">
+
+                    <div class="heading">
+                        <h3 class="text-uppercase">General Information</h3>
+                    </div>
+
+                    
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" ng-model="product.name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <md-input-container>
+                                    <label>Description</label>
+                                        <textarea name="description" ng-required="true" class="form-control" ng-model="product.description"></textarea>
+                                        <div ng-messages="productForm.description.$error">
+                                          <div ng-message="required">Required!</div>
+                                        </div>
+                                </md-input-container>
+                            </div>
+                        </div>
+                    </div>
+                    
+                        <!-- <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    
+                                    <div type="password" class="form-control" id="password_1" ng-model="$flow.files[0]" ></div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- /.row -->
+
+                        <div class="text-center">
+                            <!-- <button class="btn btn-template-main"><i class="fa fa-upload"></i> Upload Image  -->
+                            <label for="password_1">Image</label>
+                            <input type="file" flow-btn class="btn btn-template-main" placeholder="&#xf093;" >
+                            <!-- </button> -->
+                            
+                        </div>
+                    
+                </div>
+                </div>
+                <!-- /.box -->
+
+
+                <div class="box clearfix">
+                    <div class="heading">
+                        <h3 class="text-uppercase">Product Specifics</h3>
+                    </div>
+
+                    <form>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="firstname">Price</label>
+                                    <input type="text" class="form-control" ng-model="product.price" >
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="company">Company</label>
+                                    <input type="text" class="form-control" id="company">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="street">Street</label>
+                                    <input type="text" class="form-control" id="street">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+
+                        <div class="row">
+                            <div class="col-sm-6 col-md-3">
+                                <div class="form-group">
+                                    <label for="city">Company</label>
+                                    <input type="text" class="form-control" id="city">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="form-group">
+                                    <label for="zip">ZIP</label>
+                                    <input type="text" class="form-control" id="zip">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="form-group">
+                                    <label for="state">State</label>
+                                    <select class="form-control" id="state"></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <select class="form-control" id="country"></select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="phone">Telephone</label>
+                                    <input type="text" class="form-control" id="phone">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="email_account">Email</label>
+                                    <input type="text" class="form-control" id="email_account">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 text-center">
+                                <button type="submit" class="btn btn-template-main"><i class="fa fa-save"></i> Save changes</button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>

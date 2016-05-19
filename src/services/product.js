@@ -32,6 +32,12 @@ angular.module('swen303.services.product', [])
             });
         }
 
+        this.addProduct = function(productData){
+            return $http.post('/api/products/',productData).then(function(payload) {
+                return payload.data;
+            });   
+        }
+
     })
 
 ;
