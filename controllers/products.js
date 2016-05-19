@@ -1,6 +1,9 @@
 var express = require('express')
   , router = express.Router()
   , Products = require('../models/products')
+  , multer = require('multer')
+  , fs = require('fs')
+  , path = require('path')
 
 router.get('/', function(req,res){
 	console.log("GET /products");
@@ -75,6 +78,21 @@ router.post('/', function(req,res){
 		res.sendStatus(400);
 	});
 
+})
+var upload = multer({ dest : 'upload/'});
+//new product
+router.post('/imageUpload', upload.single('pimage'), function(req,res){
+	console.log('POST /api/products/imageUpload');
+	
+	var tmp_path = req.file.path;
+	var newfilename = path.basename(tmp_path)+path.extname(req.file.originalname);
+	var target_path = './src/assets/img/products/' + newfilename;
+
+	var src = fs.createReadStream(tmp_path);
+	var dest = fs.createWriteStream(target_path);
+	src.pipe(dest);
+	src.on('end', function() { res.json({filename:newfilename}); });
+	src.on('error', function(err) { res.sendStatus(500); });
 })
 
 module.exports = router;
