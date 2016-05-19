@@ -28,6 +28,7 @@ exports.getCategories = function(cb, errorCb){
                 };
 			})
 		})
+		delete cleaned['See All - Consumer Electronics'];
 		return cleaned;
 	}
 }
