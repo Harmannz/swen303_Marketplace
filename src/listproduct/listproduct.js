@@ -1,4 +1,4 @@
-angular.module('swen303.listproduct', ['swen303.services.product'])
+angular.module('swen303.listproduct', ['swen303.services.product', 'flow'])
 
 	.config(function($stateProvider) {
 		$stateProvider.state('listproduct', {
