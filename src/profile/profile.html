@@ -1,0 +1,10 @@
+<div class="profile">
+	<div class="tabs">
+		<ul>
+			<li ng-click="changeState('profile.info')">Basic info</li>
+			<li ng-click="changeState('profile.orders')">Orders</li>
+			<li ng-click="changeState('profile.history')">Order history</li>
+		</ul>
+	</div>
+	<div ui-view="profile"></div>
+</div>

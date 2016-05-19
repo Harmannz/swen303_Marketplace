@@ -20,7 +20,7 @@
             <span ui-sref="register" ng-hide="user">Signin/Register</span>
             <div ng-show="user">
                 <span class="user__welcome">Hi {{ user.firstname }}!</span>
-                <span class="user__account">View your account</span>
+                <span class="user__account" ui-sref="profile.info">View your account</span>
             </div>
         </div>
         <div class="logo">

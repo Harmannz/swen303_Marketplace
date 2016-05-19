@@ -38,7 +38,7 @@ angular.module('swen303.register', [])
 				if (result.success) {
 					if ($stateParams.redirectstate) {
 						try {
-							$state.go(redirectstate);
+							$state.go($stateParams.redirectstate);
 						} catch (Error) {
 							$state.go('home');
 						}
