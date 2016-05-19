@@ -52,4 +52,15 @@ router.get('/:userId/orders', function(req,res){
 	})
 })
 
+router.get('/:userId/notifications', function(req, res) {
+    console.log("GET /notifications");
+    var userId = req.params.userId;
+    Users.checkForNotifications(userId, function(notifications) {
+        res.json(notifications);
+    }, function(err) {
+        console.log(err);
+        res.sendStatus(500);
+    })
+});
+
 module.exports = router

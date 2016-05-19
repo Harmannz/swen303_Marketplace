@@ -26,12 +26,23 @@ angular.module('swen303', [
         $locationProvider.html5Mode(true);
     })
 
-    .controller('MainController', function($scope, CategoryService, UserFactory, usercartFactory) {
+    .controller('MainController', function($scope, CategoryService, UserFactory, usercartFactory, $timeout) {
         $scope.user = UserFactory.user;
+        $scope.notifications = [];
         $scope.$watch(function() {
             return UserFactory.user;
         }, function(user) {
+            if (!user) {
+                return;
+            }
+
             $scope.user = user;
+            UserFactory.checkForNotifications().then(function(payload) {
+                $scope.notifications = payload;
+                $timeout(function() {
+                    $scope.notifications = [];
+                }, 2000);
+            });
         });
 
         $scope.categories = [];

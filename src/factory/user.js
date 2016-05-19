@@ -44,6 +44,12 @@ angular.module('swen303.factory.user', [])
 			signout: function() {
 				Auth.user = {};
 				localStorage.clear();
+			},
+
+			checkForNotifications: function() {
+				return $http.get('/api/users/' + Auth.user.uid + '/notifications').then(function(payload) {
+					return payload.data;
+				});
 			}
 
 		};

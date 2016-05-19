@@ -36,3 +36,24 @@ exports.fromUsername = function(id,cb,errorCb){
 		cb(data);
 	})
 }
+
+exports.checkForNotifications = function(userId, cb, errorCb) {
+    var query = dbClient.query("SELECT d.name FROM (SELECT a.product_id FROM productinorder AS a INNER JOIN orders AS b ON a.order_id=b.order_id WHERE b.user_id=$1 AND a.rent_due_date < (NOW() + interval '1 days')) as c"
+            + " INNER JOIN products AS d ON c.product_id=d.pid",
+        [userId], function(err, results) {
+            if (err) {
+                errorCb(err);
+            } else {
+                var notifications = [];
+
+                results.rows.forEach(function(row) {
+                    notifications.push({
+                        notification_type: 'due < 1 day',
+                        product: row.name
+                    });
+                });
+
+                cb(notifications);
+            }
+        });
+};
