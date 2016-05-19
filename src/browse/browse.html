@@ -7,10 +7,7 @@
             <div class="search">
                 <div class="form-group no-margin">
                     <div class="input-group">
-                        <input type="text" class="search__input" ng-model="searchTerm" placeholder="Search here" value="{{ searchterm }}">
-                        <span class="input-group-btn">
-                            <button type="submit" class="btn btn-md btn-template-primary" type="button" id="search-button">Search</button>
-                        </span>
+                        <input type="text" type="submit" class="search__input" ng-model="searchTerm" placeholder="Search here" value="{{ searchterm }}" ng-keyup="search()">
                     </div>
                 </div>
             </div>
