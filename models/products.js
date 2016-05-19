@@ -20,6 +20,7 @@ exports.get = function(id, cb, errorCb){
 }
 
 exports.search = function(str, cid, cb, errorCb){
+	//cid: 0 = search all
 	var searchWords = str.toLowerCase().split(' ');
 	//Build query
 	var queryStr = "select * from products WHERE ";

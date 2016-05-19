@@ -15,13 +15,9 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 						return payload;
 					});
 				}],
+
 				Specifications: ['SpecificationService', '$stateParams', function(SpecificationService, $stateParams) {
 					return SpecificationService.getSpecifications($stateParams.id).then(function(payload) {
-						return payload;
-					});
-				}],
-				CompareSpecifications: ['SpecificationService', '$stateParams', function(SpecificationService, $stateParams) {
-					return SpecificationService.getSpecifications(2).then(function(payload) {
 						return payload;
 					});
 				}]
@@ -29,37 +25,73 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 		});
 	})
 
-	.controller('ProductController', function($state, $scope, Product, Specifications, CompareSpecifications, UserFactory, usercartFactory) {
+	.controller('ProductController', function($state, $scope, ProductService, SpecificationService, Product, Specifications, UserFactory, usercartFactory) {
 		$scope.product = Product;
 		$scope.specs = Specifications;
-		$scope.compareSpecs = CompareSpecifications;
+		$scope.compareProduct = null;
+		$scope.compareSpecs = null;
+		$scope.searchResult = null;
+		$scope.fullCompareTable = null;
 
 		//Create Comparison table of specifications
-		var fullCompTable = [];
-		fullCompTable.push({"name":"Item", "value_1":Product.name, "value_2":"TEST COMPARE ITEM"})
-		//Compare this products specs with other product
-		for(i = 0; i < Specifications.length; i++){
-			var value="-";
-			for(j = 0; j < CompareSpecifications.length; j++){
-				if(Specifications[i].name == CompareSpecifications[j].name){
-					value = CompareSpecifications[j].value;
+		repopulateCompareTable = function(){
+			if($scope.compareProduct==null){
+				$scope.compareSpecs = null;
+				return;
+			}
+			//Get specs of new item
+			$scope.compareSpecs = SpecificationService.getSpecifications($scope.compareProduct.pid).then(function(payload) {
+				return payload;
+			});
+			var fullCompTable = [];
+			//Compare this products specs with other product
+			for(i = 0; i < $scope.specs.length; i++){
+				var value="-";
+				for(j = 0; j < $scope.compareSpecs.length; j++){
+					if($scope.specs[i].name == $scope.compareSpecs[j].name){
+						value = $scope.compareSpecs[j].value;
+					}
+				}
+				fullCompTable.push({"name":$scope.specs[i].name, "value_1":$scope.specs[i].value, "value_2":value});
+			}
+
+			//Add extra specs from other product
+			for(i = 0; i < $scope.compareSpecs.length; i++){
+				var matchFound=false;
+				for(j = 0; j < $scope.specs.length; j++){
+					if($scope.compareSpecs[i].name == $scope.specs[j].name){
+						matchFound = true;
+					}
+				}
+				if(!matchFound){
+					fullCompTable.push({"name":$scope.compareSpecs[i].name, "value_1":"-", "value_2":$scope.compareSpecs[i].value});
 				}
 			}
-			fullCompTable.push({"name":Specifications[i].name, "value_1":Specifications[i].value, "value_2":value});
+			$scope.fullCompareTable = fullCompTable;
 		}
 
-		//Add extra specs from other product
-		for(i = 0; i < CompareSpecifications.length; i++){
-			var matchFound=false;
-			for(j = 0; j < Specifications.length; j++){
-				if(CompareSpecifications[i].name == Specifications[j].name){
-					matchFound = true;
-				}
+
+		$scope.searchTerm = '';
+
+		$scope.search = function() {
+			if (!$scope.searchTerm) {
+				$scope.compareProduct = null;
+			} else {
+				ProductService.search($scope.searchTerm, 0).then(function(payload) {
+					if(payload!=null){
+						if(payload[0]!=$scope.compareProduct){
+							$scope.compareProduct = payload[0];
+							repopulateCompareTable();
+						}
+					}else{
+						$scope.compareProduct = null;
+						repopulateCompareTable();
+					}
+				});
+				console.log($scope.fullCompareTable);
 			}
-			if(!matchFound){
-				fullCompTable.push({"name":Specifications[i].name, "value_1":"-", "value_2":CompareSpecifications[i].value});
-			}
-		}
+		};
+
 
 		$scope.addToCart = function() {
 			usercartFactory.addToPurchase($scope.product);
@@ -74,8 +106,7 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 		};
 
 
-		$scope.fullCompareTable = fullCompTable;
-		console.log(fullCompTable);
+		
 	})
 
 ;
