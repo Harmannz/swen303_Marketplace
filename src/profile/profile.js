@@ -14,12 +14,17 @@ angular.module('swen303.profile', ['swen303.profile.info', 'swen303.profile.orde
 	})
 
 	.controller('ProfileController', function($scope, $state, UserFactory) {
+		$scope.state = 'profile.info';
+
 		$scope.changeState = function(state) {
 			$state.go(state);
+			$scope.state = state;
 		};
 
 		if (!UserFactory.user) {
 			$state.go('register', { redirectstate: 'profile.info' });
+		} else {
+			$scope.name = UserFactory.user.firstname;
 		}
 	})
 
