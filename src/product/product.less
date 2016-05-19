@@ -1,0 +1,49 @@
+// Font imports
+@font-face {
+    font-family: 'Keep Calm';
+    src: url('fonts/Keepcalm.ttf');
+}
+
+//color variables
+@theme-primary: #ff0000;
+@theme-dark: #444444;
+@theme-light: #ECEFF1;
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,100,300,500');
+
+.product {
+    .panel {
+        .panel-heading{
+            display: inline-block;
+            vertical-align: middle;
+            font-family: 'Keep Calm', sans-serif;
+            color: #ffffff;
+            padding-left: 24px;
+
+            span:hover {
+                cursor: pointer;
+            }
+            font-size: 24pt;
+        }
+    .container {
+        .panel {
+            .table{
+                .table-heading{
+                    font-weight: bold;
+                    background: @theme-light;
+                }
+            }
+        }
+    }
+    .list {
+        padding-top: 48px;
+        padding-bottom: 48px;
+
+        .list__header {
+            margin-bottom: 24px;
+        }
+    }
+    .table-heading {
+        font-weight: bold;
+        background: @theme-light;
+    }
+}

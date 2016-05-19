@@ -1,4 +1,4 @@
-angular.module('swen303.product', ['swen303.services.product', 'swen303.services.specifications'])
+angular.module('swen303.product', ['swen303.services.product', 'swen303.services.specifications', 'swen303.factory.cart', 'swen303.factory.user'])
 
 	.config(function($stateProvider) {
 		$stateProvider.state('product', {
@@ -29,7 +29,7 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 		});
 	})
 
-	.controller('ProductController', function($scope, Product, Specifications, CompareSpecifications, usercartFactory) {
+	.controller('ProductController', function($state, $scope, Product, Specifications, CompareSpecifications, UserFactory, usercartFactory) {
 		$scope.product = Product;
 		$scope.specs = Specifications;
 		$scope.compareSpecs = CompareSpecifications;
@@ -63,11 +63,13 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 
 		$scope.addToCart = function() {
 			usercartFactory.addToPurchase($scope.product);
+			$state.go("cart");
 		};
 
 		$scope.rent = function() {
 			$scope.product.rentdays = $scope.product.minrentdays;
 			usercartFactory.addToRent($scope.product);
+			$state.go("cart");
 		};
 
 

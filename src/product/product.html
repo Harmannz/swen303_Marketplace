@@ -1,3 +1,19 @@
+<head>
+  <title> {{ product.name }} </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <style>
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+  }
+  </style>
+</head>
+
 <div class="product">
 	<div class="container">
 		<div class="row">
@@ -8,8 +24,10 @@
 				<h1 ng-bind="product.name"></h1>
 				<h2 ng-if="product.purchaseprice">{{ product.purchaseprice | currency }}</h2>
 				<h3 ng-if="product.rentalpricepd">or rent from {{ product.rentalpricepd | currency }} per day</h3>
-				<button class="btn btn-template-main" ng-click="addToCart()">Add to cart</button>
+				<button class="btn btn-template-main" ng-click="addToCart()" ui-sref="cart">Add to cart</button>
 				<button class="btn btn-default" ng-click="rent()">Rent this product</button>
+				<h3>Description</h3>
+				<p ng-bind="product.description"></p>
 			</div>
 		</div>
 	</div>
@@ -17,19 +35,60 @@
 
 
 	<div class="container">
-		<h3>Description</h3>
-		<p ng-bind="product.description"></p>
+		<h3 class="panel-heading">Specifications</h3>
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+				<li data-target="#myCarousel" data-slide-to="3"></li>
+			</ol>
 
-		<div class="panel panel-default">
-			<div class="panel-heading">Specifications</div>
-				<table class="table">
-					<tr ng-repeat="(key, spec) in fullCompareTable">
-						<td> {{ spec.name }} </td>
-						<td> {{ spec.value_1 }} </td>
-						<td> {{ spec.value_2 }} </td>
-					</tr>
-				</table>
-			<div>
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<div class="panel">
+						<table class="table">
+							<thead>
+								<tr>
+									<td> Item </td>
+									<td> {{ product.name }} </td>
+									<td>  TEST PRODUCT </td>
+								</tr>
+							</thead>
+							<tr ng-repeat="(key, spec) in fullCompareTable">
+								<td> {{ spec.name }} </td>
+								<td> {{ spec.value_1 }} </td>
+								<td> {{ spec.value_2 }} </td>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+				<div class="item">
+					<div>TEST_2</div>
+				</div>
+
+				<div class="item">
+					<div>TEST_3</div>
+				</div>
+
+				<div class="item">
+					<div>TEST_4</div>
+				</div>
+			</div>
+
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
 		</div>
 	</div>
+	
 </div>
