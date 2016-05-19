@@ -36,59 +36,59 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 		//Create Comparison table of specifications
 		repopulateCompareTable = function(){
 			if($scope.compareProduct==null){
-				$scope.compareSpecs = null;
+				$scope.fullCompareTable = null;
 				return;
 			}
 			//Get specs of new item
-			$scope.compareSpecs = SpecificationService.getSpecifications($scope.compareProduct.pid).then(function(payload) {
-				return payload;
-			});
-			var fullCompTable = [];
-			//Compare this products specs with other product
-			for(i = 0; i < $scope.specs.length; i++){
-				var value="-";
-				for(j = 0; j < $scope.compareSpecs.length; j++){
-					if($scope.specs[i].name == $scope.compareSpecs[j].name){
-						value = $scope.compareSpecs[j].value;
+			SpecificationService.getSpecifications($scope.compareProduct.pid).then(function(payload) {
+				$scope.compareSpecs = payload;
+				var fullCompTable = [];
+				//Compare this products specs with other product
+				for(i = 0; i < $scope.specs.length; i++){
+					var value="-";
+					for(j = 0; j < $scope.compareSpecs.length; j++){
+						if($scope.specs[i].name == $scope.compareSpecs[j].name){
+							value = $scope.compareSpecs[j].value;
+						}
 					}
+					fullCompTable.push({"name":$scope.specs[i].name, "value_1":$scope.specs[i].value, "value_2":value});
 				}
-				fullCompTable.push({"name":$scope.specs[i].name, "value_1":$scope.specs[i].value, "value_2":value});
-			}
 
-			//Add extra specs from other product
-			for(i = 0; i < $scope.compareSpecs.length; i++){
-				var matchFound=false;
-				for(j = 0; j < $scope.specs.length; j++){
-					if($scope.compareSpecs[i].name == $scope.specs[j].name){
-						matchFound = true;
+				//Add extra specs from other product
+				for(i = 0; i < $scope.compareSpecs.length; i++){
+					var matchFound=false;
+					for(j = 0; j < $scope.specs.length; j++){
+						if($scope.compareSpecs[i].name == $scope.specs[j].name){
+							matchFound = true;
+						}
+					}
+					if(!matchFound){
+						fullCompTable.push({"name":$scope.compareSpecs[i].name, "value_1":"-", "value_2":$scope.compareSpecs[i].value});
 					}
 				}
-				if(!matchFound){
-					fullCompTable.push({"name":$scope.compareSpecs[i].name, "value_1":"-", "value_2":$scope.compareSpecs[i].value});
-				}
-			}
-			$scope.fullCompareTable = fullCompTable;
+				$scope.fullCompareTable = fullCompTable;
+			});
+
 		}
 
 
 		$scope.searchTerm = '';
 
+//Search items
 		$scope.search = function() {
 			if (!$scope.searchTerm) {
 				$scope.compareProduct = null;
+				repopulateCompareTable();
 			} else {
+				//Search in all
 				ProductService.search($scope.searchTerm, 0).then(function(payload) {
-					if(payload!=null){
-						if(payload[0]!=$scope.compareProduct){
-							$scope.compareProduct = payload[0];
-							repopulateCompareTable();
-						}
-					}else{
-						$scope.compareProduct = null;
+					if(payload[0]!=null){
+						//Get first item found
+						$scope.compareProduct = payload[0];
+						//repop table
 						repopulateCompareTable();
 					}
 				});
-				console.log($scope.fullCompareTable);
 			}
 		};
 
