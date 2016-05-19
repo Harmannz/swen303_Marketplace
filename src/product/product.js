@@ -67,9 +67,10 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 		};
 
 		$scope.rent = function() {
-			$scope.product.rentdays = $scope.product.minrentdays;
-			usercartFactory.addToRent($scope.product);
-			$state.go("cart");
+			var rentProduct = JSON.parse(JSON.stringify($scope.product));
+            rentProduct.rentdays = rentProduct.minrentdays;
+            usercartFactory.addToRent(rentProduct);
+            $state.go("cart");
 		};
 
 
