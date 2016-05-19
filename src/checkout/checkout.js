@@ -33,6 +33,10 @@ angular.module('swen303.cart', ['swen303.services.product', 'swen303.factory.car
             this.updatePrices();
         };
 
+         $scope.back = function(){
+            $state.go('home');
+        };
+
         $scope.removeProductFromRent = function(pid){
             console.log("Remove product with id: " + pid);
             usercartFactory.removeFromRent(pid);
