@@ -1,15 +1,22 @@
 <div class="browse container">
     <div class="container">
-        <div class="heading text-center"><h1>{{ category.name }}</h1></div>
+        <div class="heading text-center"><a ui-sref="browse({cid: category.id})" style="color: #333;"><h1>{{ category.name }}</h1></a></div>
+        
         <!-- search bar -->
-		<form ng-submit="search()">
-            <div class="input-group">
-                <input type="text" class="form-control" ng-model="searchTerm" placeholder="Search here">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-md btn-template-primary" type="button" id="search-button">Markup Search</button>
-                </span>
+        <form ng-submit="search()">
+            <div class="search">
+                <div class="form-group no-margin">
+                    <div class="input-group">
+                        <input type="text" class="search__input" ng-model="searchTerm" placeholder="Search here" value="{{ searchterm }}">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-md btn-template-primary" type="button" id="search-button">Search</button>
+                        </span>
+                    </div>
+                </div>
             </div>
-		</form>
+            <h4><small>Showing {{ products.length }} item(s) <span ng-if="searchTerm"> for {{searchTerm}}</span></small></h4>
+        </form>
+        
         <!-- show items -->
         <div id="content">
             <div class="container">
@@ -19,7 +26,7 @@
                     <div class="col-md-3 col-sm-4">
                         <div class="product">
                             <div class="image">
-                                <a  ui-sref="product({ id: product.pid })">
+                                <a ui-sref="product({ id: product.pid })">
                                     <img ng-src="assets/img/products/{{ product.image }}" alt="{{product.image}}" class="img-responsive">
                                 </a>
                             </div>
@@ -32,15 +39,15 @@
                             </div>
                             <!-- /.text -->
                             <a href="#">
-                                <div class="ribbon sale"  ng-click="addToCart(product)">
-                                    <div class="theribbon">Buy Now</div>
+                                <div class="ribbon sale">
+                                    <div class="theribbon" ng-click="addToCart(product)">Quick Buy</div>
                                     <div class="ribbon-background"></div>
                                 </div>
                             </a>
                             <!-- /.ribbon -->
                             <a href="#">
-                                <div class="ribbon new" ng-click="rent(product)">
-                                    <div class="theribbon">Quick Rent</div>
+                                <div class="ribbon new" >
+                                    <div class="theribbon" ng-click="rent(product)">Quick Rent</div>
                                     <div class="ribbon-background"></div>
                                 </div>
                             </a>
