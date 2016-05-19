@@ -1,0 +1,9 @@
+<div class="profile">
+	<h1 class="intro">Hi there {{ name }}</h1>
+	<div class="container-fluid tabs">
+		<div ng-click="changeState('profile.info')" class="col-xs-4 tab" ng-class="{ 'selected' : state === 'profile.info' }">Basic info</div>
+		<div ng-click="changeState('profile.orders')" class="col-xs-4 tab" ng-class="{ 'selected' : state === 'profile.orders' }">Orders</div>
+		<div ng-click="changeState('profile.history')" class="col-xs-4 tab" ng-class="{ 'selected' : state === 'profile.history' }">Order history</div>
+	</div>
+	<div ui-view="profile"></div>
+</div>
