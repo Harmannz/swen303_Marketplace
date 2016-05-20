@@ -1,6 +1,6 @@
 angular.module('swen303.services.category', [])
 
-    .service('CategoryService', function($http) {
+    .service('CategoryService', function($http, $timeout, $q) {
 
         this.getCategories = function() {
             return $http.get('/api/categories').then(function (payload) {

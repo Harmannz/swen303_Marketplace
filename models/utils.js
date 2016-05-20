@@ -3,7 +3,7 @@ var dbClient = require('./db')
 
 /*Get the category tree*/
 exports.getCategories = function(cb, errorCb){
-	var query = dbClient.query("select c.cid, c.name as child, p.name as parent from categories c inner join categories p on c.parentcid = p.cid",[]);
+	var query = dbClient.query("select * from categories",[]);
 
 	var data = [];
 	query.on('row',function(d){
@@ -15,22 +15,8 @@ exports.getCategories = function(cb, errorCb){
 	});
 
 	query.on('end',function(e){
-		cb(formatTree(data));
+		cb(data);
 	});
-
-	function formatTree(d){
-		grouped = _.groupBy(d,'parent');
-		var cleaned = _.mapValues(grouped,function(o){
-			return _.map(o,function(oc){
-				return {
-                    id: oc.cid,
-                    name: oc.child
-                };
-			})
-		})
-		delete cleaned['See All - Consumer Electronics'];
-		return cleaned;
-	}
 }
 //constructs a querystring and args for sql query from obj
 exports.shallowObjToQuery = function(o){

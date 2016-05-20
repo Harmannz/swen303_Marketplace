@@ -17,8 +17,14 @@ angular.module('swen303.profile.info', [])
 		})
 	})
 
-	.controller('InfoController', function($scope, User) {
+	.controller('InfoController', function($scope, User, UserFactory) {
 		$scope.user = User;
+
+		$scope.submit = function() {
+			UserFactory.updateDetails($scope.user).then(function(payload) {
+				console.log(payload);
+			});
+		};
 	})
 
 ;

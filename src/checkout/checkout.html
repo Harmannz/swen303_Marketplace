@@ -12,48 +12,6 @@
 
                     <form ng-submit="submitForm()">
                         
-                        <div class="box-header"><h3>Purchasing</h3></div>
-                        
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th colspan="2">Product</th>
-                                    <th>Quantity</th>
-                                    <th>Unit price</th>
-                                    <th colspan="2">Total</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-repeat="product in productsToPurchase">
-                                    <td>
-                                        <a ui-sref="product({ id: product.pid })">
-                                            <img ng-src="assets/img/products/{{product.image}}" alt="{{product.name}}">
-                                        </a>
-                                    </td>
-                                    <td><a ui-sref="product({ id: product.pid })">{{product.name}}</a>
-                                    </td>
-                                    <td>
-                                        <input type="number" ng-model="product.quantity" ng-change="updatePrices()" class="form-control" min="0" max={{product.instock}}>
-                                    </td>
-                                    <td>{{product.purchaseprice | currency}}</td>
-                                    <td>{{product.purchaseprice * product.quantity | currency}}</td>
-                                    <td><a href="#here" ng-click="removeProduct(product.pid)"><i class="fa fa-trash-o"></i></a>
-                                    </td>
-                                </tr>
-
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th colspan="5">Total</th>
-                                    <th colspan="2">{{purchaseTotal | currency}}</th>
-                                </tr>
-                                </tfoot>
-                            </table>
-
-                        </div>
-                        <!-- /.table-responsive -->
-                        
                         <div class="box-header box-header-last"><h3>Renting</h3></div>
                         
                         <div class="table-responsive">

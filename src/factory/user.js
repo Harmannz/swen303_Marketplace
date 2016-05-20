@@ -22,7 +22,7 @@ angular.module('swen303.factory.user', [])
 					Auth.user = payload.data;
 
 					try {
-						localStorage.setItem('user', JSON.stringify(user));
+						localStorage.setItem('user', JSON.stringify(Auth.user));
 					} catch (error) {}
 
 					return { success: true };
@@ -34,7 +34,7 @@ angular.module('swen303.factory.user', [])
 					Auth.user = payload.data;
 
 					try {
-						localStorage.setItem('user', JSON.stringify(user));
+						localStorage.setItem('user', JSON.stringify(Auth.user));
 					} catch (error) {}
 
 					return { success: true };
@@ -44,6 +44,12 @@ angular.module('swen303.factory.user', [])
 			signout: function() {
 				Auth.user = {};
 				localStorage.clear();
+			},
+
+			updateDetails: function(data) {
+				return $http.post('/api/users/' + Auth.user.uid + '/update', data).then(function(payload) {
+					return payload.data;
+				});
 			},
 
 			checkForNotifications: function() {

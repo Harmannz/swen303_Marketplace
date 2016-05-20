@@ -1,11 +1,16 @@
 angular.module('swen303.services.product', [])
 
-    .service('ProductService', function($http) {
+    .service('ProductService', function($http, $q, $timeout) {
 
         this.getFeaturedProducts = function() {
-            return $http.get('/api/products/featured').then(function(payload) {
+            /*return $http.get('/api/products/featured').then(function(payload) {
                 return payload.data;
-            });
+            });*/
+            var promise = $q.defer();
+            $timeout(function() {
+                promise.resolve([]);
+            }, 0.1);
+            return promise.promise;
         };
 
         this.getProduct = function(product_id) {

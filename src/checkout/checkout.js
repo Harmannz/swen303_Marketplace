@@ -14,24 +14,13 @@ angular.module('swen303.cart', ['swen303.services.product', 'swen303.factory.car
 
 	.controller('CartController',function($state, $scope, usercartFactory) {
 
-        $scope.productsToPurchase = usercartFactory.getToPurchase();
-        console.log($scope.productsToPurchase);
-
         $scope.productsToRent = usercartFactory.getToRent();
-        console.log($scope.productsToRent);
 
-        $scope.purchaseTotal = usercartFactory.purchaseTotal();
         $scope.rentTotal = usercartFactory.rentTotal();
         $scope.total = usercartFactory.getTotal();
-        $scope.tax = usercartFactory.getTax()
+        $scope.tax = usercartFactory.getTax();
         $scope.shipping = usercartFactory.getShipping();
         $scope.cartsize = usercartFactory.getNumOfItems();
-
-        $scope.removeProduct = function(pid){
-            console.log("Remove product with id: " + pid);
-            usercartFactory.removeFromPurchase(pid);
-            this.updatePrices();
-        };
 
          $scope.back = function(){
             $state.go('home');
@@ -44,12 +33,10 @@ angular.module('swen303.cart', ['swen303.services.product', 'swen303.factory.car
         };
 
         $scope.updatePrices = function(){
-            $scope.purchaseTotal = usercartFactory.purchaseTotal();
             $scope.rentTotal = usercartFactory.rentTotal();
             $scope.total = usercartFactory.getTotal();
-            $scope.tax = usercartFactory.getTax()
+            $scope.tax = usercartFactory.getTax();
             $scope.shipping = usercartFactory.getShipping();
-            console.log($scope.productsToPurchase);
         };
         // calling our submit function.
         $scope.submitForm = function() {

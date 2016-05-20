@@ -14,7 +14,7 @@
 
 <body ng-controller="MainController">
 
-<div class="navbar">
+<!--<div class="navbar">
     <div class="navbar__top">
         <div class="user">
             <span ui-sref="register" ng-hide="user">Signin/Register</span>
@@ -27,7 +27,7 @@
             <img src="assets/img/logo.png" ui-sref="home">
             <h1><span ui-sref="home">Electronics</span></h1>
         </div><!--
-        --><div class="cart" ui-sref="cart">
+        <div class="cart" ui-sref="cart">
             <i class="material-icons">shopping_cart</i>
             <div class="cart__right">
                 <div class="cart__right--items">{{ cartsize }} items</div>
@@ -78,6 +78,24 @@
             </ul>
         </li>
     </ul>
+</div>-->
+<div class="navbar">
+    <div class="top-bar">
+        <div class="signin">
+            <span ng-hide="user" ui-sref="register">Signin/Register</span>
+            <span ng-show="user">Hi {{ user.firstname }} - <a href="/profile">View your account</a></span>
+        </div>
+        <i class="material-icons cart" ui-sref="cart">shopping_cart</i>
+    </div>
+    <div class="bottom-bar">
+        <img src="assets/img/couch.png" ui-sref="home">
+        <span class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button">Categories</a>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li ng-repeat="category in categories" class="dropdown-item" ui-sref="browse({cid: category.cid})">{{ category.name }}</li>
+            </ul>
+        </span>
+    </div>
 </div>
 
 <div ui-view="main"></div>
