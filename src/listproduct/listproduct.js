@@ -1,6 +1,6 @@
 angular.module('swen303.listproduct', ['swen303.services.product','flow','swen303.services.category'])
 
-	.config(function($stateProvider) {
+	.config(function($stateProvider, flowFactoryProvider) {
 		$stateProvider.state('listproduct', {
 			url: '/listproduct',
 			views: {
@@ -10,6 +10,16 @@ angular.module('swen303.listproduct', ['swen303.services.product','flow','swen30
 				}
 			}
 		});
+        flowFactoryProvider.defaults = {
+            target:'/api/products/imageupload', 
+            testChunks:false
+        }
+        flowFactoryProvider.on('catchAll', function (event) {
+            console.log('event', event)
+            if(event == 'fileAdded'){
+                $('#prod-image-preview').removeClass('ratio1_1');
+            }
+         });
 	})
 
 	.controller('listProductController',function($state, $scope, CategoryService ) {
@@ -37,8 +47,11 @@ angular.module('swen303.listproduct', ['swen303.services.product','flow','swen30
         // calling our submit function.
         $scope.submitForm = function(flow) {
             console.log("submit selected");
-            console.log("check if user's cart is not empty?");
             flow.upload();
+        }
+
+        $scope.checkRentDays = function(){
+            $scope.product.maxrentdays = ($scope.product.maxrentdays < $scope.product.minrentdays)? $scope.product.minrentdays : $scope.product.maxrentdays;
         }
 	})
 

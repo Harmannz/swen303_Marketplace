@@ -6,17 +6,16 @@
 
                 <p class="lead">Enter your listing details here.</p>
                 <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-                <div flow-init="{target:'/api/products/imageupload',testChunks:false}"
-                flow-name="obj.flow">
+                <div flow-init>
                 <form name="productForm">
                 
 
 
                     <!-- Image -->
                 <div class="col-sm-6">
-                    <div class="" flow-drag-enter="style={border:'4px solid green'}" flow-drag-leave="style={}" ng-style="style">
+                    <div class="ratio1_1" id="prod-image-preview" flow-drag-enter="style={border:'4px solid green'}" flow-drag-leave="style={}" ng-style="style">
 
-                        <img class="ratio1_1 prod-image-preview col-sm-12" flow-img="$flow.files[0]" />
+                        <img class="col-sm-12" flow-img="$flow.files[0]" />
                     </div>
                 </div>
                 <div class="box col-sm-6">
@@ -107,13 +106,13 @@
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label for="street">Min Rent Days</label>
-                                        <input type="number" ng-model="product.minrentdays" class="form-control" min="7">
+                                        <input type="number" ng-model="product.minrentdays" ng-change="checkRentDays()" class="form-control" min="7">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label for="street">Max Rent Days</label>
-                                        <input type="number" ng-model="product.maxrentdays" class="form-control" min="7">
+                                        <input type="number" ng-model="product.maxrentdays" class="form-control" min="product.minrentdays">
                                     </div>
                                 </div>
                         </div>
