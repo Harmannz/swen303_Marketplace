@@ -34,3 +34,7 @@ node_modules
 
 # Built project
 build
+
+#images
+upload/
+

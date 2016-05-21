@@ -9,26 +9,51 @@ CREATE TABLE products (
 	rentalPricePD decimal,
 	minRentDays int,
 	maxRentDays int,
+	mindaystobuy int,
 	dimensions varchar,
-	weightG decimal,
-	clockedOut int,
-	inStock	int
+	weightKG decimal,
+	viewed int default(0)
 );
 
 --join on specifications where pid == pid
 COPY products (name, 
 	categoryId,
+	sellerId,
 	image, 
 	description, 
 	purchasePrice, 
 	rentalPricePD, 
 	minRentDays, 
-	maxRentDays, 
+	maxRentDays,
+	mindaystobuy, 
 	dimensions, 
-	weightG, 
-	inStock) FROM stdin;
-iPhone 5s	1000	iphone.png	Modern smartphone with many features including future technology sms.	195.99	5.00	7	70	200 x 100 x 70 mm	100	100
-Cannon 4d	2000	canon.png	Nice Camera, takes mean photos ow!	700.00	7.00	10	30	500 x 200 x 200 mm	500	10
-Kindle	3003	kindle.png	Nice eBook with good contrast and easy daytime reading.	300.00	1.00	30	365	200 x 300 x 200 mm	200	20
-iPad	3004	ipad.png	Nice tablet, surf the interwebs.	500.00	2.00	15	75	200 x 300 x 200 mm	300	15
+	weightKG) FROM stdin;
+Ikea KARLSTAD Corner sofa	14	3	cornersofa.jpg	Black suede covering, modern design.	448.53	5.00	7	70	30	200 x 200 x 70 cm	25
+COIL SPRINGS FIRM double bed	2	3	bed.jpg	The Slumber 1 Mattress in a Box features a firm and tightly wound top bed mattress with integrated individual spring coils hat provide a customized feel that conforms to the shape of your body.	200.83	4.00	7	40	30	150 x 200 x 70 cm	15
+\.
+
+
+
+CREATE TABLE productInstances (
+	instance_id SERIAL primary key,
+	parent_id int references products(pid),
+	clocked_out timestamp default(now()),	
+	due_back timestamp,
+	current_status varchar,
+	rating int
+);
+
+--join on specifications where pid == pid
+COPY productInstances (
+	parent_id,
+	current_status,
+	rating) FROM stdin;
+1	"Available"	10
+1	"Available"	10
+1	"Available"	10
+1	"Available"	10
+2	"Available"	10
+2	"Available"	10
+2	"Available"	10
+2	"Available"	10
 \.
