@@ -18,6 +18,7 @@ angular.module('swen303.listproduct', ['swen303.services.product','flow','swen30
             console.log('event', event)
             if(event == 'fileAdded'){
                 $('#prod-image-preview').removeClass('ratio1_1');
+                $('#prod-image-preview').css('display','inline-block');
             }
          });
 	})
@@ -26,7 +27,8 @@ angular.module('swen303.listproduct', ['swen303.services.product','flow','swen30
 
         $scope.product = {
             minrentdays: 7,
-            maxrentdays: 7
+            maxrentdays: 7,
+            mindaystobuy: 7
         };
         console.log($scope.product);
 
@@ -51,7 +53,18 @@ angular.module('swen303.listproduct', ['swen303.services.product','flow','swen30
         }
 
         $scope.checkRentDays = function(){
+
             $scope.product.maxrentdays = ($scope.product.maxrentdays < $scope.product.minrentdays)? $scope.product.minrentdays : $scope.product.maxrentdays;
+
+            if($scope.product.mindaystobuy < $scope.product.minrentdays){
+                $scope.product.mindaystobuy = $scope.product.minrentdays;
+            }  if ($scope.product.mindaystobuy > $scope.product.maxrentdays){
+                $scope.product.mindaystobuy = $scope.product.maxrentdays;
+            }
+            // $scope.product.mindaystobuy = Math.max($scope.product.mindaystobuy, 0);
+            // $scope.product.maxrentdays = Math.max($scope.product.maxrentdays,0);
+            // $scope.product.minrentdays = Math.max($scope.product.minrentdays,0);
+
         }
 	})
 

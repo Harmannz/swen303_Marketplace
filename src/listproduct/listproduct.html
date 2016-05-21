@@ -4,8 +4,8 @@
 
            <div class="col-md-9 clearfix" id="customer-account">
 
-                <p class="lead">Enter your listing details here.</p>
-                <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                <h3 class="lead">Enter your listing details.</h3>
+                <p class="text-muted"></p>
                 <div flow-init>
                 <form name="productForm">
                 
@@ -29,7 +29,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" class="form-control" ng-model="product.name">
+                                <input type="text" class="form-control" ng-required="true" ng-model="product.name">
                             </div>
                         </div>
                     </div>
@@ -39,27 +39,19 @@
                                 <md-input-container>
                                     <label>Description</label>
                                         <textarea name="description" ng-required="true" class="form-control" ng-model="product.description"></textarea>
-                                        <div ng-messages="productForm.description.$error">
+                                        <!-- <div ng-messages="productForm.description.$error">
                                           <div ng-message="required">Required!</div>
-                                        </div>
+                                        </div> -->
                                 </md-input-container>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="state">Category</label>
-                                <select class="form-control" ng-model="mainCategory" >
-                                    <option ng-repeat="(key, value) in categories" value="{{key}}">{{key}}</option>
+                                <select class="form-control" ng-required="true" ng-model="mainCategory" >
+                                    <option ng-repeat="category in categories" value="{{category.cid}}">{{category.name}}</option>
                                 </select>
                                 <!-- select ng-options="key as value for (key , value) in categories" ng-model="mainCategory"></select> -->
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="country">Sub Category</label>
-                                <select class="form-control" id="country">
-                                    <option ng-repeat="subCat in categories[mainCategory]" value="{{subCat.id}}">{{subCat.name}}</option>
-                                </select>
                             </div>
                         </div>
                     </div>
@@ -82,14 +74,7 @@
                     </div>
 
                     <form>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="firstname">Price</label>
-                                    <input type="text" class="form-control" ng-model="product.price" >
-                                </div>
-                            </div>
-                        </div>
+                        
                         <!-- /.row -->
 
                         <div class="row">
@@ -99,61 +84,72 @@
                                    <input type="number" ng-model="product.quantity" class="form-control" min="1">
                                 </div> -->
                                 <div class="form-group">
-                                    <label>Rental Price</label>
+                                    <label>Rental Price (per day)</label>
                                     <input type="number" ng-model="product.quantity" class="form-control" min="1">
                                </div>
                             </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label for="street">Min Rent Days</label>
-                                        <input type="number" ng-model="product.minrentdays" ng-change="checkRentDays()" class="form-control" min="7">
+                                        <input type="number" ng-model="product.minrentdays" ng-change="checkRentDays()" class="form-control" min="1">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label for="street">Max Rent Days</label>
-                                        <input type="number" ng-model="product.maxrentdays" class="form-control" min="product.minrentdays">
+                                        <input type="number" ng-model="product.maxrentdays" ng-change="checkRentDays()" class="form-control" min="product.minrentdays">
                                     </div>
                                 </div>
                         </div>
+
                         <!-- /.row -->
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="firstname">Allow purchasing?</label>
+                                    <input type="checkbox" style="display:block;" ng-model="canBuy" >
+                                </div>        
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3" ng-show="canBuy">
+                                <div class="form-group">
+                                    <label for="firstname">Price</label>
+                                    <input type="text" class="form-control" ng-model="product.price" >
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group" ng-show="canBuy">
+                                    <label for="firstname">Minimum days before purchase</label>
+                                    <input style="width:40%" type="number" class="form-control" ng-model="product.mindaystobuy" ng-change="checkRentDays()">
+                                </div>
+                            </div>
+                            
+                        </div>
 
                         <div class="row">
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
-                                    <label for="city">Company</label>
-                                    <input type="text" class="form-control" id="city">
+                                    <label for="state">Weight (kg)</label>
+                                    <input type="number" class="form-control" id="zip" min="0">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
-                                    <label for="zip">ZIP</label>
-                                    <input type="text" class="form-control" id="zip">
+                                    <label for="zip">Width</label>
+                                    <input type="number" class="form-control" id="zip" min="0">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
-                                    <label for="state">State</label>
-                                    <select class="form-control" id="state"></select>
+                                    <label for="zip">Length</label>
+                                    <input type="number" class="form-control" id="zip" min="0">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
-                                    <label for="country">Country</label>
-                                    <select class="form-control" id="country"></select>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="phone">Telephone</label>
-                                    <input type="text" class="form-control" id="phone">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="email_account">Email</label>
-                                    <input type="text" class="form-control" id="email_account">
+                                    <label for="zip">Height</label>
+                                    <input type="number" class="form-control" id="zip" min="0">
                                 </div>
                             </div>
                             <div class="col-sm-12 text-center">
