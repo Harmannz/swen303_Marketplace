@@ -19,8 +19,23 @@ angular.module('swen303.home', ['swen303.services.product'])
         });
     })
 
-    .controller('HomeController', function($scope, $state, Products) {
+    .controller('HomeController', function($scope, $state, Products, ProductService) {
         $scope.products = Products;
+        $scope.searchTerm = '';
+        $scope.searchResults = [];
+
+        //Search items
+        $scope.search = function() {
+            if (!$scope.searchTerm) {
+                return
+            } else {
+                //Search in all
+                ProductService.search($scope.searchTerm, 0).then(function(payload) {
+                    $scope.searchResults = payload;
+                });
+            }
+        };
+
     })
 
 ;

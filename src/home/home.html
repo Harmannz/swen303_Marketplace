@@ -6,20 +6,36 @@
             </div>
         </div>
     </div>
-    <div class="search">
-        <div class="container">
-            <input class="search__input" type="text" placeholder="Search">
+    <!-- search bar -->
+    <form ng-submit="search()">
+        <div class="search">
+            <div class="container">
+                <input class="search__input" type="text" placeholder="Search" ng-model="searchTerm" value="{{ searchterm }}" ng-keyup="search()">
+            </div>
         </div>
-    </div>
+    </form>
     <div class="list container">
-        <div class="list__header">Top Sellers</div>
+        <div ng-if="searchTerm==''" class="list__header">Top Sellers</div>
+        <h4 ng-if="searchTerm!=''"><small>Showing {{ searchResults.length }} item(s) <span ng-if="searchTerm"> for {{searchTerm}}</span></small></h4>
         <div class="list__products row">
-            <div ng-repeat="product in products" class="product col-sm-4">
-                <div class="product__inner" ui-sref="product({ id: product.pid })">
-                    <img ng-src="assets/img/products/{{ product.image }}">
-                    <h4>{{ product.name }}</h4>
-                    <h3>{{ product.purchaseprice | currency }}</h3>
-                    <h4><small>or rent from {{ product.rentalpricepd | currency }}<small></h4>
+            <div ng-if="searchTerm==''">
+                <div ng-repeat="product in products" class="product col-sm-4">
+                    <div class="product__inner" ui-sref="product({ id: product.pid })">
+                        <img ng-src="assets/img/products/{{ product.image }}">
+                        <h4>{{ product.name }}</h4>
+                        <h3>{{ product.purchaseprice | currency }}</h3>
+                        <h4><small>or rent from {{ product.rentalpricepd | currency }}<small></h4>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="searchTerm!=''">
+            <div ng-repeat="product in searchResults" class="product col-sm-4">
+                    <div class="product__inner" ui-sref="product({ id: product.pid })">
+                        <img ng-src="assets/img/products/{{ product.image }}">
+                        <h4>{{ product.name }}</h4>
+                        <h3>{{ product.purchaseprice | currency }}</h3>
+                        <h4><small>or rent from {{ product.rentalpricepd | currency }}<small></h4>
+                    </div>
                 </div>
             </div>
         </div>
