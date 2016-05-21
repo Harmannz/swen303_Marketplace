@@ -73,7 +73,6 @@ angular.module('swen303.factory.cart', [])
                 for(var i = 0; i < cart.toRent.length; i++){
                     shippingCost += cart.toRent[i].weightkg * cart.toRent[i].quantity * .00973 ;
                 }
-                console.log("Shipping cost in cart.js: " + shippingCost);
                 return shippingCost;
             },
             //returns the total cost
