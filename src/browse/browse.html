@@ -15,7 +15,7 @@
             <div class="container">
                 <h4><small>Showing {{ products.length }} item(s) <span ng-if="searchTerm"> for {{searchTerm}}</span></small></h4>
 
-                <div class="row products">
+                <div class="row products list row-eq-height">
 
                     <div class="col-md-3 col-sm-4" ng-repeat="product in products">
                         <div class="product">
@@ -28,7 +28,7 @@
                             <div class="text">
                                 <h3><a  ui-sref="product({ id: product.pid })">{{ product.name }}</a></h3>
                                 <p class="price">{{ product.rentalpricepd | currency }}/per day</p>
-                                <h4><a ng-href="#" ng-click="rent(product)">Quick Rent<small></h4>
+                                <h4><a ng-href="#" ng-click="rent(product)">Quick Rent</a></h4>
 
                             </div>
                             <!-- /.text -->
