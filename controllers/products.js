@@ -45,7 +45,7 @@ router.get('/search/:cid/:search', function(req,res){
 
 	console.log("SEARCH " + cid + " : "+search)
 
-	console.log("GET /products/category/" + cid + "/"+search);
+	console.log("GET /products/search/" + cid + "/"+search);
 
 	Products.search(search, cid,function(products){
 		res.json(products);

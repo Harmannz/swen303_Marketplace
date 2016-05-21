@@ -43,17 +43,17 @@ angular.module('swen303.services.product', [])
             });
         };
 
-        this.search = function(category_id, query) {
-            return $http.get('/api/products/search/' + category_id + '/' + query).then(function(payload) {
-                return payload.data;
-            });
-        };
-
-        // this.search = function(searchStr, cid) {
-        //     return $http.get('/api/products/serach/' + cid + '/'+searchStr).then(function(payload) {
+        // this.search = function(category_id, query) {
+        //     return $http.get('/api/products/search/' + category_id + '/' + query).then(function(payload) {
         //         return payload.data;
         //     });
-        // }
+        // };
+
+        this.search = function(searchStr, cid) {
+            return $http.get('/api/products/search/' + cid + '/'+searchStr).then(function(payload) {
+                return payload.data;
+            });
+        }
 
         this.addProduct = function(productData){
             return $http.post('/api/products/',productData).then(function(payload) {
