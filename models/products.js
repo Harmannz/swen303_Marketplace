@@ -149,15 +149,19 @@ exports.getFromCategory = function(cid, cb,errorCb){
 
 
 exports.addNew = function(product, cb, errorCb){
+	console.log(product);
 	var queryParams = Utils.shallowObjToQuery(product);
 	var query = dbClient.query("insert into products " + queryParams.string +" returning *" , queryParams.args);
 
 	query.on('error',function(e){
+		console.log(e);
 		errorCb(e);
 	})
 
 	query.on('end',function(e){
+		//get the id
 		insertedRow = (e.rows.length > 0)? e.rows[0] : null;
+		console.log(e);
 		cb(insertedRow);
 	})
 }

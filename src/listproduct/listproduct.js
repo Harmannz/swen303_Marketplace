@@ -14,21 +14,25 @@ angular.module('swen303.listproduct', ['swen303.services.product','flow','swen30
             target:'/api/products/imageupload', 
             testChunks:false
         }
-        flowFactoryProvider.on('catchAll', function (event) {
-            console.log('event', event)
+        flowFactoryProvider.on('catchAll', function (event,b,data) {
+            console.log(event,b,data)
             if(event == 'fileAdded'){
                 $('#prod-image-preview').removeClass('ratio1_1');
                 $('#prod-image-preview').css('display','inline-block');
             }
+            if(event=='fileSuccess'){
+               console.log(data);
+            }
          });
 	})
 
-	.controller('listProductController',function($state, $scope, CategoryService ) {
+	.controller('listProductController',function($state, $scope, CategoryService, ProductService, UserFactory ) {
 
         $scope.product = {
             minrentdays: 7,
             maxrentdays: 7,
-            mindaystobuy: 7
+            mindaystobuy: 7,
+            sellerid: UserFactory.user.uid
         };
         console.log($scope.product);
 
@@ -48,8 +52,19 @@ angular.module('swen303.listproduct', ['swen303.services.product','flow','swen30
 
         // calling our submit function.
         $scope.submitForm = function(flow) {
-            console.log("submit selected");
+            console.log("submit selected", $scope.product);
             flow.upload();
+            var prod = cleanProduct($scope.product);
+            console.log(prod); 
+            console.log(ProductService.addProduct(prod));
+        }
+
+        function cleanProduct(p){
+            p.dimensions = [p.width,p.height,p.length].join(' x ') + " cm";
+            delete p.width;
+            delete p.height;
+            delete p.length;
+            return p;
         }
 
         $scope.checkRentDays = function(){
@@ -61,11 +76,15 @@ angular.module('swen303.listproduct', ['swen303.services.product','flow','swen30
             }  if ($scope.product.mindaystobuy > $scope.product.maxrentdays){
                 $scope.product.mindaystobuy = $scope.product.maxrentdays;
             }
-            // $scope.product.mindaystobuy = Math.max($scope.product.mindaystobuy, 0);
-            // $scope.product.maxrentdays = Math.max($scope.product.maxrentdays,0);
-            // $scope.product.minrentdays = Math.max($scope.product.minrentdays,0);
 
         }
+
+        $scope.flowFileSuccess = function(a,b,c){
+            var name = angular.fromJson(b).filename;
+            $scope.product.image = name;
+            console.log("aaaaaaaaaa",name);
+        }
+
 	})
 
 ;
