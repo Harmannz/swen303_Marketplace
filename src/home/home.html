@@ -15,7 +15,7 @@
         </div>
     </form>
     <div class="list container">
-        <div ng-if="searchTerm==''" class="list__header">Top Sellers</div>
+        <h4 ng-if="searchTerm==''" class="list__header">Top Sellers</h4>
         <h4 ng-if="searchTerm!=''"><small>Showing {{ searchResults.length }} item(s) <span ng-if="searchTerm"> for {{searchTerm}}</span></small></h4>
         <div class="list__products row">
             <div ng-if="searchTerm==''">
