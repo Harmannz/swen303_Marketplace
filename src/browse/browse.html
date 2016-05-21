@@ -27,24 +27,16 @@
                             <!-- /.image -->
                             <div class="text">
                                 <h3><a  ui-sref="product({ id: product.pid })">{{ product.name }}</a></h3>
-                                <p class="price">{{ product.rentalpricepd | currency }}</p>
-                                <h4><small>Per day<small></h4>
+                                <p class="price">{{ product.rentalpricepd | currency }}/per day</p>
+                                <h4><a ng-href="#" ng-click="rent(product)">Quick Rent<small></h4>
 
                             </div>
                             <!-- /.text -->
                             <!-- ribbon -->
-                            <a href="#">
-                                <div class="ribbon sale" >
-                                    <div class="theribbon" ng-click="rent(product)">Quick Rent</div>
-                                    <div class="ribbon-background"></div>
-                                </div>
-                            </a>
-                            <a href="#" ng-if="product.purchaseprice">
-                                <div class="ribbon new" >
-                                    <div class="theribbon">Rent-2-Own</div>
-                                    <div class="ribbon-background"></div>
-                                </div>
-                            </a>
+                            <div class="ribbon" >
+                                <div class="theribbon">Rent-2-Own</div>
+                                <div class="ribbon-background"></div>
+                            </div>
                             <!-- /.ribbon -->
                         </div>
                         <!-- /.product -->
