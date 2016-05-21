@@ -21,26 +21,41 @@
 				<img ng-src="assets/img/products/{{ product.image }}" class="img-responsive">
 			</div>
 			<div class="col-sm-6">
-				<h1 ng-bind="product.name"></h1>
-				<h2 ng-if="product.purchaseprice">{{ product.purchaseprice | currency }}</h2>
-				<h3 ng-if="product.rentalpricepd">or rent from {{ product.rentalpricepd | currency }} per day</h3>
-				<button class="btn btn-template-main" ng-click="addToCart()" ui-sref="cart">Add to cart</button>
-				<button class="btn btn-default" ng-click="rent()">Rent this product</button>
-				<h3>Description</h3>
+				<div class="heading text-center">
+					<h1 ng-bind="product.name"></h1>
+				</div>
 				<p ng-bind="product.description"></p>
+				<h2 ng-if="product.rentalpricepd">{{ product.rentalpricepd | currency }} per day</h2>
+				<h3 ng-if="product.purchaseprice">Purchase Price: {{ product.purchaseprice | currency }}</h3>
+				<p class="goToDescription"><a href="searchProduct" class="scroll-to text-uppercase">Compare this product</a>
+                </p>
+				<button class="btn btn-default" ng-click="rent()"><i class="fa fa-shopping-cart"></i> Rent this product</button>		
+                    
+                <blockquote ng-if="product.purchaseprice">
+                    <p><em>This product can be rented to buy. This means that you have the option to purchase this item at some point during the agreement with the seller</em>
+                    </p>
+                </blockquote>
+        
+                <div class="box social" id="product-social">
+                    <h4>Tell your friends</h4>
+                    <p>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.google.com&t=" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
+                        <a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.google.com" class="external gplus" data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>
+                        <a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fwww.google.com&text=:%20http%3A%2F%2Fwww.google.com" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
+                        <a href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site http://www.google.com." class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                    </p>
+                </div>
 			</div>
 		</div>
 	</div>
 
 	<div class="container">
-		<h3 class="panel-heading"> Specifications </h3>
-
 		<!-- search bar -->
         <form ng-submit="search()">
             <div class="search">
                 <div class="form-group no-margin">
                     <div class="input-group">
-                        <input type="text" class="search__input" ng-model="searchTerm" placeholder="Compare Product" value="{{ searchterm }}">
+                        <input id="searchProduct" type="text" class="search__input" ng-model="searchTerm" placeholder="Compare Product" value="{{ searchterm }}">
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-md btn-template-primary" type="button" id="search-button">Compare</button>
                         </span>
@@ -49,7 +64,7 @@
             </div>
             <h4><small>Found {{ products.length }} item(s) <span ng-if="searchTerm"> for {{searchTerm}}</span></small></h4>
         </form>
-
+        <h3 class="panel-heading"> Specifications </h3>
 		<div class="panel">
 			<table class="table">
 				<thead class="thead">

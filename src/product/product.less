@@ -4,6 +4,101 @@ thead{
 }
 
 .product {
+    #content {
+      border-top: 1px solid #E6E6E6;
+    }
+    .no-margin{
+      margin:0px;
+    }
+
+    .lead {
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+    @media (min-width: 768px) {
+      .lead {
+        font-size: 21px;
+      }
+    }
+
+    .heading {
+      margin-bottom: 40px;
+    }
+    .heading h1,
+    .heading h2,
+    .heading h3,
+    .heading h4,
+    .heading h5 {
+      display: inline-block;
+      border-bottom: solid 5px @theme-primary;
+      line-height: 1.1;
+      margin-bottom: 0;
+      padding-bottom: 10px;
+      vertical-align: middle;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .heading h1 i.fa,
+    .heading h2 i.fa,
+    .heading h3 i.fa,
+    .heading h4 i.fa,
+    .heading h5 i.fa {
+      display: inline-block;
+      background: @theme-primary;
+      width: 30px;
+      height: 30px;
+      vertical-align: middle;
+      text-align: center;
+      color: #fff;
+      font-size: 12px;
+      line-height: 30px;
+      border-radius: 15px;
+    }
+
+
+    a {
+    color: @theme-primary;
+    text-decoration: none;
+  }
+  a:hover,
+  a:focus {
+    color: #E53935;
+    text-decoration: underline;
+  }
+  a:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+  }
+
+  /* general styles */
+  a,
+  button {
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+  }
+  a i.fa,
+  button i.fa {
+    margin: 0 5px;
+  }
+  .clickable {
+    cursor: pointer !important;
+  }
+  .required {
+    color: @theme-primary;
+  }
+  .accent {
+    color: @theme-primary;
+  }
+  .text-uppercase {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  
+
+
     .panel {
         .panel-heading{
             display: inline-block;
