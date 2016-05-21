@@ -19,7 +19,8 @@ module.exports = function(grunt) {
                 'node_modules/angular-ui-router/release/angular-ui-router.js',
                 'node_modules/jquery/dist/jquery.js',
                 'node_modules/bootstrap/js/dropdown.js',
-                'node_modules/ng-flow/dist/ng-flow.js'
+                'node_modules/ng-flow/dist/ng-flow.js',
+                'node_modules/ng-notify/src/scripts/ng-notify.js'
             ]
         }
 

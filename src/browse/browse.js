@@ -1,4 +1,4 @@
-angular.module('swen303.browse', ['swen303.services.product', 'swen303.services.category', 'swen303.factory.cart'])
+angular.module('swen303.browse', ['swen303.services.product', 'swen303.services.category', 'swen303.factory.cart', 'ngNotify'])
 
     .config(function($stateProvider) {
         $stateProvider.state('browse', {
@@ -26,7 +26,7 @@ angular.module('swen303.browse', ['swen303.services.product', 'swen303.services.
         });
     })
 
-    .controller('BrowseController', function($scope, Products, Category, ProductService, usercartFactory) {
+    .controller('BrowseController', function($scope, Products, Category, ProductService, usercartFactory, ngNotify) {
         $scope.products = Products;
         $scope.category = Category;
 
@@ -47,6 +47,7 @@ angular.module('swen303.browse', ['swen303.services.product', 'swen303.services.
             var rentProduct = JSON.parse(JSON.stringify(product));
             rentProduct.rentdays = rentProduct.minrentdays;
             usercartFactory.addToRent(rentProduct);
+            ngNotify.set('Added ' + product.name + ' to your cart', 'info');
         };
 
     })
