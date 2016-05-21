@@ -19,6 +19,59 @@ exports.get = function(id, cb, errorCb){
 	})
 }
 
+exports.getQuantity = function(id, cb, errorCb){
+	var query = dbClient.query("select * from productinstances where product_id = $1",[id]);
+	var data = [];
+
+	query.on('row',function(d){
+		data.push(d);
+	});
+
+	query.on('error',function(er){
+		errorCb(er);
+	});
+
+	query.on('end',function(e){
+		cb(data.length);
+	})
+}
+
+exports.getInstances = function(id, cb, errorCb){
+	var query = dbClient.query("select * from productinstances where product_id = $1",[id]);
+	var data = [];
+
+	query.on('row',function(d){
+		data.push(d);
+	});
+
+	query.on('error',function(er){
+		errorCb(er);
+	});
+
+	query.on('end',function(e){
+		cb(data);
+	})
+}
+
+exports.getAvailableInstances = function(id, cb, errorCb){
+	var query = dbClient.query("select * from productinstances where product_id = $1",[id]);
+	var data = [];
+
+	query.on('row',function(d){
+		if(d.current_status=="Available"){
+			data.push(d);
+		}
+	});
+
+	query.on('error',function(er){
+		errorCb(er);
+	});
+
+	query.on('end',function(e){
+		cb(data);
+	})
+}
+
 exports.search = function(str, cid, cb, errorCb){
 	//cid: 0 = search all
 	var searchWords = str.toLowerCase().split(' ');

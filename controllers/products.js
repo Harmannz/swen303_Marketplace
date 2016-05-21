@@ -39,7 +39,7 @@ router.get('/category/:cid', function(req,res){
 })
 
 //Search Items in category (0 = All)
-router.get('/:cid/:search', function(req,res){
+router.get('/search/:cid/:search', function(req,res){
 	var cid = req.params.cid;
 	var search = req.params.search;
 
@@ -55,17 +55,45 @@ router.get('/:cid/:search', function(req,res){
 	})
 })
 
-router.get('/:id', function(req,res){
+//Get product quantity
+router.get('/quantity/:id', function(req,res){
 	var id = req.params.id;
-	console.log("GET /products/" + id);
+	console.log("GET /products/quantity/" + id);
 
-	Products.get(id,function(product){
-		res.json(product);
+	Products.getQuantity(id,function(quantity){
+		res.json(quantity);
 	},function(err){
 		console.log(err);
 		res.sendStatus(500);
 	})
 })
+
+//Get product instances
+router.get('/instances/:id', function(req,res){
+	var id = req.params.id;
+	console.log("GET /products/instances/" + id);
+
+	Products.getInstances(id,function(instances){
+		res.json(instances);
+	},function(err){
+		console.log(err);
+		res.sendStatus(500);
+	})
+})
+
+//Get Available product instances
+router.get('/available/:id', function(req,res){
+	var id = req.params.id;
+	console.log("GET /products/available/" + id);
+
+	Products.getAvailableInstances(id,function(instances){
+		res.json(instances);
+	},function(err){
+		console.log(err);
+		res.sendStatus(500);
+	})
+})
+
 //new product
 router.post('/', function(req,res){
 	Products.addNew(req.body,function(product){
@@ -78,6 +106,19 @@ router.post('/', function(req,res){
 		res.sendStatus(400);
 	});
 
+})
+
+//Get product
+router.get('/:id', function(req,res){
+	var id = req.params.id;
+	console.log("GET /products/" + id);
+
+	Products.get(id,function(product){
+		res.json(product);
+	},function(err){
+		console.log(err);
+		res.sendStatus(500);
+	})
 })
 
 var upload = multer({ dest : 'upload/'});

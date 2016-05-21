@@ -26,6 +26,7 @@
 				</div>
 				<p ng-bind="product.description"></p>
 				<h2 ng-if="product.rentalpricepd">{{ product.rentalpricepd | currency }} per day</h2>
+				<p> {{ quantity }} out of {{ quantityTotal }} in stock </p>
 				<h3 ng-if="product.purchaseprice">Purchase Price: {{ product.purchaseprice | currency }}</h3>
 				<p class="goToDescription"><a href="searchProduct" class="scroll-to text-uppercase">Compare this product</a>
                 </p>

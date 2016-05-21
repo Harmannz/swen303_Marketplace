@@ -16,6 +16,18 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 					});
 				}],
 
+				AvailableInstances: ['ProductService', '$stateParams', function(ProductService, $stateParams) {
+					return ProductService.getAvailable($stateParams.id).then(function(payload) {
+						return payload;
+					});
+				}],
+
+				AllInstances: ['ProductService', '$stateParams', function(ProductService, $stateParams) {
+					return ProductService.getInstances($stateParams.id).then(function(payload) {
+						return payload;
+					});
+				}],
+
 				Specifications: ['SpecificationService', '$stateParams', function(SpecificationService, $stateParams) {
 					return SpecificationService.getSpecifications($stateParams.id).then(function(payload) {
 						return payload;
@@ -25,13 +37,15 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 		});
 	})
 
-	.controller('ProductController', function($state, $scope, ProductService, SpecificationService, Product, Specifications, UserFactory, usercartFactory) {
+	.controller('ProductController', function($state, $scope, ProductService, SpecificationService, Product, Specifications, AvailableInstances, AllInstances, UserFactory, usercartFactory) {
 		$scope.product = Product;
 		$scope.specs = Specifications;
 		$scope.compareProduct = null;
 		$scope.compareSpecs = null;
 		$scope.searchResult = null;
 		$scope.fullCompareTable = null;
+		$scope.quantity = AvailableInstances.length;
+		$scope.quantityTotal = AllInstances.length;
 
 		//Create Comparison table of specifications
 		repopulateCompareTable = function(){
