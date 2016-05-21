@@ -48,6 +48,11 @@ angular.module('swen303.factory.user', [])
 
 			updateDetails: function(data) {
 				return $http.post('/api/users/' + Auth.user.uid + '/update', data).then(function(payload) {
+					if (payload.data.success) {
+						Auth.user = data;
+						localStorage.setItem('user', JSON.stringify(Auth.user));
+					}
+
 					return payload.data;
 				});
 			},

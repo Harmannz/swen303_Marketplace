@@ -22,7 +22,9 @@ angular.module('swen303.profile.info', [])
 
 		$scope.submit = function() {
 			UserFactory.updateDetails($scope.user).then(function(payload) {
-				console.log(payload);
+				if (payload.success) {
+					//
+				}
 			});
 		};
 	})

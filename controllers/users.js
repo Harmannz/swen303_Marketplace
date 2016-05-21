@@ -40,6 +40,17 @@ router.post('/:id', function(req,res){
 	})
 })
 
+router.post('/:userId/update', function(req, res) {
+	console.log('POST /update');
+	var userId = req.params.userId;
+	Users.updateDetails(userId, req.body, function(status) {
+		res.json({ success: status });
+	}, function(err) {
+		console.log(err);
+		res.sendStatus(500);
+	});
+})
+
 /*Get all orders for a given user*/
 router.get('/:userId/orders', function(req,res){
 	console.log("GET /orders");
