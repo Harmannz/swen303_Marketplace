@@ -5,8 +5,7 @@ angular.module('swen303.factory.cart', [])
     .factory('usercartFactory', ['$http', function($http){
         var urlBase = 'api/' //TODO: Which url are we using for purchasing/renting ??
         var cart = {
-            toRent: [],
-            user: {}
+            toRent: []
         };
 
         return {
@@ -18,6 +17,7 @@ angular.module('swen303.factory.cart', [])
                     if(cart.toRent[i].pid == product.pid){
                         cart.toRent[i].quantity+=1;
                         productExists = true;
+                        break;
                     }
                 }
                 if(productExists == false) {
@@ -25,17 +25,9 @@ angular.module('swen303.factory.cart', [])
                     cart.toRent.push(product);
                 }
             },
-            //adds user details to cart
-            addUser: function(user){
-                cart.user = user;
-            },
             //getter method for accessing the products to rent
             getToRent: function(){
                 return cart.toRent;
-            },
-            //getter for user details
-            getUser: function(){
-                return cart.user;
             },
             getNumOfRentals: function(){
                 var numOfRentals = 0;
@@ -49,7 +41,7 @@ angular.module('swen303.factory.cart', [])
             },
             //removes product matching pid from rent list
             removeFromRent: function(pid){
-                for(var i =0; i < cart.toRent.length; i++){
+                for(var i = 0; i < cart.toRent.length; i++){
                     if (cart.toRent[i].pid == pid){
                         cart.toRent.splice(i,1); //remove product from cart
                     }
@@ -57,17 +49,11 @@ angular.module('swen303.factory.cart', [])
             },
             //empties rent list
             clearRent: function(){
-                cart.toRent= [];
-            },
-            //empties user details
-            clearUser: function(){
-                cart.user = {};
+                cart.toRent = [];
             },
             //empties everything in cart
             clearCart: function(){
-                this.clearPurchase();
                 this.clearRent();
-                this.clearUser();
             },
             //returns the total rent cost
             rentTotal: function(){
@@ -81,12 +67,13 @@ angular.module('swen303.factory.cart', [])
             getTax:  function(){
                 return this.rentTotal() * 0.15;
             },
-            //returns the total shipping cost = 9.73% of weightg
+            //returns the total shipping cost = 0.973% of weightg
             getShipping: function(){
                 var shippingCost = 0;
                 for(var i = 0; i < cart.toRent.length; i++){
-                    shippingCost += cart.toRent[i].weightg * cart.toRent[i].quantity * .00973 ;
+                    shippingCost += cart.toRent[i].weightkg * cart.toRent[i].quantity * .00973 ;
                 }
+                console.log("Shipping cost in cart.js: " + shippingCost);
                 return shippingCost;
             },
             //returns the total cost

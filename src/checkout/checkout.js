@@ -20,6 +20,8 @@ angular.module('swen303.cart', ['swen303.services.product', 'swen303.factory.car
         $scope.total = usercartFactory.getTotal();
         $scope.tax = usercartFactory.getTax();
         $scope.shipping = usercartFactory.getShipping();
+        console.log(usercartFactory.getToRent());
+        console.log("Shipping: " + $scope.shipping);
         $scope.cartsize = usercartFactory.getNumOfItems();
 
          $scope.back = function(){
