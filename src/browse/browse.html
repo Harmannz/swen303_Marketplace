@@ -27,20 +27,14 @@
                             <!-- /.image -->
                             <div class="text">
                                 <h3><a  ui-sref="product({ id: product.pid })">{{ product.name }}</a></h3>
-                                <p class="price">{{ product.purchaseprice | currency }}</p>
-                                <h4><small>or rent from {{ product.rentalpricepd | currency }}<small></h4>
+                                <p class="price">{{ product.rentalpricepd | currency }}</p>
+                                <h4><small>Per day<small></h4>
 
                             </div>
                             <!-- /.text -->
+                            <!-- ribbon -->
                             <a href="#">
-                                <div class="ribbon sale">
-                                    <div class="theribbon" ng-click="addToCart(product)">Quick Buy</div>
-                                    <div class="ribbon-background"></div>
-                                </div>
-                            </a>
-                            <!-- /.ribbon -->
-                            <a href="#">
-                                <div class="ribbon new" >
+                                <div class="ribbon sale" >
                                     <div class="theribbon" ng-click="rent(product)">Quick Rent</div>
                                     <div class="ribbon-background"></div>
                                 </div>
@@ -54,6 +48,7 @@
                 <!-- /.products -->
 
                 <div class="col-sm-12">
+                    <!-- Harman: this is for pagination, but if we don't have a lot of data then I can remove this -->
                     <div class="pages">
                     </div>
                 </div>

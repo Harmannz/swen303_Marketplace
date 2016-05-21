@@ -43,11 +43,6 @@ angular.module('swen303.browse', ['swen303.services.product', 'swen303.services.
 				});
 			}
 		};
-
-        $scope.addToCart = function(product) {
-            usercartFactory.addToPurchase(product);
-        };
-
         $scope.rent = function(product) {
             var rentProduct = JSON.parse(JSON.stringify(product));
             rentProduct.rentdays = rentProduct.minrentdays;
