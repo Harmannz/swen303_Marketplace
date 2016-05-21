@@ -1,22 +1,19 @@
-<div class="browse container">
+<div class="browse">
     <div class="container">
         <div class="heading text-center"><a ui-sref="browse({cid: category.id})" style="color: #333;"><h1>{{ category.name }}</h1></a></div>
-        
+    </div>
         <!-- search bar -->
         <form ng-submit="search()">
             <div class="search">
-                <div class="form-group no-margin">
-                    <div class="input-group">
-                        <input type="text" type="submit" class="search__input" ng-model="searchTerm" placeholder="Search here" value="{{ searchterm }}" ng-keyup="search()">
-                    </div>
+                <div class="container">
+                    <input class="search__input" type="text" placeholder="Search" ng-model="searchTerm">
                 </div>
             </div>
-            <h4><small>Showing {{ products.length }} item(s) <span ng-if="searchTerm"> for {{searchTerm}}</span></small></h4>
         </form>
-        
         <!-- show items -->
         <div id="content">
             <div class="container">
+                <h4><small>Showing {{ products.length }} item(s) <span ng-if="searchTerm"> for {{searchTerm}}</span></small></h4>
 
                 <div class="row products" ng-repeat="product in products">
 
