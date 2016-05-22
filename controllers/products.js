@@ -121,19 +121,32 @@ router.get('/:id', function(req,res){
 	})
 })
 
-var upload = multer({ dest : 'upload/'});
+var upload = multer({ dest : 'uploads/'});
 router.post('/imageupload', upload.single('file'), function(req,res){
 	console.log('POST /api/products/imageUpload');
 	
 	var tmp_path = req.file.path;
+	console.log(tmp_path, req.file.originalname);
 	var newfilename = path.basename(tmp_path)+path.extname(req.file.originalname);
-	var target_path = './src/assets/img/products/' + newfilename;
+	//var target_path = './src/assets/img/products/' + newfilename;
 
-	var src = fs.createReadStream(tmp_path);
-	var dest = fs.createWriteStream(target_path);
-	src.pipe(dest);
-	src.on('end', function() { res.json({filename:newfilename}); });
-	src.on('error', function(err) { res.sendStatus(500); });
+	fs.rename(tmp_path, "uploads/"+newfilename, function(err){
+		if(err){
+			res.sendStatus(500);
+		} else {
+			res.json({filename:newfilename});
+		}
+	})
+
+	// var src = fs.createReadStream(tmp_path);
+	// var dest = fs.createWriteStream(target_path);
+	// src.pipe(dest);
+	// src.on('end', function() { res.json({filename:newfilename}); });
+	// src.on('error', function(err) { res.sendStatus(500); });
+
+	// var newfilename = tmp_path;
+	// if(tmp_path)res.json({filename:newfilename});
+	// else res.sendStatus(500);
 })
 
 module.exports = router;

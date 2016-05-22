@@ -29,7 +29,7 @@
                                 <tr ng-repeat="product in productsToRent">
                                     <td>
                                         <a ui-sref="product({ id: product.pid })">
-                                            <img ng-src="assets/img/products/{{product.image}}" alt="{{product.name}}">
+                                            <img ng-src="uploads/{{product.image}}" alt="{{product.name}}">
                                         </a>
                                     </td>
                                     <td><a ui-sref="product({ id: product.pid })">{{product.name}}</a>

@@ -4,6 +4,7 @@ var app = express();
 app.use('/src', express.static('build/src'));
 app.use('/node_modules', express.static('build/node_modules'));
 app.use('/assets', express.static('build/assets'));
+app.use('/uploads', express.static('uploads'));
 
 //routes defined here
 app.use(require('./controllers'));

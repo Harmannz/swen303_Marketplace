@@ -38,17 +38,14 @@
                             <div class="form-group">
                                 <md-input-container>
                                     <label>Description</label>
-                                        <textarea name="description" ng-required="true" class="form-control" ng-model="product.description"></textarea>
-                                        <!-- <div ng-messages="productForm.description.$error">
-                                          <div ng-message="required">Required!</div>
-                                        </div> -->
+                                    <textarea name="description" ng-required="true" class="description form-control" ng-model="product.description"></textarea>
                                 </md-input-container>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="state">Category</label>
-                                <select class="form-control" ng-required="true" ng-model="mainCategory" >
+                                <select class="form-control" ng-required="true" ng-model="product.categoryid" >
                                     <option ng-repeat="category in categories" value="{{category.cid}}">{{category.name}}</option>
                                 </select>
                                 <!-- select ng-options="key as value for (key , value) in categories" ng-model="mainCategory"></select> -->

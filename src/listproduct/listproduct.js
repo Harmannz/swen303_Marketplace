@@ -28,11 +28,17 @@ angular.module('swen303.listproduct', ['swen303.services.product','flow','swen30
 
 	.controller('listProductController',function($state, $scope, CategoryService, ProductService, UserFactory ) {
 
+        if (!UserFactory.user) {
+            $state.go('register', { redirectstate: 'listproduct' });
+        } else {
+            $scope.userid = UserFactory.user.uid;
+        }
+
         $scope.product = {
             minrentdays: 7,
             maxrentdays: 7,
             mindaystobuy: 7,
-            sellerid: UserFactory.user.uid
+            sellerid:  $scope.userid
         };
         console.log($scope.product);
 
