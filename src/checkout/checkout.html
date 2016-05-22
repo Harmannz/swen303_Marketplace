@@ -12,7 +12,7 @@
 
                     <form ng-submit="submitForm()">
                         
-                        <div class="box-header box-header-last"><h3>Renting</h3></div>
+                        <div class="box-header"><h3>Renting</h3></div>
                         
                         <div class="table-responsive">
                             <table class="table">
@@ -35,7 +35,7 @@
                                     <td><a ui-sref="product({ id: product.pid })">{{product.name}}</a>
                                     </td>
                                     <td>
-                                        <input type="number" ng-model="product.quantity" ng-change="updatePrices()" class="form-control" min="0" max={{product.instock}}>
+                                        <input type="number" ng-model="product.quantity" ng-change="updatePrices()" class="form-control" min="0" max="{{product.maxQuantity}}">
                                     </td>
                                     <td>{{product.rentalpricepd | currency}}</td>
                                     <td>

@@ -12,18 +12,24 @@ angular.module('swen303.cart', ['swen303.services.product', 'swen303.factory.car
 		});
 	})
 
-	.controller('CartController',function($state, $scope, usercartFactory) {
+	.controller('CartController',function($state, $scope, usercartFactory, ProductService) {
 
         $scope.productsToRent = usercartFactory.getToRent();
-
         $scope.rentTotal = usercartFactory.rentTotal();
         $scope.total = usercartFactory.getTotal();
         $scope.tax = usercartFactory.getTax();
         $scope.shipping = usercartFactory.getShipping();
         $scope.cartsize = usercartFactory.getNumOfItems();
 
-         $scope.back = function(){
+        $scope.back = function(){
             $state.go('home');
+        };
+
+        $scope.getAvailable = function(pid){
+            // ProductService.getAvailable(pid).then(function(payload){
+            //     console.log(payload);
+            //     return payload;
+            // });
         };
 
         $scope.removeProductFromRent = function(pid){
