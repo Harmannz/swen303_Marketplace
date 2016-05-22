@@ -30,10 +30,9 @@
             <div ng-if="searchTerm!=''">
             <div ng-repeat="product in searchResults" class="product col-sm-4">
                     <div class="product__inner" ui-sref="product({ id: product.pid })">
-                        <img ng-src="uploads/{{ product.image }}">
-                        <h4>{{ product.name }}</h4>
-                        <h3>{{ product.purchaseprice | currency }}</h3>
-                        <h4><small>or rent from {{ product.rentalpricepd | currency }}<small></h4>
+                        <div class="image" style="background-image: url('uploads/{{ product.image }}');"></div>
+                        <h4 class="name">{{ product.name }}</h4>
+                        <h4>Rent from {{ product.rentalpricepd | currency }}</h4>
                     </div>
                 </div>
             </div>
