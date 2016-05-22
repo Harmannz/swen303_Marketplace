@@ -79,3 +79,14 @@ exports.checkForNotifications = function(userId, cb, errorCb) {
             }
         });
 };
+
+exports.getRentedProducts = function(userId, cb, errorCb) {
+	var query = "SELECT c.* FROM orders AS a INNER JOIN productinorder AS b ON a.order_id=b.order_id INNER JOIN productinstances AS c ON b.instance_id=c.instance_id WHERE a.user_id=$1 AND c.current_status='Rented'";
+	dbClient.query(query, [userId], function(err, results) {
+		if (err) {
+			return errorCb(err);
+		}
+
+		return cb(results.rows);
+	});
+};

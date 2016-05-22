@@ -63,6 +63,17 @@ router.get('/:userId/orders', function(req,res){
 	})
 })
 
+router.get('/:userId/rented', function(req, res) {
+	console.log("GET /rented");
+	var userId = req.params.userId;
+	Users.getRentedProducts(userId, function(results) {
+		res.json(results);
+	}, function(err) {
+		console.log(err);
+		res.sendStatus(500);
+	});
+})
+
 router.get('/:userId/notifications', function(req, res) {
     console.log("GET /notifications");
     var userId = req.params.userId;
