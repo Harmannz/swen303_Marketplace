@@ -54,13 +54,11 @@ exports.getInstances = function(id, cb, errorCb){
 }
 
 exports.getAvailableInstances = function(id, cb, errorCb){
-	var query = dbClient.query("select * from productinstances where product_id = $1",[id]);
+	var query = dbClient.query("select * from productinstances where product_id = $1 and current_status = 'Available'",[id]);
 	var data = [];
 
 	query.on('row',function(d){
-		if(d.current_status=="Available"){
-			data.push(d);
-		}
+		data.push(d);
 	});
 
 	query.on('error',function(er){
