@@ -12,7 +12,7 @@ angular.module('swen303.cart.payment', ['swen303.factory.cart', 'ngNotify', 'swe
 		});
 	})
 
-	.controller('PaymentController',function($scope, usercartFactory, UserFactory, CartService, ngNotify) {
+	.controller('PaymentController',function($scope, $state,  usercartFactory, UserFactory, CartService, ngNotify) {
 
         //get data from paymentdetails
         $scope.user = UserFactory.user;
@@ -28,10 +28,11 @@ angular.module('swen303.cart.payment', ['swen303.factory.cart', 'ngNotify', 'swe
 
             CartService.postItemsToRent(usercart).then(function(payload) {
             	if (payload){
-            		ngNotify('Transaction completed. Thank You!', 'success');
+            		ngNotify.set('Transaction completed. Thank You!', 'success');
             		$state.go('home');
+            		usercartFactory.clearCart();
             	}else{
-            		ngNotify('Error occurred during payment.' , 'error');
+            		ngNotify.set('Error occurred during payment.' , 'error');
             	}
 			});
             
