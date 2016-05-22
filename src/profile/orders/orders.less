@@ -1,0 +1,33 @@
+.orders {
+    .order {
+        display: table;
+        width: 100%;
+        padding: 20px;
+
+        img {
+            width: 100px;
+        }
+
+        .image {
+            width: 110px;
+        }
+
+        .image, .details, .purchase {
+            display: table-cell;
+            vertical-align: middle;
+
+            @media(max-width: @screen-sm-max) {
+                display: block;
+            }
+        }
+
+        .purchase {
+            text-align: right;
+
+            @media(max-width: @screen-sm-max) {
+                text-align: left;
+                margin-top: 8px;
+            }
+        }
+    }
+}

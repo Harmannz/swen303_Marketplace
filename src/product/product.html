@@ -62,11 +62,11 @@
 		</div>
 	</div>
 
-	<div class="container">
+
 		<!-- search bar -->
         <form ng-submit="search()">
             <div class="search">
-                <div class="form-group no-margin">
+                <div class="form-group no-margin container">
                     <div class="input-group">
                         <input id="searchProduct" type="text" class="search__input" ng-model="searchTerm" placeholder="Compare Product" value="{{ searchterm }}">
                         <!--<span class="input-group-btn">
@@ -77,6 +77,7 @@
             </div>
             <h4><small>Found {{ products.length }} item(s) <span ng-if="searchTerm"> for {{searchTerm}}</span></small></h4>
         </form>
+	<div class="container">
         <h3 class="panel-heading"> Specifications </h3>
 		<div class="panel">
 			<table class="table">

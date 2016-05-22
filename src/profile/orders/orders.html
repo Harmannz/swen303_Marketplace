@@ -1,3 +1,15 @@
-<div class="orders">
-	orders
+<div class="orders container">
+	<div ng-show="orders.length === 0">You don't currently have any products on rent</div>
+	<div ng-repeat="order in orders" class="order">
+		<div class="image">
+			<img ng-src="uploads/{{order.image}}" class="inline-block">
+		</div>
+		<div class="details">
+			<h3 ng-bind="order.name"></h3>
+			<span>Due back: {{ order.due_back | date:'medium' }}</span>
+		</div>
+		<div class="purchase" ng-show="order.purchaseable">
+			<button class="btn btn-template-main">Purchase for {{ order.purchaseprice | currency }}</button>
+		</div>
+	</div>
 </div>
