@@ -27,7 +27,7 @@ angular.module('swen303', [
         $locationProvider.html5Mode(true);
     })
 
-    .controller('MainController', function($scope, CategoryService, UserFactory, usercartFactory, $timeout) {
+    .controller('MainController', function($scope, $state, CategoryService, UserFactory, usercartFactory, $timeout) {
         $scope.user = UserFactory.user;
         $scope.notifications = [];
         $scope.$watch(function() {
@@ -64,6 +64,12 @@ angular.module('swen303', [
         }, function(newValue) {
             $scope.cartsize = newValue;
         });
+
+        $scope.signout = function() {
+            $scope.user = undefined;
+            UserFactory.signout();
+            $state.go('home');
+        };
     })
 
 ;

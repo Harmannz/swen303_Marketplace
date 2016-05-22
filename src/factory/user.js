@@ -2,7 +2,7 @@ angular.module('swen303.factory.user', [])
 
 	.factory('UserFactory', function($http) {
 
-		var user = {};
+		var user = undefined;
 
 		// Check for already signed in user
 		try {
@@ -42,8 +42,10 @@ angular.module('swen303.factory.user', [])
 			},
 
 			signout: function() {
-				Auth.user = {};
-				localStorage.clear();
+				Auth.user = undefined;
+				try {
+					localStorage.clear();
+				} catch (error) {}
 			},
 
 			updateDetails: function(data) {
