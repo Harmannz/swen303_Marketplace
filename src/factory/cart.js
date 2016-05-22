@@ -12,16 +12,21 @@ angular.module('swen303.factory.cart', [])
             //adds product to purchase.
             // Product must have the rentdays (number of days for renting) as a property
             addToRent: function(product){
+                console.log("set quantity to 1");;
+                this.addMultipleToRent(product, 1);
+            },
+            // Product must have the rentdays (number of days for renting) as a property and quantity already set
+            addMultipleToRent: function(product, quantity){
                 var productExists = false;
                 for(var i = 0; i < cart.toRent.length; i++){
                     if(cart.toRent[i].pid == product.pid){
-                        cart.toRent[i].quantity+=1;
+                        cart.toRent[i].quantity+=quantity;
                         productExists = true;
                         break;
                     }
                 }
                 if(productExists == false) {
-                    product.quantity = 1;
+                    product.quantity = quantity;
                     cart.toRent.push(product);
                 }
             },
@@ -78,6 +83,10 @@ angular.module('swen303.factory.cart', [])
             //returns the total cost
             getTotal: function(){
                 return this.rentTotal() + this.getShipping();
+            },
+            //return cart object
+            getCart: function(){
+                return cart;
             }
 
         }
