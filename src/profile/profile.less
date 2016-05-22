@@ -8,21 +8,24 @@
 
 	.tabs {
 		text-align: center;
-		border-top: 1px solid #444444;
-		border-bottom: 1px solid #444444;
 		padding: 0;
 
-		.selected {
-			background-color: @theme-primary;
-			color: #ffffff;
-		}
-
 		.tab {
+			border-bottom: 1px solid #444444;
 			padding: 10px;
 
 			&:hover {
 				cursor: pointer;
 			}
+		}
+
+		.selected {
+			background-color: @theme-primary;
+			color: #ffffff;
+			border: 1px solid #444444;
+			border-bottom: none;
+			border-top-left-radius: 4px;
+			border-top-right-radius: 4px;
 		}
 	}
 }
