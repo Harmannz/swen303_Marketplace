@@ -23,6 +23,8 @@ router.use('/api/users', require('./users'))
 
 router.use('/api/orders', require('./orders'))
 
+router.use('/api/cart', require('./cart'))
+
 
 router.get('*', function(req, res) {
 	res.sendFile(path.resolve('build/index.html'));
