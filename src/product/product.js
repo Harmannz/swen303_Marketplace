@@ -119,7 +119,7 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 			console.log(rentProduct);
 			rentProduct.maxQuantity = $scope.quantity;
             usercartFactory.addMultipleToRent(rentProduct, rentProduct.quantity);
-            ngNotify.set(rentProduct.name + " has been added to your cart", 'error');
+            ngNotify.set(rentProduct.name + " has been added to your cart", 'success');
             $state.go("cart");
 		};
 		
