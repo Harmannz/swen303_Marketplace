@@ -1,4 +1,4 @@
-angular.module('swen303.product', ['swen303.services.product', 'swen303.services.specifications', 'swen303.factory.cart', 'swen303.factory.user'])
+angular.module('swen303.product', ['swen303.services.product', 'swen303.services.specifications', 'swen303.factory.cart', 'swen303.factory.user', 'ngNotify'])
 
 	.config(function($stateProvider) {
 		$stateProvider.state('product', {
@@ -37,8 +37,11 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 		});
 	})
 
-	.controller('ProductController', function($state, $scope, ProductService, SpecificationService, Product, Specifications, AvailableInstances, AllInstances, UserFactory, usercartFactory) {
-		$scope.product = Product;
+	.controller('ProductController', function($state, $scope, ProductService, SpecificationService, Product, Specifications, AvailableInstances, AllInstances, UserFactory, usercartFactory, ngNotify) {
+		var rentProduct = JSON.parse(JSON.stringify(Product)); //make a deep clone of product first
+		rentProduct.quantity = 1; //quantity to buy
+		rentProduct.rentdays = rentProduct.minrentdays; //set rent days to minimum rent days
+		$scope.product = rentProduct;
 		$scope.specs = Specifications;
 		$scope.compareProduct = null;
 		$scope.compareSpecs = null;
@@ -113,13 +116,12 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 		};
 
 		$scope.rent = function() {
-			var rentProduct = JSON.parse(JSON.stringify($scope.product));
-            rentProduct.rentdays = rentProduct.minrentdays;
-            usercartFactory.addToRent(rentProduct);
+			console.log(rentProduct);
+			rentProduct.maxQuantity = $scope.quantity;
+            usercartFactory.addMultipleToRent(rentProduct, rentProduct.quantity);
+            ngNotify.set(rentProduct.name + " has been added to your cart", 'error');
             $state.go("cart");
 		};
-
-
 		
 	})
 

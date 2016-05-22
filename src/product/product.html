@@ -27,14 +27,26 @@
 				<p ng-bind="product.description"></p>
 				<h2 ng-if="product.rentalpricepd">{{ product.rentalpricepd | currency }} per day</h2>
 				<p> {{ quantity }} out of {{ quantityTotal }} in stock </p>
-				<h3 ng-if="product.purchaseprice">Purchase Price: {{ product.purchaseprice | currency }}</h3>
-				<p class="goToDescription"><a href="searchProduct" class="scroll-to text-uppercase">Compare this product</a>
-                </p>
-				<button class="btn btn-default" ng-click="rent()"><i class="fa fa-shopping-cart"></i> Rent this product</button>		
-                    
+     
+     			
+				<form ng-submit="rent()" class="rentform">
+					<fieldset class="form-group">
+						<label for="quantity">Quantity</label>
+						<input type="number" id="quantity" ng-model="product.quantity" class="form-control" min=1 max={{quantity}}>
+					</fieldset>
+					<fieldset class="form-group">
+						<label for="rentdays">Another label</label>
+						<input type="number" id="rentdays" ng-model="product.rentdays" class="form-control" min={{product.minrentdays}} max={{product.maxrentdays}}>
+					</fieldset>
+					<button class="btn btn-default" type="submit" ng-disabled="quantity <= 0"><i class="fa fa-shopping-cart"></i> Rent this product</button>
+				</form>
+
+	               
                 <blockquote ng-if="product.purchaseprice">
-                    <p><em>This product can be rented to buy. This means that you have the option to purchase this item at some point during the agreement with the seller</em>
+                    <p><em>This product can be rented to buy. This means that you have the option to purchase this item after <strong>{{product.mindaystobuy}}</strong> days. As agreed by the seller.
+                    </em>
                     </p>
+                    <p><em>Purchase Price: {{ product.purchaseprice | currency }}</em></p>
                 </blockquote>
         
                 <div class="box social" id="product-social">
