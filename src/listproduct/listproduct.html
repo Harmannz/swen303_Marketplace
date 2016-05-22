@@ -7,7 +7,7 @@
                 <h3 class="lead">Enter your listing details.</h3>
                 <p class="text-muted"></p>
                 <div flow-init flow-file-success="flowFileSuccess($file, $message, $flow )" flow-files-submitted="$flow.upload()">
-                <form name="productForm">
+                <form name="productForm" ng-submit="submitForm($flow)">
                 
 
 
@@ -29,7 +29,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" class="form-control" ng-required="true" ng-model="product.name">
+                                <input type="text" class="form-control" required ng-model="product.name">
                             </div>
                         </div>
                     </div>
@@ -38,14 +38,14 @@
                             <div class="form-group">
                                 <md-input-container>
                                     <label>Description</label>
-                                    <textarea name="description" ng-required="true" class="description form-control" ng-model="product.description"></textarea>
+                                    <textarea name="description" required class="description form-control" ng-model="product.description"></textarea>
                                 </md-input-container>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="state">Category</label>
-                                <select class="form-control" ng-required="true" ng-model="product.categoryid" >
+                                <label>Category</label>
+                                <select class="form-control" required ng-model="product.categoryid" >
                                     <option ng-repeat="category in categories" value="{{category.cid}}">{{category.name}}</option>
                                 </select>
                                 <!-- select ng-options="key as value for (key , value) in categories" ng-model="mainCategory"></select> -->
@@ -54,8 +54,11 @@
                     </div>
 
                         <div class="text-center">
-                            <label for="password_1">Image</label>
-                            <input type="file" name="pimage" flow-btn class="btn form-control" placeholder="&#xf093;" >
+                            <span  class="btn btn-template-main" flow-btn>
+                                <i class="fa fa-upload"></i>
+                                Upload Image
+                            </span>
+                            <label ng-show="error" style="color:red">Must have uploaded an image!</label>
                             <!-- </button> -->
                             
                         </div>
@@ -69,8 +72,6 @@
                     <div class="heading">
                         <h3 class="text-uppercase">Product Specifics</h3>
                     </div>
-
-                    <form>
                         
                         <!-- /.row -->
 
@@ -82,19 +83,19 @@
                                 </div> -->
                                 <div class="form-group">
                                     <label>Rental Price (per day)</label>
-                                    <input type="number" ng-model="product.rentalpricepd" class="form-control" min="1">
+                                    <input type="number" required ng-model="product.rentalpricepd" class="form-control" min="1">
                                </div>
                             </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label for="street">Min Rent Days</label>
-                                        <input type="number" ng-model="product.minrentdays" ng-change="checkRentDays()" class="form-control" min="1">
+                                        <label>Min Rent Days</label>
+                                        <input type="number" required ng-model="product.minrentdays" ng-change="checkRentDays()" class="form-control" min="1">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label for="street">Max Rent Days</label>
-                                        <input type="number" ng-model="product.maxrentdays" ng-change="checkRentDays()" class="form-control" min="product.minrentdays">
+                                        <label>Max Rent Days</label>
+                                        <input type="number" required ng-model="product.maxrentdays" ng-change="checkRentDays()" class="form-control" min="product.minrentdays">
                                     </div>
                                 </div>
                         </div>
@@ -103,7 +104,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="firstname">Allow purchasing?</label>
+                                    <label>Allow purchasing?</label>
                                     <input type="checkbox" style="display:block;" ng-model="canBuy" >
                                 </div>        
                             </div>
@@ -111,53 +112,55 @@
                         <div class="row">
                             <div class="col-sm-3" ng-show="canBuy">
                                 <div class="form-group">
-                                    <label for="firstname">Price</label>
-                                    <input type="text" class="form-control" ng-model="product.purchaseprice" >
+                                    <label>Price</label>
+                                    <input type="number" ng-required="canBuy" class="form-control" ng-model="product.purchaseprice" min="0">
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group" ng-show="canBuy">
-                                    <label for="firstname">Minimum days before purchase</label>
-                                    <input style="width:40%" type="number" class="form-control" ng-model="product.mindaystobuy" ng-change="checkRentDays()">
+                                    <label>Minimum days before purchase</label>
+                                    <input style="width:40%" type="number" ng-required="canBuy" class="form-control" ng-model="product.mindaystobuy" ng-change="checkRentDays()">
                                 </div>
                             </div>
                             
                         </div>
-
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label >Quantity</label>
+                                    <input type="number" required class="form-control" ng-model="product.quantity" min="0">
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
-                                    <label for="state">Weight (kg)</label>
-                                    <input type="number" class="form-control" ng-model="product.weightkg" min="0">
+                                    <label >Weight (kg)</label>
+                                    <input type="number" required class="form-control" ng-model="product.weightkg" min="0">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
-                                    <label for="zip">Width</label>
-                                    <input type="number" class="form-control" ng-model="product.width" min="0">
+                                    <label >Width</label>
+                                    <input type="number" required class="form-control" ng-model="product.width" min="0">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
-                                    <label for="zip">Length</label>
-                                    <input type="number" class="form-control" ng-model="product.length" min="0">
+                                    <label >Length</label>  
+                                    <input type="number" required class="form-control" ng-model="product.length" min="0">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
-                                    <label for="zip">Height</label>
-                                    <input type="number" class="form-control" ng-model="product.height" min="0">
+                                    <label>Height</label>
+                                    <input type="number" required class="form-control" ng-model="product.height" min="0">
                                 </div>
                             </div>
                             <div class="col-sm-12 text-center">
-                                <button class="btn btn-template-main" ng-click="submitForm($flow)"><i class="fa fa-save"></i> Confirm</button>
-
+                                <button class="btn btn-template-main" type="submit"><i class="fa fa-save"></i> Confirm</button>
                             </div>
-
                         </div>
-
-                    </form>
-
                 </div>
                 </form>
                 </div>

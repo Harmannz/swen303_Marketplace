@@ -40,7 +40,8 @@ angular.module('swen303.listproduct', ['swen303.services.product','flow','swen30
             mindaystobuy: 7,
             sellerid:  $scope.userid
         };
-        console.log($scope.product);
+        
+        $scope.imageUploaded = false;
 
         $scope.categories = [];
         CategoryService.getCategories().then(function(payload) {
@@ -59,12 +60,19 @@ angular.module('swen303.listproduct', ['swen303.services.product','flow','swen30
         // calling our submit function.
         $scope.submitForm = function(flow) {
             console.log("submit selected", $scope.product);
-            flow.upload();
+            if(!$scope.imageUploaded){
+                //this.productForm.$setInvalid();
+                console.log(this.productForm);
+                $scope.error = true;
+                return;
+            }
+            //flow.upload();
             var prod = cleanProduct($scope.product);
             console.log(prod); 
-            console.log(ProductService.addProduct(prod));
+            ProductService.addProduct(prod);
         }
 
+        /*Clean the product ready for submission*/
         function cleanProduct(p){
             p.dimensions = [p.width,p.height,p.length].join(' x ') + " cm";
             delete p.width;
@@ -88,7 +96,8 @@ angular.module('swen303.listproduct', ['swen303.services.product','flow','swen30
         $scope.flowFileSuccess = function(a,b,c){
             var name = angular.fromJson(b).filename;
             $scope.product.image = name;
-            console.log("aaaaaaaaaa",name);
+            $scope.imageUploaded = true;
+            $scope.error = false;
         }
 
 	})

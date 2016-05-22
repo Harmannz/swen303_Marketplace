@@ -150,8 +150,11 @@ exports.getFromCategory = function(cid, cb,errorCb){
 
 exports.addNew = function(product, cb, errorCb){
 	console.log(product);
+	var quantity = product.quantity;
+	delete product.quantity;
+
 	var queryParams = Utils.shallowObjToQuery(product);
-	var query = dbClient.query("insert into products " + queryParams.string +" returning *" , queryParams.args);
+	var query = dbClient.query("insert into products " + queryParams.string +" returning pid" , queryParams.args);
 
 	query.on('error',function(e){
 		console.log(e);
@@ -160,9 +163,28 @@ exports.addNew = function(product, cb, errorCb){
 
 	query.on('end',function(e){
 		//get the id
-		insertedRow = (e.rows.length > 0)? e.rows[0] : null;
+		var insertedRowId = (e.rows.length > 0)? e.rows[0].pid : null;
+
 		console.log(e);
-		cb(insertedRow);
+		if(insertedRowId){
+			var query = "insert into productinstances (product_id, current_status, rating) values ";
+			var values = [];
+			for(var i =0; i != quantity; i++){
+				values.push(("(" + insertedRowId + ", 'Available' , 5)"));
+			}
+			query += values.join(',');
+			console.log("productinstances: " , query);
+			dbClient.query( query, function(err, results) {
+				if (err) {
+					console.log(err);
+					errorCb(err);
+				}else{
+					cb(insertedRowId);	
+				}
+			});
+		} else {
+			cb(null);
+		}
 	})
 }
 
