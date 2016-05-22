@@ -41,6 +41,7 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 		var rentProduct = JSON.parse(JSON.stringify(Product)); //make a deep clone of product first
 		rentProduct.quantity = 1; //quantity to buy
 		rentProduct.rentdays = rentProduct.minrentdays; //set rent days to minimum rent days
+		$scope.confirmSubmit = false;
 		$scope.product = rentProduct;
 		$scope.specs = Specifications;
 		$scope.compareProduct = null;
@@ -120,7 +121,7 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 			rentProduct.maxQuantity = $scope.quantity;
             usercartFactory.addMultipleToRent(rentProduct, rentProduct.quantity);
             ngNotify.set(rentProduct.name + " has been added to your cart", 'success');
-            $state.go("cart");
+            $scope.confirmSubmit = true;
 		};
 		
 	})
