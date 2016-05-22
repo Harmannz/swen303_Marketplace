@@ -224,6 +224,8 @@ html, body {
         position: relative;
         box-shadow: 0 2px 4px rgba(68, 68, 68, 0.4);
         z-index: 10;
+        display: table;
+        width: 100%;
 
         img {
             width: 120px;
@@ -233,9 +235,15 @@ html, body {
             }
         }
 
-        .dropdown {
-            float: right;
+        .table-cell {
+            display: table-cell;
+        }
 
+        .text-right {
+            text-align: right;
+        }
+
+        .dropdown {
             li {
                 padding: 8px;
 

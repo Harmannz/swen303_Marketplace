@@ -15,72 +15,6 @@
 </head>
 
 <body ng-controller="MainController">
-
-<!--<div class="navbar">
-    <div class="navbar__top">
-        <div class="user">
-            <span ui-sref="register" ng-hide="user">Signin/Register</span>
-            <div ng-show="user">
-                <span class="user__welcome">Hi {{ user.firstname }}!</span>
-                <span class="user__account" ui-sref="profile.info">View your account</span>
-            </div>
-        </div>
-        <div class="logo">
-            <img src="assets/img/logo.png" ui-sref="home">
-            <h1><span ui-sref="home">Electronics</span></h1>
-        </div><!--
-        <div class="cart" ui-sref="cart">
-            <i class="material-icons">shopping_cart</i>
-            <div class="cart__right">
-                <div class="cart__right--items">{{ cartsize }} items</div>
-                <div class="cart__right--price">{{ carttotal | currency }}</div>
-            </div>
-        </div>
-    </div>
-    <ul class="nav navbar-nav container">
-        <li class="dropdown col-sm-2">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Computers<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li ng-repeat="category in categories['Computers & Tablets']" ui-sref="browse({cid: category.id})"><a href="#">{{ category.name }}</a></li>
-            </ul>
-        </li>
-
-        <li class="dropdown col-sm-2">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Phones<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li ng-repeat="category in categories['Cellphones & Accessories']" ui-sref="browse({cid: category.id})"><a href="#">{{ category.name }}</a></li>
-            </ul>
-        </li>
-
-        <li class="dropdown col-sm-2">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Vehicle electronics<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li ng-repeat="category in categories['Vehicle Electronics & GPS']" ui-sref="browse({cid: category.id})"><a href="#">{{ category.name }}</a></li>
-            </ul>
-        </li>
-
-        <li class="dropdown col-sm-2">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">TVs<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li ng-repeat="category in categories['TV, Audio & Surveillance']" ui-sref="browse({cid: category.id})"><a href="#">{{ category.name }}</a></li>
-            </ul>
-        </li>
-
-        <li class="dropdown col-sm-2">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Cameras<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li ng-repeat="category in categories['Cameras & Photo']" ui-sref="browse({cid: category.id})"><a href="#">{{ category.name }}</a></li>
-            </ul>
-        </li>
-
-        <li class="dropdown col-sm-2">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Gaming<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li ng-repeat="category in categories['Video Games & Consoles']" ui-sref="browse({cid: category.id})"><a href="#">{{ category.name }}</a></li>
-            </ul>
-        </li>
-    </ul>
-</div>-->
 <div class="navbar">
     <div class="top-bar">
         <div class="signin">
@@ -90,13 +24,18 @@
         <i class="material-icons cart" ui-sref="cart">shopping_cart</i>
     </div>
     <div class="bottom-bar">
-        <img src="assets/img/logo2.png" ui-sref="home">
-        <span class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" role="button">Categories</a>
-            <ul class="dropdown-menu dropdown-menu-right">
-                <li ng-repeat="category in categories" class="dropdown-item" ui-sref="browse({cid: category.cid})">{{ category.name }}</li>
-            </ul>
-        </span>
+        <div class="table-cell">
+            <img src="assets/img/logo2.png" ui-sref="home">
+        </div>
+        <div class="table-cell text-right">
+            <span ui-sref="listproduct" class="btn btn-template-main">List product</span>
+            <span class="dropdown">
+                <a class="dropdown-toggle  btn btn-template-main" data-toggle="dropdown" role="button">Categories</a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li ng-repeat="category in categories" class="dropdown-item" ui-sref="browse({cid: category.cid})">{{ category.name }}</li>
+                </ul>
+            </span>
+        </div>
     </div>
 </div>
 
