@@ -48,7 +48,7 @@ angular.module('swen303.browse', ['swen303.services.product', 'swen303.services.
             rentProduct.rentdays = rentProduct.minrentdays;
             usercartFactory.addToRent(rentProduct);
             console.log("Print toast");
-            ngNotify.set('Added ' + product.name + ' to your cart', 'info');
+            ngNotify.set(product.name + ' has been added to your cart', 'success');
         };
 
     })
