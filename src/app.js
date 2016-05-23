@@ -16,6 +16,7 @@ angular.module('swen303', [
     'swen303.browse',
     'swen303.register',
     'swen303.profile',
+    'swen303.buyproduct',
     'swen303.services.category',
     'swen303.factory.cart',
     'swen303.factory.user'

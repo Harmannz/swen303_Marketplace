@@ -11,7 +11,7 @@
 		</div>
 		<div class="purchase">
 			<div ng-if="order.purchaseable">
-				<button class="btn btn-template-main">Purchase for {{ order.purchaseprice | currency }}</button>
+				<button class="btn btn-template-main" ui-sref="buyproduct({ price: order.purchaseprice })">Purchase for {{ order.purchaseprice | currency }}</button>
 			</div>
 			<div ng-if="!order.purchaseable">
 				<button class="btn btn-template-main disabled"> Can purchase in {{ order.purchaseAfter }} days. </button>

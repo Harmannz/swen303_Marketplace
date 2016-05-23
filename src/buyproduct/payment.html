@@ -1,0 +1,165 @@
+<div class="cart payment">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-9 clearfix" id="basket">
+                <div class="col-md-12">
+                    <h1 class="text-muted lead">Fill or confirm your payment details</h1>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 clearfix" id="checkout">
+                            <div class="box">
+                                <form ng-submit="submitForm()" name="paymentform">
+                                    <div class="content">
+                                        <h2 class="text-muted lead"> Address </h2>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="firstname">First name</label>
+                                                    <input type="text" name="firstname" id="firstname" value={{user.firstname}} class="form-control" id="firstname" required>
+                                                    <span class="error" ng-show="paymentform.firstname.$touched && paymentform.firstname.$invalid">First name is required.</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="lastname">Last name</label>
+                                                    <input type="text" id="lastname" name="lastname" ng-model="user.lastname" class="form-control" id="lastname" required>
+                                                    <span class="error" ng-show="paymentform.lastname.$touched && paymentform.lastname.$invalid">Last name is required.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.row -->
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="email">Email</label>
+                                                    <input type="email"  id="email" ng-model="user.email" class="form-control" id="email" name="email" required>
+                                                    <span class="error" ng-show="paymentform.email.$touched && paymentform.email.$invalid">Email is required.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.row -->
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="address">Address</label>
+                                                    <input type="text"  id="address" ng-model="user.address" class="form-control" id="address" name="address" required>
+                                                    <span class="error" ng-show="paymentform.address.$touched && paymentform.address.$invalid">Address is required.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.row -->
+                                    </div>
+
+
+
+                                    <div class="content">
+                                        <h2 class="text-muted lead">Card Details</h2>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="cardname">Name of Card</label>
+                                                    <input type="text" name="cardname" ng-model="user.cardname" class="form-control" id="cardname" required>
+                                                    <span class="error" ng-show="paymentform.cardname.$touched && paymentform.cardname.$invalid">Card name is required.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.row -->
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="cardnumber">Card Number</label>
+                                                    <input type="text" ng-model="user.cardnumber" class="form-control" id="cardnumber" name="cardnumber" required>
+                                                    <span class="error" ng-show="paymentform.cardnumber.$touched && paymentform.cardnumber.$invalid">Card number is required.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.row -->
+                                        <div class="row">
+                                            <div class="form-group col-xs-3 col-md-3">
+                                                <label for="expmonth">Month</label>
+                                                <select class="form-control" ng-model="user.expmonth" id="expmonth" name="expmonth" required>
+                                                    <option value="01">Jan (01)</option>
+                                                    <option value="02">Feb (02)</option>
+                                                    <option value="03">Mar (03)</option>
+                                                    <option value="04">Apr (04)</option>
+                                                    <option value="05">May (05)</option>
+                                                    <option value="06">June (06)</option>
+                                                    <option value="07">July (07)</option>
+                                                    <option value="08">Aug (08)</option>
+                                                    <option value="09">Sep (09)</option>
+                                                    <option value="10">Oct (10)</option>
+                                                    <option value="11">Nov (11)</option>
+                                                    <option value="12">Dec (12)</option>
+                                                </select>
+                                                <span class="error" ng-show="paymentform.expmonth.$touched && paymentform.expmonth.$invalid">Month is required</span>
+                                            </div>
+                                            <div class="form-group col-xs-3 col-md-3">
+                                                <label for="expyear">Year</label>
+                                                <select class="form-control"  ng-model="user.expyear" id="expyear" name="expyear" required>
+                                                    <option value="16">2016</option>
+                                                    <option value="17">2017</option>
+                                                    <option value="18">2018</option>
+                                                    <option value="19">2019</option>
+                                                    <option value="20">2020</option>
+                                                    <option value="21">2021</option>
+                                                    <option value="22">2022</option>
+                                                    <option value="23">2023</option>
+                                                    <option value="24">2024</option>
+                                                    <option value="25">2025</option>
+                                                    <option value="26">2026</option>
+                                                </select>
+                                                <span class="error" ng-show="paymentform.expyear.$touched && paymentform.expyear.$invalid">Year is required</span>
+                                            </div>
+                                        </div>
+                                        <!-- /.row -->
+                                    </div>
+
+                                    <div class="box-footer">
+                                        <div class="pull-left">
+                                            <a ui-sref="cart" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to basket</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <button type="submit" class="btn btn-template-main">Confirm<i class="fa fa-chevron-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.box -->
+                        </div>
+                        <!-- /.col-md-9 -->
+
+                        <div class="col-md-3">
+                            <div class="box" id="order-summary">
+                                <div class="box-header">
+                                    <h3>Order summary</h3>
+                                </div>
+                                <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
+
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr class="total">
+                                            <td>Total</td>
+                                            <th>{{total | currency}}</th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col-md-3 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </div>
+            <!-- /#content -->
+            </div>
+        </div>
+    </div>
+</div>
