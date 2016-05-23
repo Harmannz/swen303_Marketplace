@@ -166,6 +166,16 @@ exports.addNew = function(orderData, cb, errCb){
 	//cb(123);
 }
 
+exports.returnProduct = function(order_id, instance_id,cb){
+	var query = "UPDATE productInorder SET returned = true WHERE order_id=$1 AND instance_id=$2";
+    dbClient.query(query, [order_id, instance_id], function(err, results) {
+        if (err) {
+            errorCb(err);
+        }
+        cb(true);
+    });
+}
+
 function createOrderToInstance(orderId,instance_ids,cb,errCb){
 	var qstring = "insert into productinorder (order_id, instance_id) values ($1, $2)";
 

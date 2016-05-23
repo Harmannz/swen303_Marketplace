@@ -17,15 +17,17 @@
 
 -- CREATE TABLE productinorder (
 -- 	order_id int references orders (order_id),
--- 	product_id int references products (pid)
+-- 	product_id int references products (pid),
+	retuned boolean
 -- );
 
 COPY productInorder (
 	order_id,
 	product_id
+	returned
 ) from stdin;
-5	3
-6	2
-6	4
-7	1
+5	3	false
+6	2	false
+6	4	flase
+7	1	false
 \.

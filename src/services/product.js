@@ -61,9 +61,13 @@ angular.module('swen303.services.product', [])
             });
         }
 
-        this.returnProduct = function(instance_id){
-            return $http.post('/api/products/'+instance_id+'/return').then(function(payload) {
-                return payload.data;
+        this.returnProduct = function(order_id, instance_id){
+            //Set instanceInorder to returned
+            return $http.post('/api/orders/'+order_id+'/return/'+instance_id).then(function(payload) {
+                //Free instance to be available
+                return $http.post('/api/products/'+instance_id+'/return').then(function(payload) {
+                    return payload.data;
+                });
             });
         }
 

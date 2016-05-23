@@ -34,13 +34,13 @@ angular.module('swen303.profile.orders', ['swen303.services.product', 'ngNotify'
 			//Return item
 			console.log("return item : " + order.pid);
 			console.log(order);
-			ProductService.returnProduct(order.instance_id).then(function(payload) {
-				if(payload){
-					refreshOrders();
-					ngNotify.set(order.name + " has been returned", 'success');
-				}
-				return payload;
-			});
+				ProductService.returnProduct(order.order_id, order.instance_id).then(function(payload) {
+					if(payload){
+						refreshOrders();
+						ngNotify.set(order.name + " has been returned", 'success');
+					}
+					return payload;
+				});
 		}
 
 		refreshOrders = function(){

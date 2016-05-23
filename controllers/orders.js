@@ -13,4 +13,15 @@ router.get('/:orderId', function(req,res){
 	})
 })
 
+router.post('/:orderId/return/:instance_id', function(req,res){
+	var orderId = req.params.orderId;
+	var instance_id = req.params.instance_id;
+	console.log("POST /orders/"+orderId+"/return/"+instance_id);
+	Orders.returnProduct(orderId, instance_id,function(success){
+		return res.json({success: success});
+	},function(err){
+		console.log(err);
+	})
+})
+
 module.exports = router
