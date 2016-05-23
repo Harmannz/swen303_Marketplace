@@ -26,7 +26,7 @@
 				</div>
 				<p ng-bind="product.description"></p>
 				<h2 ng-if="product.rentalpricepd">{{ product.rentalpricepd | currency }} per day</h2>
-				<p> {{ quantity }} out of {{ quantityTotal }} in stock </p>
+				<p> {{ quantity }} out of {{ quantityTotal }} available </p>
 
 
 				<form ng-submit="rent()" class="rentform">
@@ -38,7 +38,7 @@
 						<label for="rentdays">Days for rent</label>
 						<input type="number" id="rentdays" ng-model="product.rentdays" class="form-control" min={{product.minrentdays}} max={{product.maxrentdays}}>
 					</fieldset>
-					<button class="btn btn-default" type="submit" ng-disabled="quantity <= 0"><i class="fa fa-shopping-cart"></i> {{ quantity > 0 ? "Rent this product" : "Out of Stock" }}</button> <i ng-if="confirmSubmit" class="fa fa-check"></i>
+					<button class="btn btn-default" type="submit" ng-disabled="quantity <= 0"><i class="fa fa-shopping-cart"></i> {{ quantity > 0 ? "Rent this product" : "None Available" }}</button> <i ng-if="confirmSubmit" class="fa fa-check"></i>
 				</form>
 
 
