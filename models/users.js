@@ -92,12 +92,29 @@ exports.getRentedProducts = function(userId, cb, errorCb) {
 };
 
 exports.getSelling = function(userId, cb, errorCb) {
-    var query = "SELECT c.*, d.* FROM orders AS a INNER JOIN productinorder AS b ON a.order_id=b.order_id INNER JOIN productinstances AS c ON b.instance_id=c.instance_id INNER JOIN products AS d ON c.product_id=d.pid WHERE d.sellerid=$1";
+    var query = "SELECT a.image, a.name, a.pid, productinstances.current_status, productinstances.due_back FROM products AS a INNER JOIN productinstances ON a.pid=productinstances.product_id WHERE sellerid=$1";
     dbClient.query(query, [userId], function(err, results) {
         if (err) {
             return errorCb(err);
         }
 
-        return cb(results.rows);
+        var result = {};
+
+        for (var i = 0 ; i < results.rows.length ; i++) {
+            var id = results.rows[i].pid;
+            if (!result[id]) {
+                result[id] = {};
+                result[id].instances = [];
+            }
+
+            result[id].image = results.rows[i].image;
+            result[id].name = results.rows[i].name;
+            result[id].instances.push({
+                due_back: results.rows[i].due_back,
+                current_status: results.rows[i].current_status
+            })
+        }
+
+        return cb(result);
     })
 }

@@ -1,15 +1,15 @@
 <div class="listed container">
 	<div ng-show="listed.length === 0" class="blank-state">You haven't listed any items</div>
 	<div ng-repeat="order in listed" class="order">
-		<div class="image">
+		<div class="image" style="vertical-align: top;">
 			<img ng-src="uploads/{{order.image}}" class="inline-block">
 		</div>
 		<div class="details">
 			<h3 ng-bind="order.name"></h3>
-			<p ng-show="order.current_status=='Rented'">Status : Currently rented</p>
-			<span>Due back: {{ order.due_back | date:'medium' }}</span>
-			<div ng-show="order.current_status=='Available'">
-				Status : Product has been returned
+			<div ng-repeat="instance in order.instances" class="item" style="padding: 12px 0;">
+				<div>Item {{ $index + 1 }}</div>
+				<span ng-show="instance.due_back">Due back: {{ instance.due_back | date:'medium' }}</span>
+				<div>Status: {{ instance.current_status }}</div>
 			</div>
 		</div>
 	</div>
