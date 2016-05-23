@@ -21,16 +21,32 @@ angular.module('swen303.factory.cart', [])
             //adds product to purchase.
             // Product must have the rentdays (number of days for renting) as a property
             addToRent: function(product){
-                console.log("set quantity to 1");;
-                this.addMultipleToRent(product, 1);
+                if (product.maxquantity < 1){
+                    return false;
+                }
+                console.log("set quantity to 1");
+                return this.addMultipleToRent(product, 1);
+
             },
             // Product must have the rentdays (number of days for renting) as a property and quantity already set
             addMultipleToRent: function(product, quantity){
                 //check if rent exists
-
+                console.log("maxquantity: " + product.maxquantity);
+                console.log(cart.toRent);
+                if (product.maxquanity < quantity){
+                    return false;
+                }
+                console.log("inside cart: " + quantity);
+                if (!quantity){
+                    quantity = 0;
+                }
                 var productExists = false;
                 for(var i = 0; i < cart.toRent.length; i++){
                     if(cart.toRent[i].pid == product.pid){
+                        if((cart.toRent[i].quantity + quantity) > product.maxquantity){
+                            //cannot add more products to cart than maxquantity
+                            return false;
+                        }
                         cart.toRent[i].quantity+=quantity;
                         productExists = true;
                         break;
@@ -43,6 +59,8 @@ angular.module('swen303.factory.cart', [])
                 try {
                     localStorage.setItem('cart', JSON.stringify(cart));
                 } catch (error) {}
+
+                return true;
             },
             //getter method for accessing the products to rent
             getToRent: function(){
@@ -110,6 +128,17 @@ angular.module('swen303.factory.cart', [])
             //return cart object
             getCart: function(){
                 return cart;
+            },
+
+            getQuantityById: function(pid){
+                for(var i = 0; i < cart.toRent.length; i++){
+                    if(cart.toRent[i].pid === pid){
+                        if (cart.toRent[i].quantity){
+                            return cart.toRent[i].quantity;
+                        }
+                    }
+                }
+                return 0;
             }
 
         }
