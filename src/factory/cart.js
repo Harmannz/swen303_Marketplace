@@ -3,11 +3,20 @@
  */
 angular.module('swen303.factory.cart', [])
     .factory('usercartFactory', ['$http', function($http){
-        var urlBase = 'api/' //TODO: Which url are we using for purchasing/renting ??
         var cart = {
             toRent: []
         };
-
+        // Check for existing cart
+        try {
+            cart = JSON.parse(localStorage.getItem('cart'));
+            // If there is a partial cart object for some reason, get rid of it
+            if (!cart || !cart.toRent) {
+                cart = {
+                    toRent: []
+                }
+            }
+        } catch(error) {}
+        console.log(cart);
         return {
             //adds product to purchase.
             // Product must have the rentdays (number of days for renting) as a property
@@ -17,6 +26,8 @@ angular.module('swen303.factory.cart', [])
             },
             // Product must have the rentdays (number of days for renting) as a property and quantity already set
             addMultipleToRent: function(product, quantity){
+                //check if rent exists
+
                 var productExists = false;
                 for(var i = 0; i < cart.toRent.length; i++){
                     if(cart.toRent[i].pid == product.pid){
@@ -29,6 +40,9 @@ angular.module('swen303.factory.cart', [])
                     product.quantity = quantity;
                     cart.toRent.push(product);
                 }
+                try {
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                } catch (error) {}
             },
             //getter method for accessing the products to rent
             getToRent: function(){
@@ -51,14 +65,23 @@ angular.module('swen303.factory.cart', [])
                         cart.toRent.splice(i,1); //remove product from cart
                     }
                 }
+                try {
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                } catch (error) {}
             },
             //empties rent list
             clearRent: function(){
                 cart.toRent = [];
+                try {
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                } catch (error) {}
             },
             //empties everything in cart
             clearCart: function(){
                 this.clearRent();
+                try {
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                } catch (error) {}
             },
             //returns the total rent cost
             rentTotal: function(){
