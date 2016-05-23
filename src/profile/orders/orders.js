@@ -1,4 +1,4 @@
-angular.module('swen303.profile.orders', ['swen303.services.product'])
+angular.module('swen303.profile.orders', ['swen303.services.product', 'ngNotify'])
 
 	.config(function($stateProvider) {
 		$stateProvider.state('profile.orders', {
@@ -18,7 +18,7 @@ angular.module('swen303.profile.orders', ['swen303.services.product'])
 		});
 	})
 
-	.controller('OrdersController', function($scope, Orders, ProductService, UserFactory) {
+	.controller('OrdersController', function($scope, Orders, ProductService, UserFactory, ngNotify) {
 		$scope.orders = Orders;
 
 		for (var i = 0 ; i < $scope.orders.length ; i++) {
@@ -37,6 +37,7 @@ angular.module('swen303.profile.orders', ['swen303.services.product'])
 			ProductService.returnProduct(order.instance_id).then(function(payload) {
 				if(payload){
 					refreshOrders();
+					ngNotify.set(order.name + " has been returned", 'success');
 				}
 				return payload;
 			});
