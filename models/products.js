@@ -130,7 +130,8 @@ exports.getAll = function(cb,errorCb){
 
 //Get items in category
 exports.getFromCategory = function(cid, cb,errorCb){
-	var query = dbClient.query("select * from products where categoryId = $1",[cid]);
+	var query = dbClient.query("SELECT p.*, (SELECT COUNT(*) AS maxQuantity FROM productinstances WHERE product_id=p.pid AND current_status='Available') FROM products AS p WHERE categoryId = $1",[cid]);
+
 	var data = [];
 	query.on('row',function(d){
 		data.push(d);
