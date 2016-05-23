@@ -1,4 +1,4 @@
-angular.module('swen303.profile.orders', [])
+angular.module('swen303.profile.orders', ['swen303.services.product'])
 
 	.config(function($stateProvider) {
 		$stateProvider.state('profile.orders', {
@@ -18,7 +18,7 @@ angular.module('swen303.profile.orders', [])
 		});
 	})
 
-	.controller('OrdersController', function($scope, Orders) {
+	.controller('OrdersController', function($scope, Orders, ProductService, UserFactory) {
 		$scope.orders = Orders;
 
 		for (var i = 0 ; i < $scope.orders.length ; i++) {
@@ -30,9 +30,22 @@ angular.module('swen303.profile.orders', [])
 
 		console.log($scope.orders);
 
-		$scope.return = function(order){
+		$scope.returnItem = function(order){
 			//Return item
-			console.log("return itme : " + order.pid);
+			console.log("return item : " + order.pid);
+			console.log(order);
+			ProductService.returnProduct(order.instance_id).then(function(payload) {
+				if(payload){
+					refreshOrders();
+				}
+				return payload;
+			});
+		}
+
+		refreshOrders = function(){
+			UserFactory.getOrders().then(function(payload) {
+				$scope.orders = payload;
+			});
 		}
 	})
 

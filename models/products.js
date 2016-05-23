@@ -208,3 +208,13 @@ exports.setSold = function(instance_id, cb, errorCb) {
         cb(true);
     });
 };
+
+exports.setAvailable = function(instance_id, cb, errorCb) {
+    var query = "UPDATE productinstances SET current_status='Available' WHERE instance_id=$1";
+    dbClient.query(query, [instance_id], function(err, results) {
+        if (err) {
+            errorCb(err);
+        }
+        cb(true);
+    });
+};

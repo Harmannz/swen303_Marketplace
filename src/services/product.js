@@ -61,6 +61,12 @@ angular.module('swen303.services.product', [])
             });
         }
 
+        this.returnProduct = function(instance_id){
+            return $http.post('/api/products/'+instance_id+'/return').then(function(payload) {
+                return payload.data;
+            });
+        }
+
         this.buyProduct = function(instance_id) {
             return $http.post('/api/products/' + instance_id + '/sold').then(function(payload) {
                 return payload.data;

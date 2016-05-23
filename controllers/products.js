@@ -35,6 +35,16 @@ router.post('/:id/sold', function(req, res) {
     });
 });
 
+router.post('/:id/return', function(req, res) {
+    var instance_id = req.params.id;
+    Products.setAvailable(instance_id, function(success) {
+        return res.json({success: success});
+    }, function(err) {
+        console.log(err);
+        res.sendStatus(500);
+    });
+});
+
 //Get items in category
 router.get('/category/:cid', function(req,res){
 	var cid = req.params.cid;
