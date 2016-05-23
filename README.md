@@ -3,7 +3,7 @@ Swen303 2016 Group Project: An online shopping and market place system for renti
 
 ## Authors:
 * Brock Wills
-* Jhonny Denford
+* Johnny Denford
 * Callum Gill
 * Harman Singh
 
