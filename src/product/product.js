@@ -48,7 +48,7 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 		$scope.compareSpecs = null;
 		$scope.searchResult = null;
 		$scope.fullCompareTable = null;
-		$scope.quantity = AvailableInstances.length - usercartFactory.getQuantityForId(rentProduct.pid);
+		$scope.quantity = AvailableInstances.length - usercartFactory.getQuantityById(rentProduct.pid);
 		$scope.quantityTotal = AllInstances.length;
 
 		//Create Comparison table of specifications
@@ -119,11 +119,16 @@ angular.module('swen303.product', ['swen303.services.product', 'swen303.services
 		$scope.rent = function() {
 			rentProduct = JSON.parse(JSON.stringify($scope.product));
 			rentProduct.maxQuantity = $scope.quantity;
-            usercartFactory.addMultipleToRent(rentProduct, rentProduct.quantity);
-            ngNotify.set(rentProduct.name + " has been added to your cart", 'success');
-            $scope.confirmSubmit = true;
-			$scope.quantity = $scope.quantity - usercartFactory.getQuantityById(rentProduct.pid);
+            if (usercartFactory.addMultipleToRent(rentProduct, rentProduct.quantity)){
+				ngNotify.set($scope.product.name + " has been added to your cart", 'success');
+				$scope.confirmSubmit = true;
+				$scope.quantity = $scope.quantity - usercartFactory.getQuantityById(rentProduct.pid);
+            } else {
+				ngNotify.set('Cannot add to cart' , 'error');	
+            }
+
 		};
+
 
 	})
 

@@ -46,9 +46,12 @@ angular.module('swen303.browse', ['swen303.services.product', 'swen303.services.
         $scope.rent = function(product) {
             var rentProduct = JSON.parse(JSON.stringify(product));
             rentProduct.rentdays = rentProduct.minrentdays;
-            usercartFactory.addToRent(rentProduct);
-            console.log("Print toast");
-            ngNotify.set(product.name + ' has been added to your cart', 'success');
+            if(usercartFactory.addToRent(rentProduct)){
+                ngNotify.set(product.name + ' has been added to your cart', 'success');    
+            } else {
+                ngNotify.set('Error occurred during payment' , 'error');
+            }
+            
         };
 
     })
