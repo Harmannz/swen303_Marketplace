@@ -23,7 +23,7 @@ angular.module('swen303.profile.orders', [])
 
 		for (var i = 0 ; i < $scope.orders.length ; i++) {
 			$scope.orders[i].purchaseable = ((new Date().getTime() - (new Date($scope.orders[i].clocked_out).getTime())) / (1000 * 60 * 60 * 24)) > $scope.orders[i].mindaystobuy;
-			$scope.orders[i].overdue = true;//new Date().getTime() > new Date($scope.orders[i].due_back).getTime();
+			$scope.orders[i].overdue = new Date().getTime() > new Date($scope.orders[i].due_back).getTime();
 			$scope.orders[i].purchaseAfter = Math.ceil($scope.orders[i].mindaystobuy - ((new Date().getTime() - (new Date($scope.orders[i].clocked_out).getTime())) / (1000 * 60 * 60 * 24)));
 			$scope.orders[i].purchasePrice = $scope.orders[i].purchaseprice - ((new Date().getTime() - (new Date($scope.orders[i].clocked_out).getTime())) / (1000 * 60 * 60 * 24) * $scope.orders[i].rentalpricepd);
 		}

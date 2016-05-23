@@ -6,10 +6,8 @@
 		</div>
 		<div class="details">
 			<h3 ng-bind="order.name"></h3>
-			<div ng-show="order.current_status=='Rented'">
-				Status : Currently rented
-				<span>Due back: {{ order.due_back | date:'medium' }}</span>
-			</div>
+			<p ng-show="order.current_status=='Rented'">Status : Currently rented</p>
+			<span>Due back: {{ order.due_back | date:'medium' }}</span>
 			<div ng-show="order.current_status=='Returned'">
 				Status : Product has been returned
 			</div>

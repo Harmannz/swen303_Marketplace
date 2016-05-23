@@ -1,7 +1,7 @@
 <div class="orders container">
 	<div ng-show="orders.length === 0">You don't currently have any products on rent</div>
 	<div ng-repeat="order in orders" class="order">
-		<div class="image">
+		<div ui-sref="product({ id: order.pid })" class="image">
 			<img ng-src="uploads/{{order.image}}" class="inline-block">
 		</div>
 		<div class="details">
@@ -9,13 +9,18 @@
 			<h2 class="overdue" ng-show="order.overdue">OVERDUE</h2>
 			<span>Due back: {{ order.due_back | date:'medium' }}</span>
 		</div>
-		<div class="purchase">
-			<div ng-if="order.purchaseable">
-				<button class="btn btn-template-main">Purchase for {{ order.purchaseprice | currency }}</button>
+		<div class="buttons">
+			<div ng-if="order.purchaseable" style="display:inline-block">
+				<button class="btn btn-template-main vertical-center">Purchase for {{ order.purchaseprice | currency }}</button>
 			</div>
-			<div ng-if="!order.purchaseable">
-				<button class="btn btn-template-main disabled"> Can purchase in {{ order.purchaseAfter }} days. </button>
+
+			<div ng-if="!order.purchaseable" style="display:inline-block">
+				<button class="btn btn-template-main disabled vertical-center"> Can purchase in {{ order.purchaseAfter }} days. </button>
+			</div>
+			<div style="display:inline-block">
+				<button class="btn btn-template-main vertical-center"> Return Item </button>
 			</div>
 		</div>
+		
 	</div>
 </div>

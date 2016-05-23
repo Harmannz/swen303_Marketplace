@@ -21,7 +21,7 @@ exports.fromUser = function(userId,cb,errCb){
 
 //Get all orders current and previous
 exports.historyFromUser = function(userId,cb,errCb){
-	var query = "SELECT c.*, d.* FROM orders AS a INNER JOIN productinorder AS b ON a.order_id=b.order_id INNER JOIN productinstances AS c ON b.instance_id=c.instance_id INNER JOIN products AS d ON c.product_id=d.pid WHERE a.user_id=$1";
+	var query = "SELECT c.*, d.* FROM orders AS a INNER JOIN productinorder AS b ON a.order_id=b.order_id INNER JOIN productinstances AS c ON b.instance_id=c.instance_id INNER JOIN products AS d ON c.product_id=d.pid WHERE a.user_id=$1 AND current_status != 'Rented'";
 	var query = dbClient.query(query,[userId]);
 	var rows = [];
 
