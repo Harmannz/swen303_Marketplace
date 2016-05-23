@@ -19,7 +19,8 @@ angular.module('swen303', [
     'swen303.buyproduct',
     'swen303.services.category',
     'swen303.factory.cart',
-    'swen303.factory.user'
+    'swen303.factory.user',
+    'ngNotify'
 ])
 
     // Config just specifies configuration parameters for the app
@@ -28,7 +29,7 @@ angular.module('swen303', [
         $locationProvider.html5Mode(true);
     })
 
-    .controller('MainController', function($scope, $state, CategoryService, UserFactory, usercartFactory, $timeout) {
+    .controller('MainController', function($scope, $state, CategoryService, UserFactory, usercartFactory, $timeout, ngNotify) {
         $scope.user = UserFactory.user;
         $scope.notifications = [];
         $scope.$watch(function() {
@@ -41,9 +42,10 @@ angular.module('swen303', [
             $scope.user = user;
             UserFactory.checkForNotifications().then(function(payload) {
                 $scope.notifications = payload;
-                $timeout(function() {
-                    $scope.notifications = [];
-                }, 2000);
+                if ($scope.notifications.length > 0) {
+                    ngNotify.set('Reminder: ' + $scope.notifications[0].product + ' is due back soon!', 'default');
+                }
+                $scope.notifications = [];
             });
         });
 
