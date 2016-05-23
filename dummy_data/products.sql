@@ -42,7 +42,7 @@ Spinecare Firm Single Bed	2	3	spinecare-firm-single.jpg	The Spinecare Ultra Sing
 CREATE TABLE productInstances (
 	instance_id SERIAL primary key,
 	product_id int references products(pid),
-	clocked_out timestamp default(now()),	
+	clocked_out timestamp default(now()),
 	due_back timestamp,
 	current_status varchar,
 	rating int

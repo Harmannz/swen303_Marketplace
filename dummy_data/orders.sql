@@ -11,7 +11,7 @@
 -- ) from stdin;
 -- 1	shipping
 -- 2	delivered
--- 2	delivered
+-- 3	returned
 -- \.
 
 

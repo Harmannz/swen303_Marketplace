@@ -52,15 +52,15 @@ router.post('/:userId/update', function(req, res) {
 })
 
 /*Get all orders for a given user*/
-router.get('/:userId/orders', function(req,res){
-	console.log("GET /orders");
+router.get('/:userId/history', function(req,res){
+	console.log("GET /history");
 	var userId = req.params.userId;
-	Orders.fromUser(userId,function(orders){
-		res.json(orders);
-	},function(err){
+	Orders.historyFromUser(userId, function(results) {
+		res.json(results);
+	}, function(err) {
 		console.log(err);
 		res.sendStatus(500);
-	})
+	});
 })
 
 router.get('/:userId/rented', function(req, res) {

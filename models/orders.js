@@ -1,8 +1,28 @@
 var dbClient = require('./db')
    ,_ = require('lodash');
 
+//Get all current orders
 exports.fromUser = function(userId,cb,errCb){
-	var query = dbClient.query('select * from orders where user_id = $1',[userId]);
+	var query = dbClient.query('select * from orders where user_id = $1 AND status == Rented',[userId]);
+	var rows = [];
+
+	query.on('row',function(row) {
+		rows.push(row);
+	})
+
+	query.on('end',function(summary) {
+		cb(rows);
+	})
+
+	query.on('error',function(data) {
+		errCb(data);
+	})
+}
+
+//Get all orders current and previous
+exports.historyFromUser = function(userId,cb,errCb){
+	var query = "SELECT c.*, d.* FROM orders AS a INNER JOIN productinorder AS b ON a.order_id=b.order_id INNER JOIN productinstances AS c ON b.instance_id=c.instance_id INNER JOIN products AS d ON c.product_id=d.pid WHERE a.user_id=$1";
+	var query = dbClient.query(query,[userId]);
 	var rows = [];
 
 	query.on('row',function(row) {
@@ -57,6 +77,27 @@ function updateToRented(product,cb){
 	})
 }
 
+function updateToReturned(instance_id,cb){
+
+	var qstring = "UPDATE productinstances SET current_status = 'Returned', clocked_in = now() WHERE instance_id==$1";
+
+	var query = dbClient.query(qstring,[instance_id]); 
+
+	var rows = [];
+	query.on('row',function(row){
+		rows.push(row);
+	})
+
+	query.on('end',function(summary) {
+		console.log('updateToRented done');
+		cb(rows);
+	})
+
+	query.on('error',function(log) {
+		console.log(log);
+	})
+}
+
 exports.addNew = function(orderData, cb, errCb){
 	
 	console.log("userid: " + orderData.userid);
@@ -95,7 +136,7 @@ exports.addNew = function(orderData, cb, errCb){
 
 				if(results.length == totalQuantity){
 					console.log("Matched expected number of rows, yay");
-					creatOrder({
+					createOrder({
 						user_id: orderData.userid,
 						product_instances: results
 					},function(orderId){
@@ -149,7 +190,7 @@ function createOrderToInstance(orderId,instance_ids,cb,errCb){
 }
 
 
-function creatOrder(order,cb){
+function createOrder(order,cb){
 	console.log("Creating Order");
 	var qstring = "insert into orders (user_id, status) values ($1,'Processing') returning order_id";
 

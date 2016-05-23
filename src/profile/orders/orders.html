@@ -6,10 +6,16 @@
 		</div>
 		<div class="details">
 			<h3 ng-bind="order.name"></h3>
+			<h2 class="overdue" ng-show="order.overdue">OVERDUE</h2>
 			<span>Due back: {{ order.due_back | date:'medium' }}</span>
 		</div>
-		<div class="purchase" ng-show="order.purchaseable">
-			<button class="btn btn-template-main">Purchase for {{ order.purchaseprice | currency }}</button>
+		<div class="purchase">
+			<div ng-if="order.purchaseable">
+				<button class="btn btn-template-main">Purchase for {{ order.purchaseprice | currency }}</button>
+			</div>
+			<div ng-if="!order.purchaseable">
+				<button class="btn btn-template-main disabled"> Can purchase in {{ order.purchaseAfter }} days. </button>
+			</div>
 		</div>
 	</div>
 </div>

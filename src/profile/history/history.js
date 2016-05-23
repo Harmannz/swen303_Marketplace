@@ -9,9 +9,10 @@ angular.module('swen303.profile.history', [])
 				}
 			},
 			resolve: {
-				History: [function() {
-					// TODO load history
-					return null;
+				History: ['UserFactory', function(UserFactory) {
+					return UserFactory.getHistory().then(function(payload) {
+						return payload;
+					});
 				}]
 			}
 		});

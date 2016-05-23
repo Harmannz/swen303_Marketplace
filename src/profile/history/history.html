@@ -1,3 +1,18 @@
-<div class="history">
-	history
+<div class="history container">
+	<div ng-show="history.length === 0">You have no previous orders</div>
+	<div ng-repeat="order in history" class="order">
+		<div class="image">
+			<img ng-src="uploads/{{order.image}}" class="inline-block">
+		</div>
+		<div class="details">
+			<h3 ng-bind="order.name"></h3>
+			<div ng-show="order.current_status=='Rented'">
+				Status : Currently rented
+				<span>Due back: {{ order.due_back | date:'medium' }}</span>
+			</div>
+			<div ng-show="order.current_status=='Returned'">
+				Status : Product has been returned
+			</div>
+		</div>
+	</div>
 </div>
