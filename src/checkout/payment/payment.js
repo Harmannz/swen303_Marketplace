@@ -35,7 +35,7 @@ angular.module('swen303.cart.payment', ['swen303.factory.cart', 'ngNotify', 'swe
             		ngNotify.set('Error occurred during payment.' , 'error');
             	}
 			});
-            
+
 
         }
 	})
