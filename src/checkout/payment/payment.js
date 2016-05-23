@@ -14,6 +14,10 @@ angular.module('swen303.cart.payment', ['swen303.factory.cart', 'ngNotify', 'swe
 
 	.controller('PaymentController',function($scope, $state,  usercartFactory, UserFactory, CartService, ngNotify) {
 
+		if (!UserFactory.user) {
+			$state.go('register', { redirectstate: 'payment' });
+		}
+
         //get data from paymentdetails
         $scope.user = UserFactory.user;
 		$scope.rentTotal = usercartFactory.rentTotal();
