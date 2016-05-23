@@ -118,7 +118,7 @@ router.get('/available/:id', function(req,res){
 router.post('/', function(req,res){
 	Products.addNew(req.body,function(product){
 		if(product){
-			res.status(201).send(product);
+			res.status(201).json(product);
 		}else{
 			res.sendStatus(400);
 		}

@@ -13,4 +13,16 @@ router.get('/:pid', function(req,res){
 	})
 })
 
+router.post('/', function(req,res){
+	var specs = req.body;
+	console.log("POST /specifications/");
+	specdb.addSpecs(specs, function(){
+		res.sendStatus(201);
+	}, function(err){
+		console.log(err);
+		res.sendStatus(500);
+	})
+})
+
+
 module.exports = router

@@ -12,10 +12,10 @@
 
 
                     <!-- Image -->
-                <div class="col-sm-6">
+                <div class="col-sm-6 clearfix">
                     <div class="ratio1_1" id="prod-image-preview" flow-drag-enter="style={border:'4px solid green'}" flow-drag-leave="style={}" ng-style="style">
 
-                        <img class="col-sm-12" flow-img="$flow.files[0]" />
+                        <img class="col-sm-12" style="width:100%" flow-img="$flow.files[0]" />
                     </div>
                 </div>
                 <div class="box col-sm-6">
@@ -48,7 +48,6 @@
                                 <select class="form-control" required ng-model="product.categoryid" >
                                     <option ng-repeat="category in categories" value="{{category.cid}}">{{category.name}}</option>
                                 </select>
-                                <!-- select ng-options="key as value for (key , value) in categories" ng-model="mainCategory"></select> -->
                             </div>
                         </div>
                     </div>
@@ -72,15 +71,9 @@
                     <div class="heading">
                         <h3 class="text-uppercase">Product Specifics</h3>
                     </div>
-                        
                         <!-- /.row -->
-
                         <div class="row">
                             <div class="col-sm-6">
-                                <!-- <div class="form-group">
-                                    <label>Quantity</label>
-                                   <input type="number" ng-model="product.quantity" class="form-control" min="1">
-                                </div> -->
                                 <div class="form-group">
                                     <label>Rental Price (per day)</label>
                                     <input type="number" required ng-model="product.rentalpricepd" class="form-control" min="1">
@@ -141,13 +134,13 @@
                             </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
-                                    <label >Width</label>
+                                    <label>Width</label>
                                     <input type="number" required class="form-control" ng-model="product.width" min="0">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
-                                    <label >Length</label>  
+                                    <label>Length</label>  
                                     <input type="number" required class="form-control" ng-model="product.length" min="0">
                                 </div>
                             </div>
@@ -157,11 +150,45 @@
                                     <input type="number" required class="form-control" ng-model="product.height" min="0">
                                 </div>
                             </div>
+                        </div>
+                        <div class="heading">
+                            <h3 class="text-uppercase">Specifications</h3>
+                        </div>
+                        <div class="row" ng-repeat="spec in specs">
+                            <div class="col-sm-12 col-md-5" >
+                                <div class="form-group">
+                                    <label>Specification Name</label>
+                                    <input type="text" required class="form-control" ng-model="specs[$index].name">
+                                </div>
+                            </div>
+                            <div class="col-sm-11 col-xs-9 col-md-6" >
+                                <div class="form-group">
+                                    <label>Specification Value</label>
+                                    <input type="text" required class="form-control" ng-model="specs[$index].value">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-3 col-md-1" style="text-align:right;margin-top:27px">
+                                <div class="form-group">
+                                     <span type="button" class="btn btn-template-main" ng-click="removeSpec($index)" style="color:red" type="submit"><i class="fa fa-trash-o"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
                             <div class="col-sm-12 text-center">
+                                <span class="btn btn-template-main" ng-click="addSpec()" type="submit"><i class="fa fa-plus"></i>Add Spec</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 text-center" style="margin-top:25px">
                                 <button class="btn btn-template-main" type="submit"><i class="fa fa-save"></i> Confirm</button>
                             </div>
                         </div>
-                </div>
+                    </div>
                 </form>
                 </div>
             </div>

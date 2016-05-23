@@ -8,5 +8,10 @@ angular.module('swen303.services.specifications', [])
             });
         };
 
+        this.uploadSpecifications = function(features) {
+            return $http.post('/api/specifications/', JSON.stringify(features)).then(function(payload) {
+                return payload.data;
+            });
+        };
     })
 ;
