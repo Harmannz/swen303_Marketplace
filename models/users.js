@@ -60,8 +60,8 @@ exports.updateDetails = function(userId, data, cb, errorCb) {
 };
 
 exports.checkForNotifications = function(userId, cb, errorCb) {
-    var query = dbClient.query("SELECT d.name FROM (SELECT a.product_id FROM productinorder AS a INNER JOIN orders AS b ON a.order_id=b.order_id WHERE b.user_id=$1 AND a.rent_due_date < (NOW() + interval '1 days')) as c"
-            + " INNER JOIN products AS d ON c.product_id=d.pid",
+    var query = dbClient.query("SELECT e.name FROM (SELECT c.product_id FROM productinorder AS a INNER JOIN orders AS b ON a.order_id=b.order_id INNER JOIN productinstances AS c ON c.instance_id=a.instance_id WHERE b.user_id=$1 AND c.due_back < (NOW() + interval '1 days')) AS d"
+            + " INNER JOIN products AS e ON d.product_id=e.pid",
         [userId], function(err, results) {
             if (err) {
                 errorCb(err);
