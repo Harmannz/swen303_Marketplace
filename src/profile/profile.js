@@ -1,4 +1,4 @@
-angular.module('swen303.profile', ['swen303.profile.info', 'swen303.profile.orders', 'swen303.profile.history', 'swen303.profile.rented'])
+angular.module('swen303.profile', ['swen303.profile.orders', 'swen303.profile.info', 'swen303.profile.history', 'swen303.profile.rented'])
 
 	.config(function($stateProvider) {
 		$stateProvider.state('profile', {
@@ -14,7 +14,7 @@ angular.module('swen303.profile', ['swen303.profile.info', 'swen303.profile.orde
 	})
 
 	.controller('ProfileController', function($scope, $state, UserFactory) {
-		$scope.state = 'profile.info';
+		$scope.state = 'profile.orders';
 
 		$scope.changeState = function(state) {
 			$state.go(state);
@@ -22,7 +22,7 @@ angular.module('swen303.profile', ['swen303.profile.info', 'swen303.profile.orde
 		};
 
 		if (!UserFactory.user) {
-			$state.go('register', { redirectstate: 'profile.info' });
+			$state.go('register', { redirectstate: 'profile.orders' });
 		} else {
 			$scope.name = UserFactory.user.firstname;
 		}

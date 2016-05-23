@@ -2,6 +2,7 @@ angular.module('swen303.profile.orders', ['swen303.services.product', 'ngNotify'
 
 	.config(function($stateProvider) {
 		$stateProvider.state('profile.orders', {
+			url: '',
 			views: {
 				"profile": {
 					templateUrl: 'profile/orders/orders.html',
