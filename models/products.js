@@ -178,7 +178,7 @@ exports.addNew = function(product, cb, errorCb){
 					console.log(err);
 					errorCb(err);
 				}else{
-					cb(insertedRowId);	
+					cb(insertedRowId);
 				}
 			});
 		} else {
@@ -197,3 +197,14 @@ exports.getFeaturedProducts = function(cb, errorCb) {
 		cb(results.rows);
 	});
 }
+
+exports.setSold = function(instance_id, cb, errorCb) {
+    var query = "UPDATE productinstances SET current_status='Sold' WHERE instance_id=$1";
+    dbClient.query(query, [instance_id], function(err, results) {
+        if (err) {
+            errorCb(err);
+        }
+
+        cb(true);
+    });
+};

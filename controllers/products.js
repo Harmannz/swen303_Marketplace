@@ -25,6 +25,16 @@ router.get('/featured', function(req, res) {
 	});
 });
 
+router.post('/:id/sold', function(req, res) {
+    var instance_id = req.params.id;
+    Products.setSold(instance_id, function(success) {
+        return res.json({success: success});
+    }, function(err) {
+        console.log(err);
+        res.sendStatus(500);
+    });
+});
+
 //Get items in category
 router.get('/category/:cid', function(req,res){
 	var cid = req.params.cid;
@@ -124,7 +134,7 @@ router.get('/:id', function(req,res){
 var upload = multer({ dest : 'uploads/'});
 router.post('/imageupload', upload.single('file'), function(req,res){
 	console.log('POST /api/products/imageUpload');
-	
+
 	var tmp_path = req.file.path;
 	console.log(tmp_path, req.file.originalname);
 	var newfilename = path.basename(tmp_path)+path.extname(req.file.originalname);
