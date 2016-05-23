@@ -1,5 +1,5 @@
 <div class="history container">
-	<div ng-show="history.length === 0">You have no previous orders</div>
+	<div ng-show="history.length === 0" class="blank-state">You have no previous orders</div>
 	<div ng-repeat="order in history" class="order">
 		<div class="image">
 			<img ng-src="uploads/{{order.image}}" class="inline-block">
