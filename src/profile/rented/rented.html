@@ -1,0 +1,16 @@
+<div class="listed container">
+	<div ng-show="listed.length === 0">You have no previous orders</div>
+	<div ng-repeat="order in listed" class="order">
+		<div class="image">
+			<img ng-src="uploads/{{order.image}}" class="inline-block">
+		</div>
+		<div class="details">
+			<h3 ng-bind="order.name"></h3>
+			<p ng-show="order.current_status=='Rented'">Status : Currently rented</p>
+			<span>Due back: {{ order.due_back | date:'medium' }}</span>
+			<div ng-show="order.current_status=='Available'">
+				Status : Product has been returned
+			</div>
+		</div>
+	</div>
+</div>

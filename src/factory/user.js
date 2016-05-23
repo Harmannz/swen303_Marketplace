@@ -75,6 +75,12 @@ angular.module('swen303.factory.user', [])
 				return $http.get('/api/users/' + Auth.user.uid + '/rented').then(function(payload) {
 					return payload.data;
 				});
+			},
+
+			getSellingItems: function() {
+				return $http.get('/api/users/' + Auth.user.uid + '/selling').then(function(payload) {
+					return payload.data;
+				});
 			}
 
 		};

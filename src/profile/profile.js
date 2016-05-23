@@ -1,4 +1,4 @@
-angular.module('swen303.profile', ['swen303.profile.info', 'swen303.profile.orders', 'swen303.profile.history'])
+angular.module('swen303.profile', ['swen303.profile.info', 'swen303.profile.orders', 'swen303.profile.history', 'swen303.profile.rented'])
 
 	.config(function($stateProvider) {
 		$stateProvider.state('profile', {

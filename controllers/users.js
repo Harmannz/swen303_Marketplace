@@ -51,6 +51,17 @@ router.post('/:userId/update', function(req, res) {
 	});
 })
 
+router.get('/:userId/selling', function(req, res) {
+    console.log('GET /selling');
+    var userId = req.params.userId;
+    Users.getSelling(userId, function(data) {
+        res.json(data);
+    }, function(err) {
+        console.log(err);
+        res.sendStatus(500);
+    })
+})
+
 /*Get all orders for a given user*/
 router.get('/:userId/history', function(req,res){
 	console.log("GET /history");

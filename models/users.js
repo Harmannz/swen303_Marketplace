@@ -90,3 +90,14 @@ exports.getRentedProducts = function(userId, cb, errorCb) {
 		return cb(results.rows);
 	});
 };
+
+exports.getSelling = function(userId, cb, errorCb) {
+    var query = "SELECT c.*, d.* FROM orders AS a INNER JOIN productinorder AS b ON a.order_id=b.order_id INNER JOIN productinstances AS c ON b.instance_id=c.instance_id INNER JOIN products AS d ON c.product_id=d.pid WHERE d.sellerid=$1";
+    dbClient.query(query, [userId], function(err, results) {
+        if (err) {
+            return errorCb(err);
+        }
+
+        return cb(results.rows);
+    })
+}
